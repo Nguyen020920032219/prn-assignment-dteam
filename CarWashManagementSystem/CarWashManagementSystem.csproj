@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\Add car_30px.png" />
+    <None Remove="images\add_user_male_30Cpx.png" />
+    <None Remove="images\add_user_male_30px.png" />
+    <None Remove="images\add_user_male_32px.png" />
+    <None Remove="images\bank_30px.png" />
+    <None Remove="images\cancel_20px.png" />
+    <None Remove="images\car_cleaning_30cpx.png" />
+    <None Remove="images\cash_in_hand_35px.png" />
+    <None Remove="images\clean_120px.png" />
+    <None Remove="images\clean_50px1.png" />
+    <None Remove="images\cost_30px.png" />
+    <None Remove="images\dashboard_layout_35px.png" />
+    <None Remove="images\delete_document_20px.png" />
+    <None Remove="images\down_25px.png" />
+    <None Remove="images\edit_20px.png" />
+    <None Remove="images\employee_35px.png" />
+    <None Remove="images\group_35px.png" />
+    <None Remove="images\Logout_35px.png" />
+    <None Remove="images\pexels-tima-miroshnichenko-6872582.jpg" />
+    <None Remove="images\pexels-tima-miroshnichenko-6873080.jpg" />
+    <None Remove="images\report_file_35px.png" />
+    <None Remove="images\sales_performance_35px.png" />
+    <None Remove="images\search_25px.png" />
+    <None Remove="images\Services_35px.png" />
+    <None Remove="images\submit_progress_30px.png" />
+    <None Remove="images\taxi_service_35px.png" />
+    <None Remove="images\up_25px.png" />
+    <None Remove="images\us_dollar_35px.png" />
+    <None Remove="images\withdrawal_35px.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\Add car_30px.png" />
+    <Resource Include="images\add_user_male_30Cpx.png" />
+    <Resource Include="images\add_user_male_30px.png" />
+    <Resource Include="images\add_user_male_32px.png" />
+    <Resource Include="images\bank_30px.png" />
+    <Resource Include="images\cancel_20px.png" />
+    <Resource Include="images\car_cleaning_30cpx.png" />
+    <Resource Include="images\cash_in_hand_35px.png" />
+    <Resource Include="images\clean_120px.png" />
+    <Resource Include="images\clean_50px1.png" />
+    <Resource Include="images\cost_30px.png" />
+    <Resource Include="images\dashboard_layout_35px.png" />
+    <Resource Include="images\delete_document_20px.png" />
+    <Resource Include="images\down_25px.png" />
+    <Resource Include="images\edit_20px.png" />
+    <Resource Include="images\employee_35px.png" />
+    <Resource Include="images\group_35px.png" />
+    <Resource Include="images\Logout_35px.png" />
+    <Resource Include="images\pexels-tima-miroshnichenko-6872582.jpg" />
+    <Resource Include="images\pexels-tima-miroshnichenko-6873080.jpg" />
+    <Resource Include="images\report_file_35px.png" />
+    <Resource Include="images\sales_performance_35px.png" />
+    <Resource Include="images\search_25px.png" />
+    <Resource Include="images\Services_35px.png" />
+    <Resource Include="images\submit_progress_30px.png" />
+    <Resource Include="images\taxi_service_35px.png" />
+    <Resource Include="images\up_25px.png" />
+    <Resource Include="images\us_dollar_35px.png" />
+    <Resource Include="images\withdrawal_35px.png" />
+  </ItemGroup>
+
+</Project>
