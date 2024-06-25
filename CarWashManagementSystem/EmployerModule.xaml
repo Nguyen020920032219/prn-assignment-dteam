@@ -44,7 +44,7 @@
         <Label Content="Password:" HorizontalAlignment="Left" Height="24" Margin="10,248,0,0" VerticalAlignment="Top" Width="70"/>
         <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="24" Margin="100,248,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
         
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="40" Margin="110,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnSave_Click"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Height="40" Margin="110,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnCreate_Click"/>
         <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="40" Margin="300,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnUpdate_Click"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="40" Margin="490,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnCancel_Click"/>
         
