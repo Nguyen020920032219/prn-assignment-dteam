@@ -18,7 +18,21 @@ namespace CarWashManagementSystem
            this.Close();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+
+        private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -76,29 +90,22 @@ namespace CarWashManagementSystem
                     cm.Parameters.AddWithValue("@phone", txtPhone.Text);
                     cm.Parameters.AddWithValue("@address", txtAddress.Text);
                     cm.Parameters.AddWithValue("@dob", dpDob.SelectedDate.Value);
-                    cm.Parameters.AddWithValue("@gender", rdFemale.IsChecked == true ?"Male":"Female");
+                    cm.Parameters.AddWithValue("@gender", rdFemale.IsChecked == true ? "Male" : "Female");
                     cm.Parameters.AddWithValue("@role", cbRole.Text);
                     cm.Parameters.AddWithValue("@salary", txtSalary.Text);
                     cm.Parameters.AddWithValue("@password", txtPassword.Text);
 
-                   
+
                     cm.ExecuteNonQuery();
-                    
+
                     MessageBox.Show("Employer has been successfully registered!", title);
                 }
-            }catch(Exception ex) {
-                MessageBox.Show(ex.Message, title);
             }
             catch (Exception ex)
-        {
+            {
                 MessageBox.Show(ex.Message, title);
+            }
         }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         public void clear()
         {
             txtFullName.Clear();

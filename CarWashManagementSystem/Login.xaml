@@ -20,7 +20,7 @@
 
         <CheckBox x:Name="cbShowPassword" Content="Show Password" HorizontalAlignment="Left" Height="20" Margin="653,350,0,0" VerticalAlignment="Top" Width="120"/>
         
-        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Height="50" Margin="653,396,0,0" VerticalAlignment="Top" Width="120" Background="#FF11CDEF" FontSize="20" BorderThickness="0"/>
+        <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Height="50" Margin="653,396,0,0" VerticalAlignment="Top" Width="120" Background="#FF11CDEF" FontSize="20" BorderThickness="0" Click="btnLogin_Click"/>
         <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="50" Margin="830,396,0,0" VerticalAlignment="Top" Width="120" Background="#FFD4E1E3" FontSize="20" BorderThickness="0"/>
     </Grid>
 </Window>
