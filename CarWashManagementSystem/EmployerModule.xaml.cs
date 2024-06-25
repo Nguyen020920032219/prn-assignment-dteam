@@ -89,11 +89,9 @@ namespace CarWashManagementSystem
             }catch(Exception ex) {
                 MessageBox.Show(ex.Message, title);
             }
-        }
-
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+            catch (Exception ex)
         {
-
+                MessageBox.Show(ex.Message, title);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
