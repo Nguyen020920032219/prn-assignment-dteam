@@ -1,0 +1,98 @@
+﻿<Window x:Class="CarWashManagementSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWashManagementSystem"
+        mc:Ignorable="d"
+        Title="Car Wash Management System" Height="820" Width="1264"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" >
+    <Grid>
+        <DockPanel HorizontalAlignment="Left" Height="804" LastChildFill="False" VerticalAlignment="Top" Width="10"/>
+        <DockPanel HorizontalAlignment="Left" Height="804" LastChildFill="False" Margin="10,0,0,0" VerticalAlignment="Center" Width="190">
+            <DockPanel x:Name="panelLogo" Height="150" LastChildFill="False" Margin="0,0,0,0" DockPanel.Dock="Top" Width="190">
+                <Image Width="50" Height="50" Source="/CarWashManagementSystem;component/images/clean_50px1.png"/>
+                <Label Content="DTeam" Width="100" Height="50" FontSize="24" FontWeight="Bold" Foreground="#FF11CDEF"/>
+            </DockPanel>
+            <Button x:Name="btnDashboard" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnDashboard_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/dashboard_layout_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Dashboard" FontSize="16"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnEmployer" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnEmployer_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/employee_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Employer" FontSize="16" RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="1.211"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnCustomer" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnCustomer_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/group_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Customer" FontSize="16"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnServices" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnServices_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/taxi_service_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Services" FontSize="16"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnCash" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnCash_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/us_dollar_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Cash" FontSize="16"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnReport" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnReport_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/report_file_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Report" FontSize="16"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnWareHouse" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnWareHouse_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/dashboard_layout_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock x:Name="No_name" VerticalAlignment="Center" Text="Warehouse" FontSize="16"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnLogout" DockPanel.Dock="Bottom" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnLogout_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/Logout_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="Logout" FontSize="16"/>
+                </StackPanel>
+            </Button>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Left" Height="310" LastChildFill="False" Margin="200,0,0,0" VerticalAlignment="Top" Width="1064" Background="#FF11CDEF">
+            <DockPanel LastChildFill="False" Width="260" Height="95" Background="White" Margin="50,0,0,50">
+                <Image Height="40" Source="/CarWashManagementSystem;component/images/sales_performance_35px.png" Width="40" Stretch="Fill" Margin="180,0,0,35"/>
+                <TextBlock VerticalAlignment="Top" Text="REVENUS" FontSize="16" Margin="-330, 8, 0, 0" Width="90" Height="31"/>
+                <TextBlock x:Name="txtRevenus" VerticalAlignment="Center" Text="0.00" FontSize="20" Margin="-180, 15, 0, 0" FontWeight="Black"/>
+                <TextBlock VerticalAlignment="Bottom" Text="Since last 7 days" FontSize="16" Margin="-90, 8, 0, 0" Width="120" Height="31"/>
+            </DockPanel>
+            <DockPanel LastChildFill="False" Background="White" Width="260" Height="95" Margin="100,0,0,50">
+                <Image Height="40" Source="/CarWashManagementSystem;component/images/withdrawal_35px.png" Width="40" Stretch="Fill" Margin="200,0,0,35"/>
+                <TextBlock VerticalAlignment="Top" Text="COST OF GOOD SOLD" FontSize="16" Margin="-290, 8, 0, 0" Width="170" Height="31"/>
+                <TextBlock x:Name="txtCostOfGoodSold" VerticalAlignment="Center" Text="0.00" FontSize="20" Margin="-180, 15, 0, 0" FontWeight="Black"/>
+                <TextBlock VerticalAlignment="Bottom" Text="Since last 7 days" FontSize="16" Margin="-105, 8, 0, 0" Width="120" Height="31"/>
+            </DockPanel>
+            <DockPanel LastChildFill="False" Background="White" Width="260" Height="95" Margin="90,0,0,50">
+                <Image Height="40" Source="/CarWashManagementSystem;component/images/cash_in_hand_35px.png" Width="40" Stretch="Fill" Margin="200,0,0,35"/>
+                <TextBlock VerticalAlignment="Top" Text="GROSS PROFIT" FontSize="16" Margin="-290, 8, 0, 0" Width="158" Height="31"/>
+                    <TextBlock x:Name="txtGrossProfit" VerticalAlignment="Center" Text="0.00" FontSize="20" Margin="-180, 15, 0, 0" FontWeight="Black"/>
+                    <TextBlock VerticalAlignment="Bottom" Text="Since last 7 days" FontSize="16" Margin="-105, 8, 0, 0" Width="120" Height="31"/>
+            </DockPanel>
+        </DockPanel>
+        <DockPanel x:Name="panelChild" HorizontalAlignment="Left" Height="485" LastChildFill="False" Margin="248,249,0,0" VerticalAlignment="Top" Width="968" Background="White"/>
+        <DockPanel x:Name="panelSlide" HorizontalAlignment="Left" Height="45" LastChildFill="False" Margin="0,150,0,0" VerticalAlignment="Top" Width="10" Background="#FF11CDF3"/>
+    </Grid>
+</Window>
