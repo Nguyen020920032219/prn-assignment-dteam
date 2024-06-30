@@ -81,6 +81,10 @@ ALTER TABLE tbProduct
 ADD idCategory INT,
 CONSTRAINT fk_tbProduct_idCategory FOREIGN KEY (idCategory) REFERENCES tbCategory (idCategory);
 
+ALTER TABLE tbService
+ADD idCategory INT,
+CONSTRAINT fk_tbService_idCategory FOREIGN KEY (idCategory) REFERENCES tbCategory (idCategory);
+
 -- Inserting data into tbEmployee
 INSERT INTO tbEmployee (name, phone, address, dob, gender, role, salary, password)
 VALUES 
@@ -142,18 +146,18 @@ VALUES
 ('Customer10', '1234567899', 'Chevy', 'Malibu', '132 Elm St', 550, 10);
 
 -- Inserting data into tbService
-INSERT INTO tbService (name, price)
+INSERT INTO tbService (name, price, idCategory)
 VALUES
-('Oil Change', 29.99),
-('Tire Rotation', 19.99),
-('Brake Inspection', 49.99),
-('Battery Check', 39.99),
-('Engine Tune-Up', 59.99),
-('Wheel Alignment', 69.99),
-('Transmission Flush', 89.99),
-('Air Filter Replacement', 25.99),
-('Radiator Service', 79.99),
-('Fuel System Cleaning', 99.99);
+('Oil Change', 29.99, 1),
+('Tire Rotation', 19.99, 1),
+('Brake Inspection', 49.99, 2),
+('Battery Check', 39.99, 2),
+('Engine Tune-Up', 59.99, 3),
+('Wheel Alignment', 69.99, 5),
+('Transmission Flush', 89.99, 2),
+('Air Filter Replacement', 25.99, 4),
+('Radiator Service', 79.99, 6),
+('Fuel System Cleaning', 99.99, 1);
 
 -- Inserting data into tbCash
 INSERT INTO tbCash (transno, price, date, status, idVehicleType, idService, idCustomer)
