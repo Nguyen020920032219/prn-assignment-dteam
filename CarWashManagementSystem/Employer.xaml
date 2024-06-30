@@ -10,18 +10,19 @@
         <DataGrid x:Name="dgvEmployer" Margin="0,0,0,100" BorderBrush="White"
                   CanUserAddRows="False" CanUserDeleteRows="False" 
                   CanUserResizeColumns="False" CanUserResizeRows="False"
+                  IsReadOnly="True"
                   ColumnHeaderHeight="28">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="No" Header="No" Width="40"/>
-                <DataGridTextColumn x:Name="Id" Header="Id" Width="40"/>
-                <DataGridTextColumn x:Name="Name" Header="Name" Width="70"/>
-                <DataGridTextColumn x:Name="Phone" Header="Phone" Width="90"/>
-                <DataGridTextColumn x:Name="Address" Header="Address" Width="200"/>
-                <DataGridTextColumn x:Name="DateOfBirth" Header="Date of Birth" Width="150"/>
-                <DataGridTextColumn x:Name="Gender" Header="Gender"  Width="60"/>
-                <DataGridTextColumn x:Name="Role" Header="Role" Width="60"/>
-                <DataGridTextColumn x:Name="Salary" Header="Salary" Width="80"/>
-                <DataGridTextColumn x:Name="Password" Header="Password" Width="100"/>
+                <DataGridTextColumn x:Name="No"  Header="No" Width="40"/>
+                <DataGridTextColumn x:Name="Id" Binding="{Binding IdEmployee}" Header="Id" Width="40"/>
+                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name" Width="70"/>
+                <DataGridTextColumn x:Name="Phone" Binding="{Binding Phone}" Header="Phone" Width="90"/>
+                <DataGridTextColumn x:Name="Address" Binding="{Binding Address}" Header="Address" Width="200"/>
+                <DataGridTextColumn x:Name="Dob" Binding="{Binding Dob}" Header="Date of Birth" Width="100"/>
+                <DataGridTextColumn x:Name="Gender" Binding="{Binding Gender}" Header="Gender"  Width="60"/>
+                <DataGridTextColumn x:Name="Role" Binding="{Binding Role}" Header="Role" Width="110"/>
+                <DataGridTextColumn x:Name="Salary" Binding="{Binding Salary}" Header="Salary" Width="80"/>
+                <DataGridTextColumn x:Name="Password" Binding="{Binding Password}" Header="Password" Width="100"/>
 
                 <!-- DataGridTemplateColumn for Edit -->
                 <!--<DataGridTemplateColumn x:Name="Edit" Header="Edit">
