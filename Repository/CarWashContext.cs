@@ -38,7 +38,7 @@ public partial class CarWashContext : DbContext
     {
         IConfiguration config = new ConfigurationBuilder()
              .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", true, true)
+                    .AddJsonFile("appsetting.json", true, true)
                     .Build();
         var strConn = config["ConnectionStrings:DefaultConnectionStringDB"];
 
