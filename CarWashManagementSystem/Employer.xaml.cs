@@ -2,6 +2,7 @@
 using Service;
 using Service.Impl;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CarWashManagementSystem
 {
@@ -15,13 +16,19 @@ namespace CarWashManagementSystem
         public Employer()
         {
             InitializeComponent();
+            Employer_Load();
         }
 
-        public void Employer_Load(object sender, EventArgs e)
+        public void Employer_Load()
         {
             dgvEmployer.ItemsSource = null;
             dgvEmployer.ItemsSource = employeeService.GetTbEmployeesList();
         }
 
+        public void SearchTbEmployer(object sender, TextChangedEventArgs e)
+        {
+            dgvEmployer.ItemsSource = null;
+            dgvEmployer.ItemsSource = employeeService.GetTbEmployeeContainNameList(txtSearch.Text);
+        }
     }
 }
