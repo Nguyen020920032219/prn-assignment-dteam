@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarWashManagementSystem"
         mc:Ignorable="d"
-        Title="Employer" Height="485" Width="980">
+        Title="Employer" Height="485" Width="980"
+        ResizeMode="NoResize"
+        Loaded="Employer_Load">
     <Grid>
         <DataGrid x:Name="dgvEmployer" Margin="0,0,0,100" BorderBrush="White"
                   CanUserAddRows="False" CanUserDeleteRows="False" 
                   CanUserResizeColumns="False" CanUserResizeRows="False"
-                  IsReadOnly="True"
+                  IsReadOnly="True" AutoGenerateColumns="False"
                   ColumnHeaderHeight="28">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="No"  Header="No" Width="40"/>

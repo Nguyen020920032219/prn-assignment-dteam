@@ -80,4 +80,10 @@
     <Resource Include="images\withdrawal_35px.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsetting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

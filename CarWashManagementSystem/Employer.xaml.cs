@@ -1,4 +1,5 @@
-﻿using Service;
+﻿using Repository.Entities;
+using Service;
 using Service.Impl;
 using System.Windows;
 

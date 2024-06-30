@@ -56,6 +56,7 @@ namespace Service.Impl
             _context = new CarWashContext();
 
             _context.TbEmployees.Remove(employee);
+            _context.SaveChanges();
         }
     }
 }
