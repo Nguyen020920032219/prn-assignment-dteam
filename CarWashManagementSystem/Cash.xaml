@@ -10,14 +10,14 @@
         ResizeMode="NoResize">
     <Grid>
         <DockPanel HorizontalAlignment="Center" Height="70" LastChildFill="False" VerticalAlignment="Top" Width="967" >
-            <Button x:Name="btnAddCustomer" Width="105" Height="30" Margin="20,0,0,0" Background="White" BorderThickness="0">
+            <Button x:Name="btnAddCustomer" Width="105" Height="30" Margin="20,0,0,0" Background="White" BorderThickness="0" Click="btnAddCustomer_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/CarWashManagementSystem;component/images/add_user_male_30Cpx.png" Width="30" Height="30" Margin="0,0,5,0"/>
                     <TextBlock Text="Customer" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
-            <Button x:Name="btnAddService" Width="105" Height="30" Margin="20,0,0,0" Background="White" BorderThickness="0">
+            <Button x:Name="btnAddService" Width="105" Height="30" Margin="20,0,0,0" Background="White" BorderThickness="0" Click="btnAddService_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/CarWashManagementSystem;component/images/car_cleaning_30cpx.png" Width="30" Height="30" Margin="0,0,5,0"/>
                     <TextBlock Text="Services" VerticalAlignment="Center"/>
@@ -33,20 +33,22 @@
           ColumnHeaderHeight="28">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="No" Header="No" Width="40"/>
-                <DataGridTextColumn x:Name="Id" Header="Id" Width="40"/>
-                <DataGridTextColumn x:Name="Name" Header="Name" Width="70"/>
-                <DataGridTextColumn x:Name="Phone" Header="Phone" Width="90"/>
-                <DataGridTextColumn x:Name="CarNo" Header="Car No." Width="90"/>
+                <DataGridTextColumn x:Name="Id" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="TransactionNo" Header="Transaction No" Width="100"/>
+                <DataGridTextColumn x:Name="CustomerName" Header="Customer" Width="100"/>
+                <DataGridTextColumn x:Name="CarNo" Visibility="Hidden"/>
                 <DataGridTextColumn x:Name="CarModel" Header="Car Model" Width="150"/>
-                <DataGridTextColumn x:Name="CarType" Header="Car Type"  Width="115"/>
-                <DataGridTextColumn x:Name="Address" Header="Address" Width="275"/>
-                <DataGridTextColumn x:Name="Point" Header="Point" Width="80"/>
+                <DataGridTextColumn x:Name="VehicleType" Header="Vehicle Type"  Width="115"/>
+                <DataGridTextColumn x:Name="Class" Header="Class" Width="80"/>
+                <DataGridTextColumn x:Name="Services" Header="Services" Width="275"/>
+                <DataGridTextColumn x:Name="Price" Header="Price" Width="80"/>
+                <DataGridTextColumn x:Name="Date" Visibility="Hidden"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <DockPanel HorizontalAlignment="Center" Height="50" LastChildFill="False" Margin="0,435,0,0" VerticalAlignment="Top" Width="967">
             <Label Content="Transaction no:" Width="100" Height="30" Margin="10,0,0,0"/>
-            <Label Name="lblTransactionNo" Content="0000000000" Width="80" Height="30"/>
+            <Label Name="lblTransactionNo" Content="000000000000" Width="90" Height="30"/>
 
             <Label Content="Total price:" Width="75" Height="30" Margin="300,0,0,0"/>
             <Label Name="lblTotalPrice" Content="0.00" Width="100" Height="30" Margin="0,0,0,0"/>

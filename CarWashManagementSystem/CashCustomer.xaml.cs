@@ -17,7 +17,7 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for CashCustomer.xaml
     /// </summary>
-    public partial class CashCustomer : Window
+    public partial class CashCustomer : UserControl
     {
         public CashCustomer()
         {

@@ -1,15 +1,10 @@
 ﻿using Repository;
 using Repository.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Service.Impl
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeServiceImpl : IEmployeeService
     {
         private CarWashContext _context;
 
@@ -25,7 +20,7 @@ namespace Service.Impl
         {
             _context = new CarWashContext();
 
-            return _context.TbEmployees.Where(employee =>  employee.Name.ToLower().Contains(name.ToLower())).ToList(); 
+            return _context.TbEmployees.Where(employee =>  employee.Name.ToLower().Contains(name.ToLower().Trim())).ToList(); 
         }
 
         public List<TbEmployee> GetTbEmployeesList()

@@ -15,9 +15,8 @@
                   IsReadOnly="True" AutoGenerateColumns="False"
                   ColumnHeaderHeight="28">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="No"  Header="No" Width="40"/>
                 <DataGridTextColumn x:Name="Id" Binding="{Binding IdEmployee}" Header="Id" Width="40"/>
-                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name" Width="70"/>
+                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name" Width="110"/>
                 <DataGridTextColumn x:Name="Phone" Binding="{Binding Phone}" Header="Phone" Width="90"/>
                 <DataGridTextColumn x:Name="Address" Binding="{Binding Address}" Header="Address" Width="200"/>
                 <DataGridTextColumn x:Name="Dob" Binding="{Binding Dob}" Header="Date of Birth" Width="100"/>
