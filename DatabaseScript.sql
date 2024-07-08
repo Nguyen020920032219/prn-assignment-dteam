@@ -152,8 +152,8 @@ INSERT INTO Orders (TransactionNo, Date, Status, TotalPrice, VehicleId, Customer
 ('202407080001', '2024-07-08', 'Pending', 1000.00, 9, 9, 9),
 ('202407090001', '2024-07-09', 'Completed', 1100.00, 10, 10, 10);
 
-CREATE TABLE OrderDetails (
-    OrderDetailsId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+CREATE TABLE OrderProducts (
+    OrderProductsId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     OrderId INT,
     ProductId INT,
     Quantity INT,
@@ -162,7 +162,7 @@ CREATE TABLE OrderDetails (
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
 
-INSERT INTO OrderDetails (OrderId, ProductId, Quantity, UnitPrice) VALUES
+INSERT INTO OrderProducts (OrderId, ProductId, Quantity, UnitPrice) VALUES
 (1, 1, 2, 15.00),
 (1, 2, 1, 200.00),
 (2, 3, 3, 5.00),
@@ -205,3 +205,23 @@ INSERT INTO OrderServices (OrderId, ServiceId, Quantity, UnitPrice) VALUES
 (8, 8, 1, 800.00),
 (9, 9, 1, 900.00),
 (10, 10, 1, 1000.00);
+
+CREATE TABLE CostOfGood (
+    CostOfGoodId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+    ProductId INT,
+    Cost DECIMAL(10, 2),
+    Date DATE,
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
+);
+
+INSERT INTO CostOfGood (ProductId, Cost, Date) VALUES
+(1, 10.00, '2024-07-01'),
+(2, 150.00, '2024-07-01'),
+(3, 3.00, '2024-07-01'),
+(4, 20.00, '2024-07-01'),
+(5, 80.00, '2024-07-01'),
+(6, 50.00, '2024-07-01'),
+(7, 5.00, '2024-07-01'),
+(8, 25.00, '2024-07-01'),
+(9, 350.00, '2024-07-01'),
+(10, 10.00, '2024-07-01');

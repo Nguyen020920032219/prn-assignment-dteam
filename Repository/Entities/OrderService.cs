@@ -11,11 +11,9 @@ public partial class OrderService
 
     public int? ServiceId { get; set; }
 
-    public int? EmployeeId { get; set; }
+    public int? Quantity { get; set; }
 
-    public decimal? Price { get; set; }
-
-    public virtual Employee? Employee { get; set; }
+    public decimal? UnitPrice { get; set; }
 
     public virtual Order? Order { get; set; }
 
