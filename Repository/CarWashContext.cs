@@ -61,9 +61,22 @@ public partial class CarWashContext : DbContext
                 .HasConstraintName("FK__Account__Employe__3E52440B");
         });
 
+        modelBuilder.Entity<CostOfGood>(entity =>
+        {
+            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628001F3D42");
+
+            entity.ToTable("CostOfGood");
+
+            entity.Property(e => e.Cost).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.CostOfGoods)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__CostOfGoo__Produ__5441852A");
+        });
+
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D8A6AF45E5");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D8D643D8EB");
 
             entity.ToTable("Customer");
 
