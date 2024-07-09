@@ -11,7 +11,7 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class Employer : Window
     {
-        private IEmployeeService employeeService = new EmployeeServiceImpl();
+        //private IEmployeeService employeeService = new EmployeeServiceImpl();
 
         public Employer()
         {
