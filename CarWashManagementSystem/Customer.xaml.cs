@@ -23,5 +23,25 @@ namespace CarWashManagementSystem
         {
             InitializeComponent();
         }
+
+        private void dgvCustomer_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

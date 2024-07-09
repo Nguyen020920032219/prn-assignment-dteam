@@ -2,6 +2,8 @@
 using Service;
 using System.Windows;
 using System.Windows.Controls;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+using System.Xml.Linq;
 
 namespace CarWashManagementSystem
 {
@@ -11,17 +13,19 @@ namespace CarWashManagementSystem
     public partial class Warehouse : Window
     {
         ProductService _productService;
+        ValidationService _validation;
         public Warehouse()
         {
             InitializeComponent();
             _productService = new ProductService();
+            _validation = new ValidationService();
             ShowData();
         }
 
         private void ShowData()
         {
             dgvProduct.ItemsSource = null;
-            dgvProduct.ItemsSource=_productService.GetProducts();
+            dgvProduct.ItemsSource = _productService.GetProducts();
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -58,7 +62,57 @@ namespace CarWashManagementSystem
 
         private void dgvProduct_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            Product product= e.Row.Item as Product;
+            Product product = e.Row.Item as Product;
+
+            if (!_validation.IsStringValid(product.Name))
+            {
+                MessageBox.Show("Tên sản phẩm không được để trống.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!_validation.IsStringValid(product.Description))
+            {
+                MessageBox.Show("Mô tả sản phẩm không được để trống.");
+                e.Cancel = true;
+                return;
+            }
+
+            //if (!_validation.IsStringValid(product.Price))
+            //{
+            //    MessageBox.Show("Giá sản phẩm không được để trống.");
+            //    e.Cancel = true;
+            //    return;
+            //}
+
+            if (!_validation.IsNumber(product.Price+""))
+            {
+                MessageBox.Show("Giá sản phẩm phải là một con số.");
+                e.Cancel = true;
+                return;
+            }
+
+            //if (!_validation.IsStringValid(product.StockQuantity))
+            //{
+            //    MessageBox.Show("Số lượng sản phẩm không được để trống.");
+            //    e.Cancel = true;
+            //    return;
+            //}
+
+            if (!_validation.IsNumber(product.StockQuantity + ""))
+            {
+                MessageBox.Show("Số lượng sản phẩm phải là một con số.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!_validation.IsPositiveInteger(Int32.Parse(product.StockQuantity + "")))
+            {
+                MessageBox.Show("Số lượng sản phẩm phải là số nguyên dương.");
+                e.Cancel = true;
+                return;
+            }
+
             _productService.UpdateProduct(product);
             ShowData();
         }
