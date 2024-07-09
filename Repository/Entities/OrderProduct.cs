@@ -5,17 +5,15 @@ namespace Repository.Entities;
 
 public partial class OrderProduct
 {
-    public int OrderProductId { get; set; }
+    public int OrderProductsId { get; set; }
 
     public int? OrderId { get; set; }
 
     public int? ProductId { get; set; }
 
-    public decimal? UnitPrice { get; set; }
-
     public int? Quantity { get; set; }
 
-    public decimal? TotalPrice { get; set; }
+    public decimal? UnitPrice { get; set; }
 
     public virtual Order? Order { get; set; }
 
