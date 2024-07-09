@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public interface ICashService
+    public interface IOrderService
     {
         string? GetMaxTransactionNoStartingWithDate(string prefix);
     }

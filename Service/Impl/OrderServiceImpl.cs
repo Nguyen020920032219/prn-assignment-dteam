@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.Impl
 {
-    public class CashServiceImpl : ICashService
+    public class OrderServiceImpl : IOrderService
     {
         private CarWashContext _context;
 
@@ -15,10 +15,10 @@ namespace Service.Impl
         {
             _context = new CarWashContext();
 
-            return _context.TbCashes
-                   .Where(cash => cash.Transno != null && cash.Transno.StartsWith(prefix))
-                   .OrderByDescending(cash => cash.Transno.Substring(cash.Transno.Length - 4))
-                   .Select(cash => cash.Transno)
+            return _context.Orders
+                   .Where(cash => cash.TransactionNo != null && cash.TransactionNo.StartsWith(prefix))
+                   .OrderByDescending(cash => cash.TransactionNo.Substring(cash.TransactionNo.Length - 4))
+                   .Select(cash => cash.TransactionNo)
                    .FirstOrDefault();
         }
     }

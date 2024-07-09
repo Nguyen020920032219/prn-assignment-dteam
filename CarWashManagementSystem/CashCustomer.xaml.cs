@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using Repository.DTO;
+using Service;
+using Service.Impl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +23,47 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class CashCustomer : UserControl
     {
+        private ICustomerService customerService;
+
+        public Action<CustomerVehicleDTO> onCustomerSelected { get; set; }
+
         public CashCustomer()
         {
             InitializeComponent();
+            customerService = new CustomerServiceImpl();
+            CashCustomer_Load();
+        }
+
+        public void CashCustomer_Load()
+        {
+            dgvCustomer.ItemsSource = customerService.GetAllCustomersWithVehicles();
+        }
+
+        public void SearchCustomerByName(object sender, TextChangedEventArgs e)
+        {
+            if (dgvCustomer != null)
+            {
+                dgvCustomer.Items.Filter = CustomerFilter;
+                dgvCustomer.Items.Refresh();
+            }
+        }
+
+        //Filter Customer is valid for SearchCustomerByName
+        public bool CustomerFilter(object item)
+        {
+            if (txtSearch.Text.Trim().IsNullOrEmpty())
+            {
+                return true;
+            }
+
+            var customer = item as CustomerVehicleDTO;
+            return customer != null && customer.Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        public void SelectCustomerButton_Click(object sender, RoutedEventArgs e)
+        {
+            var customerVehicelSelected = dgvCustomer.SelectedItem as CustomerVehicleDTO;
+            onCustomerSelected?.Invoke(customerVehicelSelected);
         }
     }
 }

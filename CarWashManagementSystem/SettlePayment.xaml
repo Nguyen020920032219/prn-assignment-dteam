@@ -12,7 +12,7 @@
         <DockPanel HorizontalAlignment="Left" Height="24" LastChildFill="False" VerticalAlignment="Top" Width="344" Background="#FF11CDEF">
             <Label Content="Settle Payment" Height="24" Width="100"/>
 
-            <Button x:Name="btnClose" Width="30" Height="24" Margin="214,0,0,0" BorderThickness="0" Background="#FF11CDEF">
+            <Button x:Name="btnClose" Click="btnClose_Click" Width="30" Margin="214,0,0,0" BorderThickness="0" Background="#FF11CDEF">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/CarWashManagementSystem;component/images/cancel_20px.png" Width="30" Height="22" Margin="0,0,5,0"/>
                 </StackPanel>
@@ -20,25 +20,25 @@
         </DockPanel>
         
         <TextBox x:Name="txtSale" HorizontalAlignment="Center" Height="24" Margin="0,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="324"/>
-        <TextBox x:Name="txtCash" HorizontalAlignment="Center" Height="24" Margin="0,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="324"/>
+        <TextBox x:Name="txtCash" TextChanged="txtCash_TextChanged" HorizontalAlignment="Center" Height="24" Margin="0,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="324"/>
         <TextBox x:Name="txtChange" HorizontalAlignment="Center" Height="24" Margin="0,95,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="324"/>
 
-        <Button x:Name="btn7" Content="7" HorizontalAlignment="Left" Height="50" Margin="15,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn8" Content="8" HorizontalAlignment="Left" Height="50" Margin="95,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn9" Content="9" HorizontalAlignment="Left" Height="50" Margin="175,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btnClean" Content="C" HorizontalAlignment="Left" Height="50" Margin="255,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
+        <Button x:Name="btn7" Content="7" HorizontalAlignment="Left" Height="50" Margin="15,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn7_Click"/>
+        <Button x:Name="btn8" Content="8" HorizontalAlignment="Left" Height="50" Margin="95,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn8_Click"/>
+        <Button x:Name="btn9" Content="9" HorizontalAlignment="Left" Height="50" Margin="175,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn9_Click"/>
+        <Button x:Name="btnClean" Content="C" HorizontalAlignment="Left" Height="50" Margin="255,136,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btnClean_Click"/>
 
-        <Button x:Name="btn4" Content="4" HorizontalAlignment="Left" Height="50" Margin="15,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn5" Content="5" HorizontalAlignment="Left" Height="50" Margin="95,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn6" Content="6" HorizontalAlignment="Left" Height="50" Margin="175,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn00" Content="00" HorizontalAlignment="Left" Height="50" Margin="255,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
+        <Button x:Name="btn4" Content="4" HorizontalAlignment="Left" Height="50" Margin="15,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn4_Click"/>
+        <Button x:Name="btn5" Content="5" HorizontalAlignment="Left" Height="50" Margin="95,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn5_Click"/>
+        <Button x:Name="btn6" Content="6" HorizontalAlignment="Left" Height="50" Margin="175,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn6_Click"/>
+        <Button x:Name="btn00" Content="00" HorizontalAlignment="Left" Height="50" Margin="255,196,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn00_Click"/>
 
-        <Button x:Name="btn1" Content="1" HorizontalAlignment="Left" Height="50" Margin="15,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn2" Content="2" HorizontalAlignment="Left" Height="50" Margin="95,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btn3" Content="3" HorizontalAlignment="Left" Height="50" Margin="175,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
-        <Button x:Name="btnEnter" Content="Enter" HorizontalAlignment="Left" Height="110" Margin="255,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
+        <Button x:Name="btn1" Content="1" HorizontalAlignment="Left" Height="50" Margin="15,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn1_Click"/>
+        <Button x:Name="btn2" Content="2" HorizontalAlignment="Left" Height="50" Margin="95,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn2_Click"/>
+        <Button x:Name="btn3" Content="3" HorizontalAlignment="Left" Height="50" Margin="175,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btn3_Click"/>
+        <Button x:Name="btnEnter" Content="Enter" HorizontalAlignment="Left" Height="110" Margin="255,256,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btnEnter_Click"/>
 
-        <Button x:Name="btn0" Content="0" HorizontalAlignment="Left" Height="50" Margin="15,316,0,0" VerticalAlignment="Top" Width="150" BorderBrush="White"/>
-        <Button x:Name="btnPoint" Content="." HorizontalAlignment="Left" Height="50" Margin="175,316,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White"/>
+        <Button x:Name="btn0" Content="0" HorizontalAlignment="Left" Height="50" Margin="15,316,0,0" VerticalAlignment="Top" Width="150" BorderBrush="White" Click="btn0_Click"/>
+        <Button x:Name="btnPoint" Content="." HorizontalAlignment="Left" Height="50" Margin="175,316,0,0" VerticalAlignment="Top" Width="70" BorderBrush="White" Click="btnPoint_Click"/>
     </Grid>
 </Window>

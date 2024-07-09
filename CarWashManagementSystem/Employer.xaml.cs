@@ -16,19 +16,19 @@ namespace CarWashManagementSystem
         public Employer()
         {
             InitializeComponent();
-            Employer_Load();
+            //Employer_Load();
         }
 
-        public void Employer_Load()
-        {
-            dgvEmployer.ItemsSource = null;
-            dgvEmployer.ItemsSource = employeeService.GetTbEmployeesList();
-        }
+        //public void Employer_Load()
+        //{
+        //    dgvEmployer.ItemsSource = null;
+        //    dgvEmployer.ItemsSource = employeeService.GetTbEmployeesList();
+        //}
 
         public void SearchTbEmployer(object sender, TextChangedEventArgs e)
         {
-            dgvEmployer.ItemsSource = null;
-            dgvEmployer.ItemsSource = employeeService.GetTbEmployeeContainNameList(txtSearch.Text);
+        //    dgvEmployer.ItemsSource = null;
+        //    dgvEmployer.ItemsSource = employeeService.GetTbEmployeeContainNameList(txtSearch.Text);
         }
     }
 }

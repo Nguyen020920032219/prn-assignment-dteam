@@ -8,21 +8,35 @@
         Height="200" Width="967"
         FontFamily="Century Gothic" FontSize="12">
     <Grid>
-        <DataGrid x:Name="dgvEmployer" Margin="7,0,0,30" BorderBrush="White"
+        <DataGrid x:Name="dgvCustomer" Margin="0,0,0,30" BorderBrush="White"
                   CanUserAddRows="False" CanUserDeleteRows="False" 
-                  CanUserResizeColumns="False" CanUserResizeRows="False"
+                  CanUserResizeColumns="True" CanUserResizeRows="False"
+                  AutoGenerateColumns="False" IsReadOnly="True"
                   ColumnHeaderHeight="28">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="No" Header="No" Width="40"/>
-                <DataGridTextColumn x:Name="Id" Visibility="Hidden"/>
-                <DataGridTextColumn x:Name="VId" Visibility="Hidden"/>
-                <DataGridTextColumn x:Name="Name" Header="Name" Width="100"/>
-                <DataGridTextColumn x:Name="Phone" Header="Phone" Width="100"/>
-                <DataGridTextColumn x:Name="CarNo" Header="Car No." Width="100"/>
-                <DataGridTextColumn x:Name="CarModel" Header="Car Model" Width="150"/>
-                <DataGridTextColumn x:Name="CarType" Visibility="Hidden"/>
-                <DataGridTextColumn x:Name="Address" Header="Address" Width="300"/>
-                <DataGridTextColumn x:Name="Point" Header="Point" Width="120"/>
+                <DataGridTextColumn x:Name="CustomerId" Binding="{Binding CustomerId}" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name" Width="100"/>
+                <DataGridTextColumn x:Name="Phone" Binding="{Binding Phone}" Header="Phone" Width="100"/>
+                <DataGridTextColumn x:Name="Address" Binding="{Binding Address}" Header="Address" Width="250"/>
+
+                <DataGridTextColumn x:Name="VehicleId" Binding="{Binding VehicleId}" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="VehicleNo" Binding="{Binding VehicleNo}" Header="Vehicle No." Width="100"/>
+                <DataGridTextColumn x:Name="VehicleMake" Binding="{Binding VehicleMake}" Header="Make" Width="130"/>
+                <DataGridTextColumn x:Name="VehicleModel" Binding="{Binding VehicleModel}" Header="Model" Width="150"/>
+                <DataGridTextColumn x:Name="VehicleYear" Binding="{Binding VehicleYear}" Header="Year" Width="65"/>
+                
+             <!-- New column for the select customer button with image -->
+            <DataGridTemplateColumn Header="Select">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Click="SelectCustomerButton_Click" BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                    <Image Source="/CarWashManagementSystem;component/images/add_user_male_30Cpx.png" Width="30" Height="30"/>
+                             </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -32,6 +46,6 @@
                 <TextBlock Text="Search" VerticalAlignment="Center" Foreground="#FFD4DBDF"/>
             </StackPanel>
         </Button>
-        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="108,170,0,0" TextWrapping="Wrap" Text="" BorderThickness="0" VerticalAlignment="Top" Width="859"/>
+        <TextBox x:Name="txtSearch" TextChanged="SearchCustomerByName" HorizontalAlignment="Left" Height="30" Margin="108,170,0,0" TextWrapping="Wrap" Text="" BorderThickness="0" VerticalAlignment="Top" Width="859"/>
     </Grid>
 </UserControl>
