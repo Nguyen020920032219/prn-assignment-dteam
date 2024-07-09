@@ -10,19 +10,23 @@
         WindowStyle="None" ResizeMode="NoResize">
     <Grid>
         <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" VerticalAlignment="Top" Width="706" Background="#FFC10037"/>
-        <Label Content="Manage Service" HorizontalAlignment="Left" Height="27" Margin="10,25,0,0" VerticalAlignment="Top" Width="105" Foreground="#FFC10037" FontWeight="Bold"/>
-        <Button HorizontalAlignment="Left" Height="20" Margin="670,25,0,0" VerticalAlignment="Top" Width="20" BorderThickness="0" Background="White">
+
+        <Label Content="Add Service" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="105" Foreground="#FFC10037" FontWeight="Bold"/>
+
+        <Button x:Name="Close" HorizontalAlignment="Right" Height="20" Margin="0,25,10,0" VerticalAlignment="Top" Width="20" BorderThickness="0" Background="White" Click="Close_Click">
             <Image Source="/CarWashManagementSystem;component/images/cancel_20px.png"/>
         </Button>
 
-        <Label Content="Full name:" HorizontalAlignment="Left" Height="24" Margin="10,80,0,0" VerticalAlignment="Top" Width="68"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="24" Margin="100,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Height="24" Margin="10,52,0,0" VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="100,52,0,0" VerticalAlignment="Top" Width="585" Height="24"/>
 
-        <Label Content="Price:" HorizontalAlignment="Left" Height="24" Margin="10,140,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="24" Margin="100,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Height="24" Margin="10,122,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.475,1.345"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Margin="100,122,0,0" VerticalAlignment="Top" Width="585" Height="24"/>
 
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="40" Margin="110,200,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="40" Margin="300,200,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="40" Margin="490,200,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
+        <Label Content="Price:" HorizontalAlignment="Left" Height="24" Margin="10,86,0,0" VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Margin="100,86,0,0" VerticalAlignment="Top" Width="585" Height="24"/>
+
+        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="437,200,0,0" VerticalAlignment="Top" Width="100" Height="40" Background="#FF4965F0" Foreground="White" BorderThickness="0" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="562,200,0,0" VerticalAlignment="Top" Width="100" Height="40" Background="#FF4965F0" Foreground="White" BorderThickness="0" Click="btnCancel_Click"/>
     </Grid>
 </Window>
