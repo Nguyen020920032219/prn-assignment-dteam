@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Repository.Entities;
 
 namespace Repository;
@@ -17,201 +16,217 @@ public partial class CarWashContext : DbContext
     {
     }
 
-    public virtual DbSet<TbCash> TbCashes { get; set; }
+    public virtual DbSet<Account> Accounts { get; set; }
 
-    public virtual DbSet<TbCompany> TbCompanies { get; set; }
+    public virtual DbSet<CostOfGood> CostOfGoods { get; set; }
 
-    public virtual DbSet<TbCostofGood> TbCostofGoods { get; set; }
+    public virtual DbSet<Customer> Customers { get; set; }
 
-    public virtual DbSet<TbCustomer> TbCustomers { get; set; }
+    public virtual DbSet<Employee> Employees { get; set; }
 
-    public virtual DbSet<TbEmployee> TbEmployees { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<TbService> TbServices { get; set; }
+    public virtual DbSet<OrderProduct> OrderProducts { get; set; }
 
-    public virtual DbSet<TbVehicleType> TbVehicleTypes { get; set; }
+    public virtual DbSet<OrderService> OrderServices { get; set; }
+
+    public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<Service> Services { get; set; }
+
+    public virtual DbSet<Vehicle> Vehicles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(GetConnectionString());
-
-    private string GetConnectionString()
-    {
-        IConfiguration config = new ConfigurationBuilder()
-             .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsetting.json", true, true)
-                    .Build();
-        var strConn = config["ConnectionStrings:DefaultConnectionStringDB"];
-
-        return strConn;
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=(local);Database=CarWash;UID=sa;PWD=12345;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<TbCash>(entity =>
+        modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.IdCash).HasName("PK__tbCash__8BA3F09A2F4618A8");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A63FD7945A");
 
-            entity.ToTable("tbCash");
+            entity.ToTable("Account");
 
-            entity.Property(e => e.IdCash).HasColumnName("idCash");
-            entity.Property(e => e.Date).HasColumnName("date");
-            entity.Property(e => e.IdCustomer).HasColumnName("idCustomer");
-            entity.Property(e => e.IdService).HasColumnName("idService");
-            entity.Property(e => e.IdVehicleType).HasColumnName("idVehicleType");
-            entity.Property(e => e.Price)
-                .HasColumnType("decimal(18, 2)")
-                .HasColumnName("price");
-            entity.Property(e => e.Status)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("status");
-            entity.Property(e => e.Transno)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("transno");
-
-            entity.HasOne(d => d.IdCustomerNavigation).WithMany(p => p.TbCashes)
-                .HasForeignKey(d => d.IdCustomer)
-                .HasConstraintName("fk_tbCash_idCustomer");
-
-            entity.HasOne(d => d.IdServiceNavigation).WithMany(p => p.TbCashes)
-                .HasForeignKey(d => d.IdService)
-                .HasConstraintName("fk_tbCash_idService");
-
-            entity.HasOne(d => d.IdVehicleTypeNavigation).WithMany(p => p.TbCashes)
-                .HasForeignKey(d => d.IdVehicleType)
-                .HasConstraintName("fk_tbCash_idVehicleType");
-        });
-
-        modelBuilder.Entity<TbCompany>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("tbCompany");
-
-            entity.Property(e => e.Address)
-                .HasColumnType("text")
-                .HasColumnName("address");
-            entity.Property(e => e.Name)
-                .HasMaxLength(200)
-                .IsUnicode(false)
-                .HasColumnName("name");
-        });
-
-        modelBuilder.Entity<TbCostofGood>(entity =>
-        {
-            entity.HasKey(e => e.IdCostofGood).HasName("PK__tbCostof__7A1DEA94D623F72C");
-
-            entity.ToTable("tbCostofGood");
-
-            entity.Property(e => e.IdCostofGood).HasColumnName("idCostofGood");
-            entity.Property(e => e.Cost)
-                .HasColumnType("decimal(18, 2)")
-                .HasColumnName("cost");
-            entity.Property(e => e.Costname)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("costname");
-            entity.Property(e => e.Date).HasColumnName("date");
-        });
-
-        modelBuilder.Entity<TbCustomer>(entity =>
-        {
-            entity.HasKey(e => e.IdCustomer).HasName("PK__tbCustom__D0587686AB6705CF");
-
-            entity.ToTable("tbCustomer");
-
-            entity.Property(e => e.IdCustomer).HasColumnName("idCustomer");
-            entity.Property(e => e.Address)
-                .HasColumnType("text")
-                .HasColumnName("address");
-            entity.Property(e => e.Camo)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("camo");
-            entity.Property(e => e.Camodel)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("camodel");
-            entity.Property(e => e.IdVehicleType).HasColumnName("idVehicleType");
-            entity.Property(e => e.Name)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("name");
-            entity.Property(e => e.Phone)
-                .HasMaxLength(11)
-                .IsUnicode(false)
-                .HasColumnName("phone");
-            entity.Property(e => e.Points).HasColumnName("points");
-
-            entity.HasOne(d => d.IdVehicleTypeNavigation).WithMany(p => p.TbCustomers)
-                .HasForeignKey(d => d.IdVehicleType)
-                .HasConstraintName("fk_idVehicleType");
-        });
-
-        modelBuilder.Entity<TbEmployee>(entity =>
-        {
-            entity.HasKey(e => e.IdEmployee).HasName("PK__tbEmploy__227F26A543DA0E2C");
-
-            entity.ToTable("tbEmployee");
-
-            entity.Property(e => e.IdEmployee).HasColumnName("idEmployee");
-            entity.Property(e => e.Address)
-                .HasColumnType("text")
-                .HasColumnName("address");
-            entity.Property(e => e.Dob).HasColumnName("dob");
-            entity.Property(e => e.Gender)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("gender");
-            entity.Property(e => e.Name)
-                .HasMaxLength(200)
-                .HasColumnName("name");
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("password");
-            entity.Property(e => e.Phone)
-                .HasMaxLength(11)
-                .IsUnicode(false)
-                .HasColumnName("phone");
+                .IsUnicode(false);
             entity.Property(e => e.Role)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("role");
-            entity.Property(e => e.Salary)
-                .HasColumnType("decimal(18, 2)")
-                .HasColumnName("salary");
+                .IsUnicode(false);
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Accounts)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__Account__Employe__3E52440B");
         });
 
-        modelBuilder.Entity<TbService>(entity =>
+        modelBuilder.Entity<CostOfGood>(entity =>
         {
-            entity.HasKey(e => e.IdService).HasName("PK__tbServic__0E3EA45BAD22DE9B");
+            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628A6A36B2B");
 
-            entity.ToTable("tbService");
+            entity.ToTable("CostOfGood");
 
-            entity.Property(e => e.IdService).HasColumnName("idService");
-            entity.Property(e => e.Name)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("name");
-            entity.Property(e => e.Price)
-                .HasColumnType("decimal(18, 2)")
-                .HasColumnName("price");
+            entity.Property(e => e.ProductName)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.CostOfGoods)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__CostOfGoo__Produ__52593CB8");
         });
 
-        modelBuilder.Entity<TbVehicleType>(entity =>
+        modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.IdVehicleType).HasName("PK__tbVehicl__EDA0D14382934296");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D80CA5D9A9");
 
-            entity.ToTable("tbVehicleType");
+            entity.ToTable("Customer");
 
-            entity.Property(e => e.IdVehicleType).HasColumnName("idVehicleType");
-            entity.Property(e => e.Class).HasColumnName("class");
+            entity.Property(e => e.Address)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.Name)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("name");
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Phone)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11BABCCF67");
+
+            entity.ToTable("Employee");
+
+            entity.Property(e => e.Address)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Gender)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Phone)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCF80E3A51A");
+
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.TransactionNo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.CustomerId)
+                .HasConstraintName("FK__Orders__Customer__45F365D3");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__Orders__Employee__46E78A0C");
+
+            entity.HasOne(d => d.Vehicle).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.VehicleId)
+                .HasConstraintName("FK__Orders__VehicleI__44FF419A");
+        });
+
+        modelBuilder.Entity<OrderProduct>(entity =>
+        {
+            entity.HasKey(e => e.OrderProductId).HasName("PK__OrderPro__29B019C245C9DDE2");
+
+            entity.ToTable("OrderProduct");
+
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__OrderProd__Order__4E88ABD4");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__OrderProd__Produ__4F7CD00D");
+        });
+
+        modelBuilder.Entity<OrderService>(entity =>
+        {
+            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB3AF2AE2B");
+
+            entity.ToTable("OrderService");
+
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+
+            entity.HasOne(d => d.Employee).WithMany(p => p.OrderServices)
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK__OrderServ__Emplo__4BAC3F29");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderServices)
+                .HasForeignKey(d => d.OrderId)
+                .HasConstraintName("FK__OrderServ__Order__49C3F6B7");
+
+            entity.HasOne(d => d.Service).WithMany(p => p.OrderServices)
+                .HasForeignKey(d => d.ServiceId)
+                .HasConstraintName("FK__OrderServ__Servi__4AB81AF0");
+        });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CDBF7FABE2");
+
+            entity.ToTable("Product");
+
+            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+        });
+
+        modelBuilder.Entity<Service>(entity =>
+        {
+            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00AF667F939");
+
+            entity.ToTable("Service");
+
+            entity.Property(e => e.Description).HasColumnType("text");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+        });
+
+        modelBuilder.Entity<Vehicle>(entity =>
+        {
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B54920A0CD93C");
+
+            entity.ToTable("Vehicle");
+
+            entity.Property(e => e.LicensePlate)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Make)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.Model)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Vehicles)
+                .HasForeignKey(d => d.CustomerId)
+                .HasConstraintName("FK__Vehicle__Custome__398D8EEE");
         });
 
         OnModelCreatingPartial(modelBuilder);
