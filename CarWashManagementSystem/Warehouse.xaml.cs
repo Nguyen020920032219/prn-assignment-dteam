@@ -122,7 +122,7 @@ namespace CarWashManagementSystem
             WarehouseModule wm = new WarehouseModule();
             wm.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             wm.Closed += WarehouseModule_Closed;
-            wm.Show();
+            wm.ShowDialog();
         }
         private void WarehouseModule_Closed(object sender, EventArgs e)
         {
