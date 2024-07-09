@@ -17,7 +17,5 @@ public partial class Product
 
     public bool IsDeleted { get; set; }
 
-    public virtual ICollection<CostOfGood> CostOfGoods { get; set; } = new List<CostOfGood>();
-
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 }
