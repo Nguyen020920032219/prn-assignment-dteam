@@ -5,9 +5,9 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWashManagementSystem", "CarWashManagementSystem\CarWashManagementSystem.csproj", "{6C496632-9877-46F5-80FB-CCC6D3FF53DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{61EB93C4-8FCC-4246-83E4-FDF4F0C6D194}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{61EB93C4-8FCC-4246-83E4-FDF4F0C6D194}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{303A59FA-BDCB-46B7-B074-E618093FDC8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "service", "Service\service.csproj", "{303A59FA-BDCB-46B7-B074-E618093FDC8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

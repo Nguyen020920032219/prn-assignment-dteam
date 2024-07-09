@@ -16,4 +16,8 @@ public partial class Service
     public bool IsDeleted { get; set; }
 
     public virtual ICollection<OrderService> OrderServices { get; set; } = new List<OrderService>();
+<<<<<<< HEAD
+=======
+    
+>>>>>>> develop
 }
