@@ -65,7 +65,7 @@ namespace CarWashManagementSystem
             Button button = sender as Button;
             
          
-            Service service = button.DataContext as Service;
+            Repository.Entities.Service service = button.DataContext as Repository.Entities.Service;
             service.IsDeleted = true;
             MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirm delete",
                 MessageBoxButton.YesNo,
@@ -91,7 +91,7 @@ namespace CarWashManagementSystem
         {
             try
             {
-                var Service = e.Row.Item as Service;
+                var Service = e.Row.Item as Repository.Entities.Service;
                 if (Service == null)
                 {
                     MessageBox.Show("Row is null!!");
