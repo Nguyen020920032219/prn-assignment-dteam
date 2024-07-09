@@ -92,39 +92,45 @@ CREATE TABLE Product (
     Name VARCHAR(255) NOT NULL,
     StockQuantity INT,
     Price DECIMAL(10, 2),
-    Description TEXT
+    Description TEXT,
+    IsDeleted BIT NOT NULL DEFAULT 0
 );
 
-INSERT INTO Product (Name, StockQuantity, Price, Description) VALUES
-('Motor Oil', 100, 15.00, 'High quality motor oil'),
-('Tire', 50, 200.00, 'Durable tire'),
-('Air Filter', 200, 5.00, 'High quality air filter'),
-('Brake Pads', 70, 30.00, 'Safe brake pads'),
-('Battery', 30, 120.00, 'Long-lasting battery'),
-('Headlight', 150, 70.00, 'Super bright headlight'),
-('Windshield Wiper', 100, 8.00, 'Durable windshield wiper'),
-('Rearview Mirror', 80, 40.00, 'Anti-glare rearview mirror'),
-('Leather Seat', 20, 500.00, 'Premium leather seat'),
-('Timing Belt', 90, 15.00, 'Durable timing belt');
+INSERT INTO Product (Name, StockQuantity, Price, Description, isDeleted)
+VALUES
+('Motor Oil', 100, 15.00, 'High quality motor oil', 0),
+('Tire', 50, 200.00, 'Durable tire', 0),
+('Air Filter', 200, 5.00, 'High quality air filter', 0),
+('Brake Pads', 70, 30.00, 'Safe brake pads', 0),
+('Battery', 30, 120.00, 'Long-lasting battery', 0),
+('Headlight', 150, 70.00, 'Super bright headlight', 0),
+('Windshield Wiper', 100, 8.00, 'Durable windshield wiper', 0),
+('Rearview Mirror', 80, 40.00, 'Anti-glare rearview mirror', 0),
+('Leather Seat', 20, 500.00, 'Premium leather seat', 0),
+('Timing Belt', 90, 15.00, 'Durable timing belt', 0);
+
 
 CREATE TABLE Service (
     ServiceId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     Name VARCHAR(255) NOT NULL,
     Price DECIMAL(10, 2),
-    Description TEXT
+    Description TEXT,
+    IsDeleted BIT NOT NULL DEFAULT 0
 );
 
-INSERT INTO Service (Name, Price, Description) VALUES
-('Car Wash', 100.00, 'Professional car wash service'),
-('Oil Change', 200.00, 'Quick oil change'),
-('Brake Repair', 300.00, 'Safe brake repair'),
-('Tire Replacement', 400.00, 'Quality tire replacement'),
-('Regular Maintenance', 500.00, 'Periodic car maintenance'),
-('Comprehensive Check', 600.00, 'Comprehensive car check-up'),
-('Engine Repair', 700.00, 'Engine repair service'),
-('Battery Replacement', 800.00, 'Quick battery replacement'),
-('Headlight Installation', 900.00, 'Super bright headlight installation'),
-('Air Conditioning Repair', 1000.00, 'Air conditioning repair service');
+INSERT INTO Service (Name, Price, Description, IsDeleted)
+VALUES
+('Car Wash', 100.00, 'Professional car wash service', 0),
+('Oil Change', 200.00, 'Quick oil change', 0),
+('Brake Repair', 300.00, 'Safe brake repair', 0),
+('Tire Replacement', 400.00, 'Quality tire replacement', 0),
+('Regular Maintenance', 500.00, 'Periodic car maintenance', 0),
+('Comprehensive Check', 600.00, 'Comprehensive car check-up', 0),
+('Engine Repair', 700.00, 'Engine repair service', 0),
+('Battery Replacement', 800.00, 'Quick battery replacement', 0),
+('Headlight Installation', 900.00, 'Super bright headlight installation', 0),
+('Air Conditioning Repair', 1000.00, 'Air conditioning repair service', 0);
+
 
 CREATE TABLE Orders (
     OrderId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
