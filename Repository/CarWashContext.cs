@@ -18,8 +18,6 @@ public partial class CarWashContext : DbContext
 
     public virtual DbSet<Account> Accounts { get; set; }
 
-    public virtual DbSet<CostOfGood> CostOfGoods { get; set; }
-
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Employee> Employees { get; set; }
@@ -38,13 +36,13 @@ public partial class CarWashContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(local);Database=CarWash;UID=sa;PWD=12345;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=(local);Database=CarWash;UID=sa;PWD=12345;TrustServerCertificate=True;Encrypt=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A65D8F1C54");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A629F1AEE7");
 
             entity.ToTable("Account");
 
@@ -95,7 +93,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F115054C650");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11E787E013");
 
             entity.ToTable("Employee");
 
@@ -115,9 +113,9 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFC25C8B38");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFC00BE4DA");
 
-            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D9485DADC8").IsUnique();
+            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D920EF5CAE").IsUnique();
 
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
@@ -142,7 +140,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B33923768F19");
+            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B339ADDFDBD6");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -157,7 +155,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderService>(entity =>
         {
-            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EBCA8F10C6");
+            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB974513EF");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -172,7 +170,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CD038B671E");
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CD5F2655C4");
 
             entity.ToTable("Product");
 
@@ -185,7 +183,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00AD5FF756A");
+            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00A6C52DFAB");
 
             entity.ToTable("Service");
 
@@ -198,7 +196,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B54925668F7F8");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B5492E86CEBE0");
 
             entity.ToTable("Vehicle");
 
