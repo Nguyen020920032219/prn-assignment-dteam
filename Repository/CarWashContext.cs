@@ -44,7 +44,7 @@ public partial class CarWashContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A65D8F1C54");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A6594CE023");
 
             entity.ToTable("Account");
 
@@ -65,7 +65,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<CostOfGood>(entity =>
         {
-            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628001F3D42");
+            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628F6C1BAD0");
 
             entity.ToTable("CostOfGood");
 
@@ -78,7 +78,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D8D643D8EB");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D8764CCF45");
 
             entity.ToTable("Customer");
 
@@ -95,7 +95,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F115054C650");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11787F8886");
 
             entity.ToTable("Employee");
 
@@ -115,9 +115,9 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFC25C8B38");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFDFE474B2");
 
-            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D9485DADC8").IsUnique();
+            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D93F97A025").IsUnique();
 
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
@@ -142,7 +142,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B33923768F19");
+            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B33913A88AC7");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -157,7 +157,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderService>(entity =>
         {
-            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EBCA8F10C6");
+            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB5B6F7622");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -172,7 +172,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CD038B671E");
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CDBFC20B15");
 
             entity.ToTable("Product");
 
@@ -185,7 +185,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00AD5FF756A");
+            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00A645DB828");
 
             entity.ToTable("Service");
 
@@ -198,7 +198,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B54925668F7F8");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B5492AC56FCE4");
 
             entity.ToTable("Vehicle");
 

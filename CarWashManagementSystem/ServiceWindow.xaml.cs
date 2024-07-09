@@ -50,7 +50,7 @@ namespace CarWashManagementSystem
             ServiceModule serviceModule = new ServiceModule();  
             serviceModule.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             serviceModule.Closed += ServiceModule_Closed;
-            serviceModule.Show();
+            serviceModule.ShowDialog();
 
 
         }
