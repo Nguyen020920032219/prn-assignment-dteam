@@ -40,8 +40,8 @@ namespace CarWashManagementSystem
             Product product = (Product)btn.DataContext;
 
             MessageBoxResult result = MessageBox.Show(
-                $"Bạn có chắc chắn muốn xóa sản phẩm '{product.Name}' không?",
-                "Xác nhận xóa",
+                $"Are you sure to delete '{product.Name}'?",
+                "Confirm",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
             );
@@ -54,7 +54,7 @@ namespace CarWashManagementSystem
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Lỗi khi xóa sản phẩm: {ex.Message}");
+                    MessageBox.Show($"Error while deleting product: {ex.Message}");
                 }
             }
             ShowData();
@@ -66,14 +66,14 @@ namespace CarWashManagementSystem
 
             if (!_validation.IsStringValid(product.Name))
             {
-                MessageBox.Show("Tên sản phẩm không được để trống.");
+                MessageBox.Show("Product name can not be empty.");
                 e.Cancel = true;
                 return;
             }
 
             if (!_validation.IsStringValid(product.Description))
             {
-                MessageBox.Show("Mô tả sản phẩm không được để trống.");
+                MessageBox.Show("Product description can not be empty.");
                 e.Cancel = true;
                 return;
             }
@@ -87,7 +87,7 @@ namespace CarWashManagementSystem
 
             if (!_validation.IsNumber(product.Price+""))
             {
-                MessageBox.Show("Giá sản phẩm phải là một con số.");
+                MessageBox.Show("Product price must be a number.");
                 e.Cancel = true;
                 return;
             }
@@ -101,14 +101,14 @@ namespace CarWashManagementSystem
 
             if (!_validation.IsNumber(product.StockQuantity + ""))
             {
-                MessageBox.Show("Số lượng sản phẩm phải là một con số.");
+                MessageBox.Show("Product quantity must be a number.");
                 e.Cancel = true;
                 return;
             }
 
             if (!_validation.IsPositiveInteger(Int32.Parse(product.StockQuantity + "")))
             {
-                MessageBox.Show("Số lượng sản phẩm phải là số nguyên dương.");
+                MessageBox.Show("Product quantity must be positve number.");
                 e.Cancel = true;
                 return;
             }

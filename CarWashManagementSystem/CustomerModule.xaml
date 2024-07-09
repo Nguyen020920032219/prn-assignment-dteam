@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarWashManagementSystem"
         mc:Ignorable="d"
-        Title="CustomerModule" Height="400" Width="708"
+        Title="CustomerModule" Height="200" Width="708"
         FontFamily="Century Gothic" FontSize="12"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
@@ -17,27 +17,15 @@
         </Button>
 
         <Label Content="Full name:" HorizontalAlignment="Left" Height="24" Margin="10,50,0,0" VerticalAlignment="Top" Width="68"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="24" Margin="100,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="24" Margin="100,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
 
         <Label Content="Phone:" HorizontalAlignment="Left" Height="24" Margin="10,80,0,0" VerticalAlignment="Top" Width="50"/>
         <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="24" Margin="100,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
+        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="24" Margin="100,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
 
-        <Label Content="Car No.:" HorizontalAlignment="Left" Height="24" Margin="10,110,0,0" VerticalAlignment="Top" Width="60"/>
-        <TextBox x:Name="txtCarNo" HorizontalAlignment="Left" Height="24" Margin="100,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
+        <Label Content="Address:" HorizontalAlignment="Left" Height="24" Margin="10,110,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <Label Content="Car Model:" HorizontalAlignment="Left" Height="24" Margin="10,140,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="txtCarModel" HorizontalAlignment="Left" Height="24" Margin="100,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
-
-        <Label Content="Car Type:" HorizontalAlignment="Left" Height="24" Margin="10,170,0,0" VerticalAlignment="Top" Width="65"/>
-        <ComboBox x:Name="cbCarType" HorizontalAlignment="Left" Height="24" Margin="100,170,0,0" VerticalAlignment="Top" Width="585"/>
-
-        <Label Content="Address:" HorizontalAlignment="Left" Height="24" Margin="10,200,0,0" VerticalAlignment="Top" Width="60"/>
-        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="72" Margin="100,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
-
-        <Label Content="Point:" HorizontalAlignment="Left" Height="24" Margin="10,278,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox x:Name="txtPoint" HorizontalAlignment="Left" Height="24" Margin="100,278,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
-
-        <Button x:Name="btnSave" Click="btnSave_Click" Content="Save" HorizontalAlignment="Right" Height="40" Margin="0,330,162,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
-        <Button x:Name="btnCancel" Click="btnClose_Click" Content="Cancel" HorizontalAlignment="Right" Height="40" Margin="0,330,28,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
+        <Button x:Name="btnSave" Click="btnSave_Click" Content="Save" HorizontalAlignment="Right" Height="40" Margin="0,150,204,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
+        <Button x:Name="btnCancel" Click="btnClose_Click" Content="Cancel" HorizontalAlignment="Right" Height="40" Margin="0,150,55,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White"/>
     </Grid>
 </Window>

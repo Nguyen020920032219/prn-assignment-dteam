@@ -34,49 +34,43 @@ namespace CarWashManagementSystem
 
             if (!_validation.IsStringValid(name))
             {
-                MessageBox.Show("Tên sản phẩm không được để trống.");
-                return;
-            }
-
-            if (!_validation.IsStringLengthValid(name, 1, 50))
-            {
-                MessageBox.Show("Tên sản phẩm phải từ 1 đến 50 ký tự.");
+                MessageBox.Show("Product name can not be empty.");
                 return;
             }
 
             if (!_validation.IsStringValid(description))
             {
-                MessageBox.Show("Mô tả sản phẩm không được để trống.");
+                MessageBox.Show("Product description can not be empty.");
                 return;
             }
 
             if (!_validation.IsStringValid(priceText))
             {
-                MessageBox.Show("Giá sản phẩm không được để trống.");
+                MessageBox.Show("Product price can not be empty.");
                 return;
             }
 
             if (!_validation.IsNumber(priceText))
             {
-                MessageBox.Show("Giá sản phẩm phải là một con số.");
+                MessageBox.Show("Product price must be a number.");
                 return;
             }
 
             if (!_validation.IsStringValid(quantityText))
             {
-                MessageBox.Show("Số lượng sản phẩm không được để trống.");
+                MessageBox.Show("Product quantity can not be empty.");
                 return;
             }
 
             if (!_validation.IsNumber(quantityText))
             {
-                MessageBox.Show("Số lượng sản phẩm phải là một con số.");
+                MessageBox.Show("Product quantity must be a number.");
                 return;
             }
 
             if (!_validation.IsPositiveInteger(Int32.Parse(quantityText)))
             {
-                MessageBox.Show("Số lượng sản phẩm phải là số nguyên dương.");
+                MessageBox.Show("Product quantity must be positive number.");
                 return;
             }
 
@@ -95,12 +89,12 @@ namespace CarWashManagementSystem
             try
             {
                 _productService.CreateProduct(product);
-                MessageBox.Show("Sản phẩm đã được thêm thành công.");
+                MessageBox.Show("Product added.");
                 Close_Click(sender, e);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi thêm sản phẩm: {ex.Message}");
+                MessageBox.Show($"Error while adding product: {ex.Message}");
             }
         }
     }
