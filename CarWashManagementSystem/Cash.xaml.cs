@@ -92,10 +92,10 @@ namespace CarWashManagementSystem
 
         private void btnAddService_Click(object sender, RoutedEventArgs e)
         {
-            List<Repository.Entities.Service> selectedServices;
-            _vehicleServices.TryGetValue(_customerVehicleSelected.VehicleId, out selectedServices);
+            List<Repository.Entities.Service> servicesSelected;
+            _vehicleServices.TryGetValue(_customerVehicleSelected.VehicleId, out servicesSelected);
 
-            CashService cashService = new CashService(_customerVehicleSelected, selectedServices);
+            CashService cashService = new CashService(_customerVehicleSelected, servicesSelected);
             cashService.OnServiceSelectionCompleted = OnServiceSelectionCompleted;
             OpenChildWindown(cashService);
         }
@@ -109,21 +109,21 @@ namespace CarWashManagementSystem
 
         //Hidden serives are selected by a customer
         //Show services again if choice anther cust
-        private void OnServiceSelectionCompleted(List<Repository.Entities.Service> selectedServices)
+        private void OnServiceSelectionCompleted(List<Repository.Entities.Service> servicesSelected)
         {
             if (_customerVehicleSelected != null)
             {
                 if (_vehicleServices.ContainsKey(_customerVehicleSelected.VehicleId))
                 {
-                    _vehicleServices[_customerVehicleSelected.VehicleId].AddRange(selectedServices);
+                    _vehicleServices[_customerVehicleSelected.VehicleId].AddRange(servicesSelected);
                 }
                 else if (_cashRecords.Count > 0)
                 {
-                    _vehicleServices[_customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(selectedServices);
+                    _vehicleServices[_customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(servicesSelected);
                     _vehicleServices.Remove(_cashRecords[0].VehicleId);
                 } else
                 {
-                    _vehicleServices[_customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(selectedServices);
+                    _vehicleServices[_customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(servicesSelected);
                 }
             }
 
@@ -133,7 +133,7 @@ namespace CarWashManagementSystem
                 _cashRecords.Clear();
             }
 
-            DisplaySelectedInfo(_customerVehicleSelected, selectedServices);
+            DisplaySelectedInfo(_customerVehicleSelected, servicesSelected);
             UpdateTotalPrice();
             CloseChildWindown();
         }
