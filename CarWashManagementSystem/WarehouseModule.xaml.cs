@@ -1,31 +1,23 @@
 ﻿using Repository.Entities;
 using Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CarWashManagementSystem
 {
     /// <summary>
-    /// Interaction logic for ServiceModule.xaml
+    /// Interaction logic for WarehouseModule.xaml
     /// </summary>
     public partial class WarehouseModule : Window
     {
         ProductService _productService;
+        Validation _validation;
+
         public WarehouseModule()
         {
             InitializeComponent();
             _productService = new ProductService();
+            _validation = new Validation();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -35,21 +27,81 @@ namespace CarWashManagementSystem
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var Name = txtName.Text;
-            var Description=txtDescription.Text;
-            var Price= decimal.Parse(txtPrice.Text);
-            var Quantity= Int32.Parse(txtQuantity.Text);
+            var name = txtName.Text;
+            var description = txtDescription.Text;
+            var priceText = txtPrice.Text;
+            var quantityText = txtQuantity.Text;
 
-            Product product = new Product();
-            product.Name = Name;
-            product.Description = Description;
-            product.Price = Price;
-            product.StockQuantity = Quantity;
-            product.IsDeleted = false;
+            if (!_validation.IsStringValid(name))
+            {
+                MessageBox.Show("Tên sản phẩm không được để trống.");
+                return;
+            }
 
-            _productService.CreateProduct(product);
+            if (!_validation.IsStringLengthValid(name, 1, 50))
+            {
+                MessageBox.Show("Tên sản phẩm phải từ 1 đến 50 ký tự.");
+                return;
+            }
 
-            Close_Click(sender, e);
+            if (!_validation.IsStringValid(description))
+            {
+                MessageBox.Show("Mô tả sản phẩm không được để trống.");
+                return;
+            }
+
+            if (!_validation.IsStringValid(priceText))
+            {
+                MessageBox.Show("Giá sản phẩm không được để trống.");
+                return;
+            }
+
+            if (!_validation.IsNumber(priceText))
+            {
+                MessageBox.Show("Giá sản phẩm phải là một con số.");
+                return;
+            }
+
+            if (!_validation.IsStringValid(quantityText))
+            {
+                MessageBox.Show("Số lượng sản phẩm không được để trống.");
+                return;
+            }
+
+            if (!_validation.IsNumber(quantityText))
+            {
+                MessageBox.Show("Số lượng sản phẩm phải là một con số.");
+                return;
+            }
+
+            if (!_validation.IsPositiveInteger(Int32.Parse(quantityText)))
+            {
+                MessageBox.Show("Số lượng sản phẩm phải là số nguyên dương.");
+                return;
+            }
+
+            var price = decimal.Parse(priceText);
+            var quantity = Int32.Parse(quantityText);
+
+            Product product = new Product
+            {
+                Name = name,
+                Description = description,
+                Price = price,
+                StockQuantity = quantity,
+                IsDeleted = false
+            };
+
+            try
+            {
+                _productService.CreateProduct(product);
+                MessageBox.Show("Sản phẩm đã được thêm thành công.");
+                Close_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi thêm sản phẩm: {ex.Message}");
+            }
         }
     }
 }
