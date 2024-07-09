@@ -9,13 +9,9 @@ public partial class Order
 
     public string TransactionNo { get; set; } = null!;
 
-    public decimal? UnitPrice { get; set; }
-
     public DateOnly? Date { get; set; }
 
     public string? Status { get; set; }
-
-    public int? Quantity { get; set; }
 
     public decimal? TotalPrice { get; set; }
 

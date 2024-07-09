@@ -1,7 +1,9 @@
 CREATE DATABASE CarWash;
-go
+GO
+
 USE CarWash;
-go
+GO
+
 CREATE TABLE Customer (
     CustomerId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     Name VARCHAR(255) NOT NULL,
@@ -43,7 +45,6 @@ INSERT INTO Vehicle (CustomerId, LicensePlate, Make, Model, Year) VALUES
 (9, 'YZA567', 'Audi', 'A4', 2012),
 (10, 'BCD890', 'Chevrolet', 'Cruze', 2011);
 
--- Table Employee
 CREATE TABLE Employee (
     EmployeeId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     Name VARCHAR(255) NOT NULL,
@@ -127,11 +128,9 @@ INSERT INTO Service (Name, Price, Description) VALUES
 
 CREATE TABLE Orders (
     OrderId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
-    TransactionNo VARCHAR(50) NOT NULL,
-    UnitPrice DECIMAL(10, 2),
+    TransactionNo VARCHAR(50) NOT NULL UNIQUE,
     Date DATE,
     Status VARCHAR(50),
-    Quantity INT,
     TotalPrice DECIMAL(10, 2),
     VehicleId INT,
     CustomerId INT,
@@ -141,83 +140,88 @@ CREATE TABLE Orders (
     FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId)
 );
 
-INSERT INTO Orders (TransactionNo, UnitPrice, Date, Status, Quantity, TotalPrice, VehicleId, CustomerId, EmployeeId) VALUES
-('TXN001', 200.00, '2024-07-01', 'Completed', 1, 200.00, 1, 1, 1),
-('TXN002', 300.00, '2024-07-02', 'Completed', 1, 300.00, 2, 2, 2),
-('TXN003', 400.00, '2024-07-03', 'Pending', 1, 400.00, 3, 3, 3),
-('TXN004', 500.00, '2024-07-04', 'Completed', 1, 500.00, 4, 4, 4),
-('TXN005', 600.00, '2024-07-05', 'Completed', 1, 600.00, 5, 5, 5),
-('TXN006', 700.00, '2024-07-06', 'Pending', 1, 700.00, 6, 6, 6),
-('TXN007', 800.00, '2024-07-07', 'Completed', 1, 800.00, 7, 7, 7),
-('TXN008', 900.00, '2024-07-08', 'Pending', 1, 900.00, 8, 8, 8),
-('TXN009', 1000.00, '2024-07-09', 'Pending', 1, 1000.00, 9, 9, 9),
-('TXN010', 1100.00, '2024-07-10', 'Completed', 1, 1100.00, 10, 10, 10);
+INSERT INTO Orders (TransactionNo, Date, Status, TotalPrice, VehicleId, CustomerId, EmployeeId) VALUES
+('202407010001', '2024-07-01', 'Completed', 200.00, 1, 1, 1),
+('202407010002', '2024-07-01', 'Completed', 300.00, 2, 2, 2),
+('202407020001', '2024-07-02', 'Pending', 400.00, 3, 3, 3),
+('202407030001', '2024-07-03', 'Completed', 500.00, 4, 4, 4),
+('202407040001', '2024-07-04', 'Completed', 600.00, 5, 5, 5),
+('202407050001', '2024-07-05', 'Pending', 700.00, 6, 6, 6),
+('202407060001', '2024-07-06', 'Completed', 800.00, 7, 7, 7),
+('202407070001', '2024-07-07', 'Pending', 900.00, 8, 8, 8),
+('202407080001', '2024-07-08', 'Pending', 1000.00, 9, 9, 9),
+('202407090001', '2024-07-09', 'Completed', 1100.00, 10, 10, 10);
 
-CREATE TABLE OrderService (
-    OrderServiceId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
-    OrderId INT,
-    ServiceId INT,
-    EmployeeId INT,
-    Price DECIMAL(10, 2),
-    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
-    FOREIGN KEY (ServiceId) REFERENCES Service(ServiceId),
-    FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId)
-);
-
-INSERT INTO OrderService (OrderId, ServiceId, EmployeeId, Price) VALUES
-(1, 1, 1, 100.00),
-(2, 2, 2, 200.00),
-(3, 3, 3, 300.00),
-(4, 4, 4, 400.00),
-(5, 5, 5, 500.00),
-(6, 6, 6, 600.00),
-(7, 7, 7, 700.00),
-(8, 8, 8, 800.00),
-(9, 9, 9, 900.00),
-(10, 10, 10, 1000.00);
-
-CREATE TABLE OrderProduct (
-    OrderProductId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+CREATE TABLE OrderProducts (
+    OrderProductsId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     OrderId INT,
     ProductId INT,
-    UnitPrice DECIMAL(10, 2),
     Quantity INT,
-    TotalPrice DECIMAL(10, 2),
+    UnitPrice DECIMAL(10, 2),
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
 
-INSERT INTO OrderProduct (OrderId, ProductId, UnitPrice, Quantity, TotalPrice) VALUES
-(1, 1, 15.00, 1, 15.00),
-(2, 2, 200.00, 1, 200.00),
-(3, 3, 5.00, 1, 5.00),
-(4, 4, 30.00, 1, 30.00),
-(5, 5, 120.00, 1, 120.00),
-(6, 6, 70.00, 1, 70.00),
-(7, 7, 8.00, 1, 8.00),
-(8, 8, 40.00, 1, 40.00),
-(9, 9, 500.00, 1, 500.00),
-(10, 10, 15.00, 1, 15.00);
+INSERT INTO OrderProducts (OrderId, ProductId, Quantity, UnitPrice) VALUES
+(1, 1, 2, 15.00),
+(1, 2, 1, 200.00),
+(2, 3, 3, 5.00),
+(2, 4, 1, 30.00),
+(3, 5, 2, 120.00),
+(3, 6, 1, 70.00),
+(4, 7, 4, 8.00),
+(4, 8, 1, 40.00),
+(5, 9, 1, 500.00),
+(5, 10, 2, 15.00),
+(6, 1, 2, 15.00),
+(6, 2, 1, 200.00),
+(7, 3, 3, 5.00),
+(7, 4, 1, 30.00),
+(8, 5, 2, 120.00),
+(8, 6, 1, 70.00),
+(9, 7, 4, 8.00),
+(9, 8, 1, 40.00),
+(10, 9, 1, 500.00),
+(10, 10, 2, 15.00);
+
+CREATE TABLE OrderServices (
+    OrderServiceId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
+    OrderId INT,
+    ServiceId INT,
+    Quantity INT,
+    UnitPrice DECIMAL(10, 2),
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
+    FOREIGN KEY (ServiceId) REFERENCES Service(ServiceId)
+);
+
+INSERT INTO OrderServices (OrderId, ServiceId, Quantity, UnitPrice) VALUES
+(1, 1, 1, 100.00),
+(2, 2, 1, 200.00),
+(3, 3, 1, 300.00),
+(4, 4, 1, 400.00),
+(5, 5, 1, 500.00),
+(6, 6, 1, 600.00),
+(7, 7, 1, 700.00),
+(8, 8, 1, 800.00),
+(9, 9, 1, 900.00),
+(10, 10, 1, 1000.00);
 
 CREATE TABLE CostOfGood (
     CostOfGoodId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     ProductId INT,
-    ProductName VARCHAR(255),
-    UnitPrice DECIMAL(10, 2),
-    TotalPrice DECIMAL(10, 2),
-    Quantity INT,
+    Cost DECIMAL(10, 2),
     Date DATE,
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
 
-INSERT INTO CostOfGood (ProductId, ProductName, UnitPrice, TotalPrice, Quantity, Date) VALUES
-(1, 'Motor Oil', 12.00, 24.00, 2, '2024-07-01'),
-(2, 'Tire', 180.00, 180.00, 1, '2024-07-02'),
-(3, 'Air Filter', 4.00, 4.00, 1, '2024-07-03'),
-(4, 'Brake Pads', 25.00, 25.00, 1, '2024-07-04'),
-(5, 'Battery', 100.00, 100.00, 1, '2024-07-05'),
-(6, 'Headlight', 50.00, 50.00, 1, '2024-07-06'),
-(7, 'Windshield Wiper', 6.00, 12.00, 2, '2024-07-07'),
-(8, 'Rearview Mirror', 30.00, 30.00, 1, '2024-07-08'),
-(9, 'Leather Seat', 400.00, 400.00, 1, '2024-07-09'),
-(10, 'Timing Belt', 10.00, 20.00, 2, '2024-07-10');
+INSERT INTO CostOfGood (ProductId, Cost, Date) VALUES
+(1, 10.00, '2024-07-01'),
+(2, 150.00, '2024-07-01'),
+(3, 3.00, '2024-07-01'),
+(4, 20.00, '2024-07-01'),
+(5, 80.00, '2024-07-01'),
+(6, 50.00, '2024-07-01'),
+(7, 5.00, '2024-07-01'),
+(8, 25.00, '2024-07-01'),
+(9, 350.00, '2024-07-01'),
+(10, 10.00, '2024-07-01');
