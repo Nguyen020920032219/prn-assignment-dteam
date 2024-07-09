@@ -1,7 +1,7 @@
 ﻿using Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Service
+namespace Repository
 {
     public partial class RepositoryBase<T> where T : class
     {
