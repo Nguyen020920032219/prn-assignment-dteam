@@ -13,5 +13,7 @@ public partial class Service
 
     public string? Description { get; set; }
 
+    public bool IsDeleted { get; set; }
+
     public virtual ICollection<OrderService> OrderServices { get; set; } = new List<OrderService>();
 }
