@@ -1,9 +1,14 @@
-﻿using Repository;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
-    public partial class RepositoryBase<T> where T : class
+    public class RepositoryBase<T> where T : class
     {
         CarWashContext _context;
         DbSet<T> _dbSet;
