@@ -194,23 +194,22 @@ CREATE TABLE OrderServices (
     OrderServiceId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     OrderId INT,
     ServiceId INT,
-    Quantity INT,
     UnitPrice DECIMAL(10, 2),
     FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
     FOREIGN KEY (ServiceId) REFERENCES Service(ServiceId)
 );
 
-INSERT INTO OrderServices (OrderId, ServiceId, Quantity, UnitPrice) VALUES
-(1, 1, 1, 100.00),
-(2, 2, 1, 200.00),
-(3, 3, 1, 300.00),
-(4, 4, 1, 400.00),
-(5, 5, 1, 500.00),
-(6, 6, 1, 600.00),
-(7, 7, 1, 700.00),
-(8, 8, 1, 800.00),
-(9, 9, 1, 900.00),
-(10, 10, 1, 1000.00);
+INSERT INTO OrderServices (OrderId, ServiceId, UnitPrice) VALUES
+(1, 1, 100.00),
+(2, 2, 200.00),
+(3, 3, 300.00),
+(4, 4, 400.00),
+(5, 5, 500.00),
+(6, 6, 600.00),
+(7, 7, 700.00),
+(8, 8, 800.00),
+(9, 9, 900.00),
+(10, 10, 1000.00);
 
 CREATE TABLE CostOfGood (
     CostOfGoodId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
