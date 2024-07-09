@@ -33,6 +33,7 @@
     <None Remove="images\sales_performance_35px.png" />
     <None Remove="images\search_25px.png" />
     <None Remove="images\Services_35px.png" />
+    <None Remove="images\service_support.png" />
     <None Remove="images\submit_progress_30px.png" />
     <None Remove="images\taxi_service_35px.png" />
     <None Remove="images\up_25px.png" />
@@ -74,12 +75,12 @@
     <Resource Include="images\sales_performance_35px.png" />
     <Resource Include="images\search_25px.png" />
     <Resource Include="images\Services_35px.png" />
+    <Resource Include="images\service_support.png" />
     <Resource Include="images\submit_progress_30px.png" />
     <Resource Include="images\taxi_service_35px.png" />
     <Resource Include="images\up_25px.png" />
     <Resource Include="images\us_dollar_35px.png" />
     <Resource Include="images\withdrawal_35px.png" />
-    <Resource Include="service_support.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,9 +13,9 @@
               AutoGenerateColumns="False"  ColumnHeaderHeight="28">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-                <DataGridTextColumn Header="Phone" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
-                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="500"/>
                 <DataGridTemplateColumn x:Name="Delete" Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
