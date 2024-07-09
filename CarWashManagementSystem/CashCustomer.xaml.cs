@@ -23,20 +23,20 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class CashCustomer : UserControl
     {
-        private ICustomerService customerService;
+        private ICustomerService _customerService;
 
-        public Action<CustomerVehicleDTO> onCustomerSelected { get; set; }
+        public Action<CustomerVehicleDTO> OnCustomerSelected { get; set; }
 
         public CashCustomer()
         {
             InitializeComponent();
-            customerService = new CustomerServiceImpl();
+            _customerService = new CustomerServiceImpl();
             CashCustomer_Load();
         }
 
         public void CashCustomer_Load()
         {
-            dgvCustomer.ItemsSource = customerService.GetAllCustomersWithVehicles();
+            dgvCustomer.ItemsSource = _customerService.GetAllCustomersWithVehicles();
         }
 
         public void SearchCustomerByName(object sender, TextChangedEventArgs e)
@@ -63,7 +63,7 @@ namespace CarWashManagementSystem
         public void SelectCustomerButton_Click(object sender, RoutedEventArgs e)
         {
             var customerVehicelSelected = dgvCustomer.SelectedItem as CustomerVehicleDTO;
-            onCustomerSelected?.Invoke(customerVehicelSelected);
+            OnCustomerSelected?.Invoke(customerVehicelSelected);
         }
     }
 }

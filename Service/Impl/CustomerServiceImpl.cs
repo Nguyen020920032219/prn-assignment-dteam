@@ -12,13 +12,13 @@ namespace Service.Impl
 {
     public class CustomerServiceImpl : ICustomerService
     {
-        private RepositoryBase<Customer> repository;
+        private RepositoryBase<Customer> _repository;
         private CarWashContext _context;
 
         public List<Customer> GetAllCustomers()
         {
-            repository = new RepositoryBase<Customer>();
-            return repository.GetAll();
+            _repository = new RepositoryBase<Customer>();
+            return _repository.GetAll();
         }
 
         public List<CustomerVehicleDTO> GetAllCustomersWithVehicles()

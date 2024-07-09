@@ -14,43 +14,43 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Cash.xaml
     /// </summary>
-    public partial class Cash : Window
+    public partial class Cash : UserControl
     {
         //private decimal? totalPrice = 0;
 
-        private IOrderService orderService;
+        private IOrderService _orderService;
 
-        private UserControl? activeWindown = null;
+        private UserControl? _activeWindown = null;
 
         //Track which is Vehicle of customer selected
-        private CustomerVehicleDTO customerVehicleSelected;
+        private CustomerVehicleDTO _customerVehicleSelected;
 
         //private List<Repository.Entities.Service> servicesSelected;
 
         //Track what are services of vehicle selected to display 
-        private ObservableCollection<dynamic> cashRecords = new ObservableCollection<dynamic>();
+        private ObservableCollection<dynamic> _cashRecords = new ObservableCollection<dynamic>();
 
         //Track what are services of which is vehicle selected 
-        private Dictionary<int, List<Repository.Entities.Service>> vehicleServices = new Dictionary<int, List<Repository.Entities.Service>>();
+        private Dictionary<int, List<Repository.Entities.Service>> _vehicleServices = new Dictionary<int, List<Repository.Entities.Service>>();
 
         public Cash()
         {
             InitializeComponent();
-            orderService = new OrderServiceImpl();
+            _orderService = new OrderServiceImpl();
 
             GetTransactionNo();
-            dgvCash.ItemsSource = cashRecords;
+            dgvCash.ItemsSource = _cashRecords;
             btnAddService.IsEnabled = false;
         }
 
         public void OpenChildWindown(UserControl childWindown)
         {
-            if (activeWindown != null)
+            if (_activeWindown != null)
             {
-                panelCash.Children.Remove(activeWindown);
+                panelCash.Children.Remove(_activeWindown);
             }
 
-            activeWindown = childWindown;
+            _activeWindown = childWindown;
             dgvCash.Margin = new Thickness(0, 271, 0, 80);
             panelCash.Height = 200;
             panelCash.Children.Add(childWindown);
@@ -58,10 +58,10 @@ namespace CarWashManagementSystem
 
         public void CloseChildWindown()
         {
-            if (activeWindown != null)
+            if (_activeWindown != null)
             {
-                panelCash.Children.Remove(activeWindown);
-                activeWindown = null;
+                panelCash.Children.Remove(_activeWindown);
+                _activeWindown = null;
                 dgvCash.Margin = new Thickness(0, 71, 0, 80); // Reset margin to original if needed
             }
         }
@@ -69,7 +69,7 @@ namespace CarWashManagementSystem
         public void GetTransactionNo()
         {
             string date = DateTime.Now.ToString("yyyyMMdd");
-            string? MaxTransactionNoStartingWithDate = orderService.GetMaxTransactionNoStartingWithDate(date);
+            string? MaxTransactionNoStartingWithDate = _orderService.GetMaxTransactionNoStartingWithDate(date);
 
             if (MaxTransactionNoStartingWithDate != null)
             {
@@ -86,23 +86,23 @@ namespace CarWashManagementSystem
         private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
             CashCustomer cashCustomer = new CashCustomer();
-            cashCustomer.onCustomerSelected = OnCustomerSelected;
+            cashCustomer.OnCustomerSelected = OnCustomerSelected;
             OpenChildWindown(cashCustomer);
         }
 
         private void btnAddService_Click(object sender, RoutedEventArgs e)
         {
             List<Repository.Entities.Service> selectedServices;
-            vehicleServices.TryGetValue(customerVehicleSelected.VehicleId, out selectedServices);
+            _vehicleServices.TryGetValue(_customerVehicleSelected.VehicleId, out selectedServices);
 
-            CashService cashService = new CashService(customerVehicleSelected, selectedServices);
+            CashService cashService = new CashService(_customerVehicleSelected, selectedServices);
             cashService.OnServiceSelectionCompleted = OnServiceSelectionCompleted;
             OpenChildWindown(cashService);
         }
 
         private void OnCustomerSelected(CustomerVehicleDTO customerVehicleSelected)
         {
-            this.customerVehicleSelected = customerVehicleSelected;
+            this._customerVehicleSelected = customerVehicleSelected;
             btnAddService.IsEnabled = true; // Enable service button when customer is selected
             btnAddService_Click(null, null); // Automatically open CashService
         }
@@ -111,29 +111,29 @@ namespace CarWashManagementSystem
         //Show services again if choice anther cust
         private void OnServiceSelectionCompleted(List<Repository.Entities.Service> selectedServices)
         {
-            if (customerVehicleSelected != null)
+            if (_customerVehicleSelected != null)
             {
-                if (vehicleServices.ContainsKey(customerVehicleSelected.VehicleId))
+                if (_vehicleServices.ContainsKey(_customerVehicleSelected.VehicleId))
                 {
-                    vehicleServices[customerVehicleSelected.VehicleId].AddRange(selectedServices);
+                    _vehicleServices[_customerVehicleSelected.VehicleId].AddRange(selectedServices);
                 }
-                else if (cashRecords.Count > 0)
+                else if (_cashRecords.Count > 0)
                 {
-                    vehicleServices[customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(selectedServices);
-                    vehicleServices.Remove(cashRecords[0].VehicleId);
+                    _vehicleServices[_customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(selectedServices);
+                    _vehicleServices.Remove(_cashRecords[0].VehicleId);
                 } else
                 {
-                    vehicleServices[customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(selectedServices);
+                    _vehicleServices[_customerVehicleSelected.VehicleId] = new List<Repository.Entities.Service>(selectedServices);
                 }
             }
 
             //Clear previous services if a different vehicle is selcted
-            if (cashRecords.Count > 0 && cashRecords[0].VehicleId != customerVehicleSelected.VehicleId) 
+            if (_cashRecords.Count > 0 && _cashRecords[0].VehicleId != _customerVehicleSelected.VehicleId) 
             {
-                cashRecords.Clear();
+                _cashRecords.Clear();
             }
 
-            DisplaySelectedInfo(customerVehicleSelected, selectedServices);
+            DisplaySelectedInfo(_customerVehicleSelected, selectedServices);
             UpdateTotalPrice();
             CloseChildWindown();
         }
@@ -142,7 +142,7 @@ namespace CarWashManagementSystem
         {
             decimal totalPrice = 0;
 
-            foreach(var record in cashRecords)
+            foreach(var record in _cashRecords)
             {
                 totalPrice += record.ServicePrice;
             }
@@ -155,7 +155,7 @@ namespace CarWashManagementSystem
             // Display the selected info in the DataGrid
             foreach (var service in servicesSelected)
             {
-                cashRecords.Add(new
+                _cashRecords.Add(new
                 {
                     CustomerId = customerVehicleSelected.CustomerId,
                     TransactionNo = lblTransactionNo.Content,
@@ -186,12 +186,12 @@ namespace CarWashManagementSystem
 
             var customerId = serviceRecord.GetType().GetProperty("CustomerId").GetValue(serviceRecord, null);
 
-            cashRecords.Remove(serviceRecord);
+            _cashRecords.Remove(serviceRecord);
             UpdateTotalPrice();
 
-            if (vehicleServices.ContainsKey((int)customerId))
+            if (_vehicleServices.ContainsKey((int)customerId))
             {
-                var services = vehicleServices[(int)customerId];
+                var services = _vehicleServices[(int)customerId];
                 var serviceToRemove = services.FirstOrDefault(s => s.ServiceId == (int)serviceId);
 
                 if (serviceToRemove != null)

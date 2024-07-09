@@ -12,7 +12,7 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class CashService : UserControl
     {
-        private IServiceService serviceService;
+        private IServiceService _serviceService;
 
         public CustomerVehicleDTO? CustomerVehicleSelected { get; set; }
 
@@ -23,7 +23,7 @@ namespace CarWashManagementSystem
         public CashService(CustomerVehicleDTO? customerVehicleSelected, List<Repository.Entities.Service> alreadySelectedServices)
         {
             InitializeComponent();
-            serviceService = new ServiceServiceImpl();
+            _serviceService = new ServiceServiceImpl();
 
             CustomerVehicleSelected = customerVehicleSelected;
             ServicesSelected = new List<Repository.Entities.Service>();
@@ -32,7 +32,7 @@ namespace CarWashManagementSystem
 
         public void CashService_Load(List<Repository.Entities.Service> alreadySelectedServices)
         {
-            var allServices = serviceService.GetAllServices();
+            var allServices = _serviceService.GetAllServices();
             
             if(alreadySelectedServices != null)
             {

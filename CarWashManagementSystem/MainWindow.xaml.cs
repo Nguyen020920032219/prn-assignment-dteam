@@ -17,9 +17,22 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserControl? _activeWindow = null;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void OpenChildWindow (UserControl childWindow)
+        {
+            if (_activeWindow != null)
+            {
+                panelChild.Children.Remove(_activeWindow);
+            }
+
+            _activeWindow = childWindow;
+            panelChild.Children.Add(childWindow);
         }
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
@@ -57,10 +70,11 @@ namespace CarWashManagementSystem
 
         private void btnCash_Click(object sender, RoutedEventArgs e)
         {
-            panelSlide.Height = btnCash.ActualHeight;
-            Thickness margin = panelSlide.Margin;
-            margin.Top = btnCash.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
-            panelSlide.Margin = margin;
+            //panelSlide.Height = btnCash.ActualHeight;
+            //Thickness margin = panelSlide.Margin;
+            //margin.Top = btnCash.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
+            //panelSlide.Margin = margin;
+            OpenChildWindow(new Cash());
         }
 
         private void btnReport_Click(object sender, RoutedEventArgs e)
