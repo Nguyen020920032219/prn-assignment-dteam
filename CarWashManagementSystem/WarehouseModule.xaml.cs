@@ -11,13 +11,13 @@ namespace CarWashManagementSystem
     public partial class WarehouseModule : Window
     {
         ProductService _productService;
-        Validation _validation;
+        ValidationService _validation;
 
         public WarehouseModule()
         {
             InitializeComponent();
             _productService = new ProductService();
-            _validation = new Validation();
+            _validation = new ValidationService();
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

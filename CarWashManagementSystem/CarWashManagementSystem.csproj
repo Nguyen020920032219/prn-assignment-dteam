@@ -38,6 +38,7 @@
     <None Remove="images\up_25px.png" />
     <None Remove="images\us_dollar_35px.png" />
     <None Remove="images\withdrawal_35px.png" />
+    <None Remove="service_support.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,6 +79,7 @@
     <Resource Include="images\up_25px.png" />
     <Resource Include="images\us_dollar_35px.png" />
     <Resource Include="images\withdrawal_35px.png" />
+    <Resource Include="service_support.png" />
   </ItemGroup>
 
   <ItemGroup>

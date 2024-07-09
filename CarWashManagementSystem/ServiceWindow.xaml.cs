@@ -22,10 +22,12 @@ namespace CarWashManagementSystem
     public partial class ServiceWindow : Window
     {
         ServiceService _services;
+        ValidationService _validationService;
         public ServiceWindow()
         {
             InitializeComponent();
             _services = new ServiceService();
+            _validationService = new ValidationService();
             ViewData();
         }
 
@@ -34,7 +36,9 @@ namespace CarWashManagementSystem
             try
             {
                 dgvService.ItemsSource = _services.GetList();
-            } catch {
+            }
+            catch
+            {
                 MessageBox.Show("Cannot access with data");
             }
 
@@ -47,11 +51,10 @@ namespace CarWashManagementSystem
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            ServiceModule serviceModule = new ServiceModule();  
+            ServiceModule serviceModule = new ServiceModule();
             serviceModule.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             serviceModule.Closed += ServiceModule_Closed;
             serviceModule.ShowDialog();
-
 
         }
 
@@ -63,8 +66,8 @@ namespace CarWashManagementSystem
         private void Hide_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            
-         
+
+
             Repository.Entities.Service service = button.DataContext as Repository.Entities.Service;
             service.IsDeleted = true;
             MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirm delete",
@@ -72,26 +75,47 @@ namespace CarWashManagementSystem
                 MessageBoxImage.Warning
                 );
 
-            if ( result == MessageBoxResult.Yes )
+            if (result == MessageBoxResult.Yes)
             {
                 try
-                {       _services.DeleteService(service);
-                        ViewData();
-                        MessageBox.Show("Delete successfull");                 
+                {
+                    _services.DeleteService(service);
+                    ViewData();
+                    MessageBox.Show("Delete successfull");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Hide service failed because: " + ex.Message);
                 }
             }
-            
+
         }
 
         private void dgvService_Update(object sender, DataGridCellEditEndingEventArgs e)
         {
+            var Service = e.Row.Item as Repository.Entities.Service;
+            if (!_validationService.IsStringValid(Service.Name))
+            {
+                MessageBox.Show("Name cannot be null or empty");
+                e.Cancel = true;
+                return;
+            }
+            if (!_validationService.IsStringValid(Service.Description))
+            {
+                MessageBox.Show("Description cannot be null or empty");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!_validationService.IsPositiveDecimal((decimal)Service.Price))
+            {
+                MessageBox.Show("Price cannot be null or empty");
+                e.Cancel = true;
+                return;
+            }
             try
             {
-                var Service = e.Row.Item as Repository.Entities.Service;
+
                 if (Service == null)
                 {
                     MessageBox.Show("Row is null!!");
@@ -106,7 +130,8 @@ namespace CarWashManagementSystem
                 ViewData();
                 MessageBox.Show("Update successfully!!!");
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show("Update was failed beacause: " + ex.Message);
             }
         }
