@@ -38,13 +38,13 @@ public partial class CarWashContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(local);Database=CarWash;UID=sa;PWD=12345;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=(local);Database=CarWash;UID=sa;PWD=12345;TrustServerCertificate=True;Encrypt=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A6594CE023");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A6125AEE8B");
 
             entity.ToTable("Account");
 
@@ -65,7 +65,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<CostOfGood>(entity =>
         {
-            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628F6C1BAD0");
+            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628B327F50B");
 
             entity.ToTable("CostOfGood");
 
@@ -78,7 +78,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D8764CCF45");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D84690EE9B");
 
             entity.ToTable("Customer");
 
@@ -95,7 +95,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11787F8886");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11E386FEC5");
 
             entity.ToTable("Employee");
 
@@ -115,9 +115,9 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFDFE474B2");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFAA22103A");
 
-            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D93F97A025").IsUnique();
+            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D944E5874B").IsUnique();
 
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
@@ -142,7 +142,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B33913A88AC7");
+            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B339EDB0894E");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -157,7 +157,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderService>(entity =>
         {
-            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB5B6F7622");
+            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB708094E2");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -172,7 +172,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CDBFC20B15");
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CDEF170B9D");
 
             entity.ToTable("Product");
 
@@ -185,7 +185,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00A645DB828");
+            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00AB0BDD221");
 
             entity.ToTable("Service");
 
@@ -198,7 +198,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B5492AC56FCE4");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B5492999083F9");
 
             entity.ToTable("Vehicle");
 

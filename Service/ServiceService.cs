@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace service
+namespace Service
 {
     public class ServiceService
     {
@@ -19,13 +19,13 @@ namespace service
         private List<Repository.Entities.Service> _serviceList;
         public List<Repository.Entities.Service> GetList()
         {
-            List<Service> list = new List<Service>();
+            List<Repository.Entities.Service> list = new List<Repository.Entities.Service>();
             try
             {
                 _serviceList = _serviceRepository.GetAll();
                 
 
-                foreach (Service service in _serviceList)
+                foreach (Repository.Entities.Service service in _serviceList)
                 {
                     if (!service.IsDeleted)
                     {
@@ -50,7 +50,7 @@ namespace service
             }
         }
 
-        public void DeleteService(Service service)
+        public void DeleteService(Repository.Entities.Service service)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace service
             }
         }
 
-        public void UpdateService(Service service)
+        public void UpdateService(Repository.Entities.Service service)
         {
             try
             {
