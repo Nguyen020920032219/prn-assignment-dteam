@@ -25,9 +25,7 @@ namespace CarWashManagementSystem
         public Customer()
         {
             InitializeComponent();
-            _productService = new ProductService();
-            _validation = new ValidationService();
-            ShowData();
+           
         }
 
         private void dgvCustomer_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
