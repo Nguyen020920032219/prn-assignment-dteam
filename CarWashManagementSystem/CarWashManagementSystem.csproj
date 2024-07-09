@@ -45,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="images\Add car_30px.png" />
     <Resource Include="images\add_user_male_30Cpx.png" />
     <Resource Include="images\add_user_male_30px.png" />

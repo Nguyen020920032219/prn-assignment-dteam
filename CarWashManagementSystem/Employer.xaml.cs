@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,23 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class Employer : Window
     {
+        private readonly EmployeeService _employeeService;
         public Employer()
         {
             InitializeComponent();
+            _employeeService = new EmployeeService();
+            ShowData();
+        }
+
+        private void ShowData()
+        {
+            dgvEmployer.ItemsSource = null;
+            dgvEmployer.ItemsSource = _employeeService.GetEmployees();
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dgvEmployer.ItemsSource = _employeeService.GetEmployeeByName(txtSearch.Text);
         }
     }
 }

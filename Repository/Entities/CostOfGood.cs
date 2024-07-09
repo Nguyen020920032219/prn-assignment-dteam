@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace Repository.Entities;
 
-public partial class TbCostofGood
+public partial class CostOfGood
 {
-    public int IdCostofGood { get; set; }
+    public int CostOfGoodId { get; set; }
 
-    public string? Costname { get; set; }
+    public int? ProductId { get; set; }
 
     public decimal? Cost { get; set; }
 
     public DateOnly? Date { get; set; }
+
+    public virtual Product? Product { get; set; }
 }
