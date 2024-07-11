@@ -51,20 +51,21 @@ CREATE TABLE Employee (
     Phone VARCHAR(50),
     Address VARCHAR(255),
     DateOfBirth DATE,
-    Gender VARCHAR(10)
+    Gender VARCHAR(10),
+    IsActive BIT NOT NULL DEFAULT 1
 );
 
-INSERT INTO Employee (Name, Phone, Address, DateOfBirth, Gender) VALUES
-('John Smith', '0912345671', '123 Main St', '1980-01-01', 'Male'),
-('Jane Johnson', '0987654322', '456 Oak St', '1985-02-02', 'Female'),
-('Michael Williams', '0901234568', '789 Pine St', '1990-03-03', 'Male'),
-('Emily Brown', '0934567891', '101 Maple St', '1995-04-04', 'Female'),
-('David Jones', '0945678902', '202 Cedar St', '2000-05-05', 'Male'),
-('Sophia Garcia', '0923456790', '303 Birch St', '1982-06-06', 'Female'),
-('James Martinez', '0919876544', '404 Elm St', '1987-07-07', 'Male'),
-('Olivia Rodriguez', '0908765433', '505 Aspen St', '1992-08-08', 'Female'),
-('Daniel Hernandez', '0987654321', '606 Spruce St', '1997-09-09', 'Male'),
-('Ava Wilson', '0912345672', '707 Redwood St', '1984-10-10', 'Female');
+INSERT INTO Employee (Name, Phone, Address, DateOfBirth, Gender, IsActive) VALUES
+('John Smith', '0912345671', '123 Main St', '1980-01-01', 'Male', 1),
+('Jane Johnson', '0987654322', '456 Oak St', '1985-02-02', 'Female', 1),
+('Michael Williams', '0901234568', '789 Pine St', '1990-03-03', 'Male', 1),
+('Emily Brown', '0934567891', '101 Maple St', '1995-04-04', 'Female', 1),
+('David Jones', '0945678902', '202 Cedar St', '2000-05-05', 'Male', 1),
+('Sophia Garcia', '0923456790', '303 Birch St', '1982-06-06', 'Female', 1),
+('James Martinez', '0919876544', '404 Elm St', '1987-07-07', 'Male', 1),
+('Olivia Rodriguez', '0908765433', '505 Aspen St', '1992-08-08', 'Female', 1),
+('Daniel Hernandez', '0987654321', '606 Spruce St', '1997-09-09', 'Male', 1),
+('Ava Wilson', '0912345672', '707 Redwood St', '1984-10-10', 'Female', 1);
 
 CREATE TABLE Account (
     AccountId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
@@ -72,20 +73,21 @@ CREATE TABLE Account (
     UserName VARCHAR(50) NOT NULL,
     Password VARCHAR(50) NOT NULL,
     Role VARCHAR(50),
+    IsActive BIT NOT NULL DEFAULT 1,
     FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId)
 );
 
-INSERT INTO Account (EmployeeId, UserName, Password, Role) VALUES
-(1, 'johnsmith', 'password1', 'Admin'),
-(2, 'janejohnson', 'password2', 'Staff'),
-(3, 'michaelwilliams', 'password3', 'Staff'),
-(4, 'emilybrown', 'password4', 'Staff'),
-(5, 'davidjones', 'password5', 'Staff'),
-(6, 'sophiagarcia', 'password6', 'Staff'),
-(7, 'jamesmartinez', 'password7', 'Staff'),
-(8, 'oliviarodriguez', 'password8', 'Staff'),
-(9, 'danielhernandez', 'password9', 'Staff'),
-(10, 'avawilson', 'password10', 'Staff');
+INSERT INTO Account (EmployeeId, UserName, Password, Role, IsActive) VALUES
+(1, 'johnsmith', 'password1', 'Admin', 1),
+(2, 'janejohnson', 'password2', 'Staff', 1),
+(3, 'michaelwilliams', 'password3', 'Staff', 1),
+(4, 'emilybrown', 'password4', 'Staff', 1),
+(5, 'davidjones', 'password5', 'Staff', 1),
+(6, 'sophiagarcia', 'password6', 'Staff', 1),
+(7, 'jamesmartinez', 'password7', 'Staff', 1),
+(8, 'oliviarodriguez', 'password8', 'Staff', 1),
+(9, 'danielhernandez', 'password9', 'Staff', 1),
+(10, 'avawilson', 'password10', 'Staff', 1);
 
 CREATE TABLE Product (
     ProductId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
@@ -93,10 +95,10 @@ CREATE TABLE Product (
     StockQuantity INT,
     Price DECIMAL(10, 2),
     Description TEXT,
-    IsDeleted BIT NOT NULL DEFAULT 0
+    IsDiscontinued BIT NOT NULL DEFAULT 0
 );
 
-INSERT INTO Product (Name, StockQuantity, Price, Description, isDeleted)
+INSERT INTO Product (Name, StockQuantity, Price, Description, IsDiscontinued)
 VALUES
 ('Motor Oil', 100, 15.00, 'High quality motor oil', 0),
 ('Tire', 50, 200.00, 'Durable tire', 0),
@@ -115,10 +117,10 @@ CREATE TABLE Service (
     Name VARCHAR(255) NOT NULL,
     Price DECIMAL(10, 2),
     Description TEXT,
-    IsDeleted BIT NOT NULL DEFAULT 0
+    IsDiscontinued BIT NOT NULL DEFAULT 0
 );
 
-INSERT INTO Service (Name, Price, Description, IsDeleted)
+INSERT INTO Service (Name, Price, Description, IsDiscontinued)
 VALUES
 ('Car Wash', 100.00, 'Professional car wash service', 0),
 ('Oil Change', 200.00, 'Quick oil change', 0),
@@ -136,7 +138,7 @@ CREATE TABLE Orders (
     OrderId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     TransactionNo VARCHAR(50) NOT NULL UNIQUE,
     Date DATE,
-    Status VARCHAR(50),
+    Status BIT NOT NULL DEFAULT 0, -- 0 for Pending, 1 for Completed
     TotalPrice DECIMAL(10, 2),
     VehicleId INT,
     CustomerId INT,
@@ -147,16 +149,16 @@ CREATE TABLE Orders (
 );
 
 INSERT INTO Orders (TransactionNo, Date, Status, TotalPrice, VehicleId, CustomerId, EmployeeId) VALUES
-('202407010001', '2024-07-01', 'Completed', 200.00, 1, 1, 1),
-('202407010002', '2024-07-01', 'Completed', 300.00, 2, 2, 2),
-('202407020001', '2024-07-02', 'Pending', 400.00, 3, 3, 3),
-('202407030001', '2024-07-03', 'Completed', 500.00, 4, 4, 4),
-('202407040001', '2024-07-04', 'Completed', 600.00, 5, 5, 5),
-('202407050001', '2024-07-05', 'Pending', 700.00, 6, 6, 6),
-('202407060001', '2024-07-06', 'Completed', 800.00, 7, 7, 7),
-('202407070001', '2024-07-07', 'Pending', 900.00, 8, 8, 8),
-('202407080001', '2024-07-08', 'Pending', 1000.00, 9, 9, 9),
-('202407090001', '2024-07-09', 'Completed', 1100.00, 10, 10, 10);
+('202407010001', '2024-07-01', 1, 200.00, 1, 1, 1),
+('202407010002', '2024-07-01', '1', 300.00, 2, 2, 2),
+('202407020001', '2024-07-02', '0', 400.00, 3, 3, 3),
+('202407030001', '2024-07-03', '1', 500.00, 4, 4, 4),
+('202407040001', '2024-07-04', '1', 600.00, 5, 5, 5),
+('202407050001', '2024-07-05', '0', 700.00, 6, 6, 6),
+('202407060001', '2024-07-06', '1', 800.00, 7, 7, 7),
+('202407070001', '2024-07-07', '0', 900.00, 8, 8, 8),
+('202407080001', '2024-07-08', '0', 1000.00, 9, 9, 9),
+('202407090001', '2024-07-09', '1', 1100.00, 10, 10, 10);
 
 CREATE TABLE OrderProducts (
     OrderProductsId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
