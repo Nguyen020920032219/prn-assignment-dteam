@@ -69,7 +69,7 @@ namespace CarWashManagementSystem
 
 
             Repository.Entities.Service service = button.DataContext as Repository.Entities.Service;
-            service.IsDeleted = true;
+            service.IsDiscontinued = true;
             MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirm delete",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning

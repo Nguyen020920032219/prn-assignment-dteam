@@ -83,7 +83,7 @@ namespace CarWashManagementSystem
                 Description = description,
                 Price = price,
                 StockQuantity = quantity,
-                IsDeleted = false
+                IsDiscontinued = false
             };
 
             try
