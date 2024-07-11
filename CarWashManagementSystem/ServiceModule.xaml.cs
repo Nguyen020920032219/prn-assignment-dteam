@@ -72,7 +72,7 @@ namespace CarWashManagementSystem
                 service.Name = Name;
                 service.Description = Description;
                 service.Price = Price;
-                service.IsDeleted = false;
+                service.IsDiscontinued = false;
                 _service.addService(service);
                 MessageBox.Show("Add succesfully!");
                 Close_Click(sender, e);
