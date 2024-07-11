@@ -99,13 +99,25 @@ namespace CarWashManagementSystem
         {
             CustomerModule wm = new CustomerModule();
             wm.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            wm.Closed += CustomerModule_Closed;
+            wm.Closed += Close_Module;
             wm.ShowDialog();
         }
 
-        private void CustomerModule_Closed(object? sender, EventArgs e)
+        private void Close_Module(object? sender, EventArgs e)
         {
             ShowData();
+        }
+
+        private void ManageVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            Repository.Entities.Customer customer = (Repository.Entities.Customer)btn.DataContext;
+
+            Vehicle mv=new Vehicle(customer);
+            mv.WindowStartupLocation= WindowStartupLocation.CenterScreen;
+            mv.Closed += Close_Module;
+            mv.ShowDialog();
         }
     }
 }

@@ -75,7 +75,7 @@ namespace CarWashManagementSystem
             }
 
             var price = decimal.Parse(priceText);
-            var quantity = Int32.Parse(quantityText);
+            var quantity = int.Parse(quantityText);
 
             Product product = new Product
             {
