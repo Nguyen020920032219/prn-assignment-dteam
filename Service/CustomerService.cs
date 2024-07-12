@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Repository.Entities;
+using Microsoft.EntityFrameworkCore;
+using Repository.DTO;
 
 namespace Service
 {
     public class CustomerService
     {
         CustomerRepository _customerRepo;
+        private CarWashContext _context;
 
         public CustomerService()
         {
@@ -28,12 +31,54 @@ namespace Service
             List<Customer> result = new List<Customer>();
             foreach (Customer customer in customers)
             {
-                if (customer.Name.ToLower().Contains(txtSearch.ToLower()))
+                if (customer.CustomerId.ToString().Contains(txtSearch.ToLower()))
                 {
                     result.Add(customer);
                 }
+                if (customer.Name.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(customer))
+                    {
+                        result.Add(customer);
+                    }
+                }
+                if (customer.Phone.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(customer))
+                    {
+                        result.Add(customer);
+                    }
+                }
+                if (customer.Address.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(customer))
+                    {
+                        result.Add(customer);
+                    }
+                }
             }
             return result;
+        }
+
+        public List<CustomerVehicleDTO> GetAllCustomersWithVehicles()
+        {
+            _context = new CarWashContext();
+            var query = from c in _context.Customers
+                        join v in _context.Vehicles on c.CustomerId equals v.CustomerId
+                        select new CustomerVehicleDTO
+                        {
+                            CustomerId = c.CustomerId,
+                            Name = c.Name,
+                            Phone = c.Phone,
+                            Address = c.Address,
+                            VehicleId = v.VehicleId,
+                            VehicleNo = v.LicensePlate,
+                            VehicleMake = v.Make,
+                            VehicleModel = v.Model,
+                            VehicleYear = v.Year
+                        };
+
+            return query.ToList();
         }
 
         public void DeleteCustomer(Customer customer)

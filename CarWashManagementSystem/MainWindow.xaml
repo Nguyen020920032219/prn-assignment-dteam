@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:CarWashManagementSystem"
         mc:Ignorable="d"
         Title="Car Wash Management System" Height="820" Width="1264"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" >
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <!--WindowStyle="None"-->
     <Grid>
         <DockPanel HorizontalAlignment="Left" Height="804" LastChildFill="False" VerticalAlignment="Top" Width="10"/>
         <DockPanel HorizontalAlignment="Left" Height="804" LastChildFill="False" Margin="10,0,0,0" VerticalAlignment="Center" Width="190">

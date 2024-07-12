@@ -17,9 +17,28 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private UserControl? _activeWindow = null;
+
+        public MainWindow(string role)
         {
             InitializeComponent();
+           
+            if (role.Equals("Staff", StringComparison.OrdinalIgnoreCase)) 
+            {
+                btnEmployer.IsEnabled = false;
+                btnServices.IsEnabled = false;
+            }
+        }
+
+        public void OpenChildWindow (UserControl childWindow)
+        {
+            if (_activeWindow != null)
+            {
+                panelChild.Children.Remove(_activeWindow);
+            }
+
+            _activeWindow = childWindow;
+            panelChild.Children.Add(childWindow);
         }
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
@@ -53,6 +72,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnServices.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new ServiceWindow());
         }
 
         private void btnCash_Click(object sender, RoutedEventArgs e)
@@ -61,6 +82,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnCash.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new Cash());
         }
 
         private void btnReport_Click(object sender, RoutedEventArgs e)
@@ -77,6 +100,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnWareHouse.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new Warehouse());
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -85,6 +110,10 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnLogout.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            Login login = new Login();
+            login.Show();
+            this.Close();
         }
 
         

@@ -81,6 +81,7 @@ namespace CarWashManagementSystem
                 try
                 {
                     _vehicleService.DeleteVehicle(vehicle);
+                    MessageBox.Show("Delete successfully.");
                 }
                 catch (Exception ex)
                 {
