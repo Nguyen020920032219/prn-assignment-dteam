@@ -33,33 +33,6 @@ namespace CarWashManagementSystem
             dgvProduct.ItemsSource = _productService.GetProductsContainString(txtSearch.Text);
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = (Button)sender;
-
-            Product product = (Product)btn.DataContext;
-
-            MessageBoxResult result = MessageBox.Show(
-                $"Are you sure to delete '{product.Name}'?",
-                "Confirm",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning
-            );
-
-            if (result == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    _productService.DeleteProduct(product);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error while deleting product: {ex.Message}");
-                }
-            }
-            ShowData();
-        }
-
         private void dgvProduct_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             Product product = e.Row.Item as Product;
@@ -121,12 +94,51 @@ namespace CarWashManagementSystem
         {
             WarehouseModule wm = new WarehouseModule();
             wm.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            wm.Closed += WarehouseModule_Closed;
+            wm.Closed += Module_Closed;
             wm.ShowDialog();
         }
-        private void WarehouseModule_Closed(object sender, EventArgs e)
+        private void Module_Closed(object sender, EventArgs e)
         {
             ShowData();
+        }
+
+        private void Discontinued_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            Product product = (Product)btn.DataContext;
+
+            MessageBoxResult result = MessageBox.Show(
+                $"Are you sure to delete '{product.Name}'?",
+                "Confirm",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning
+            );
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _productService.DeleteProduct(product);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error while deleting product: {ex.Message}");
+                }
+            }
+            ShowData();
+        }
+
+        private void StockIn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            Product product= (Product)btn.DataContext;
+
+            StockIn s = new StockIn(product);
+            s.WindowStartupLocation= WindowStartupLocation.CenterScreen;
+            s.Closed += Module_Closed;
+            s.ShowDialog();
         }
     }
 }

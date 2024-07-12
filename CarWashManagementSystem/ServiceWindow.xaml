@@ -34,7 +34,7 @@
             <Label x:Name="lblSearch" Content="Search" Width="50" Height="24" Margin="10,0,0,0"/>
             <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0"/>
             <Button Name="btnAdd" Click="btnAdd_Click" Width="50" Height="40" Background="#00000000" BorderThickness="0" >
-                <Image Source="/CarWashManagementSystem;component/images/add_user_male_30px.png"/>
+                <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\add_service_32px.png"/>
             </Button>
         </DockPanel>
     </Grid>

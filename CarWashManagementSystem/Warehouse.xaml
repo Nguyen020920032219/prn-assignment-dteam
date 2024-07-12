@@ -15,15 +15,23 @@
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding ProductId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-                <DataGridTextColumn Header="StockQuantity" Binding="{Binding StockQuantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
+                <DataGridTextColumn IsReadOnly="True" Header="Stock quantity" Binding="{Binding StockQuantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="418"/>
-                <DataGridTextColumn Header="Discontinued" Binding="{Binding IsDiscontinued, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="75"/>
-                <DataGridTemplateColumn x:Name="Delete" Header="Delete">
+                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="400"/>
+                <DataGridTemplateColumn Header="Stock in">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="Delete" Click="Delete_Click">
-                                <Image Source="/images/delete_document_20px.png" Width="16" Height="16" />
+                            <Button x:Name="StockIn" Click="StockIn_Click">
+                                <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\stock_in_32px.png" Width="16" Height="16"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Discontinued">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="Discontinued" Click="Discontinued_Click">
+                                <Image Source="/images/delete_document_20px.png" Width="70" Height="16"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -35,7 +43,7 @@
             <Label x:Name="lblSearch" Content="Search" Width="50" Height="24" Margin="10,0,0,0"/>
             <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0"/>
             <Button Name="Add" Click="Add_Click" Width="50" Height="40" Background="#00000000" BorderThickness="0" >
-                <Image Source="/CarWashManagementSystem;component/images/add_user_male_30px.png"/>
+                <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\add_product_32px.png"/>
             </Button>
         </DockPanel>
     </Grid>

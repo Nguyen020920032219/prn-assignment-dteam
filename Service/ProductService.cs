@@ -11,9 +11,11 @@ namespace Service
     public class ProductService
     {
         ProductRepository _productRepo;
+        ValidationService _validationService;
         public ProductService()
         {
             _productRepo = new ProductRepository();
+            _validationService = new ValidationService();
         }
 
         public List<Product> GetProducts()
@@ -27,9 +29,19 @@ namespace Service
             List<Product> result = new List<Product>();
             foreach (Product product in products)
             {
+                if (_validationService.IsNumber(txtSearch))
+                {
+                    if (product.ProductId.ToString().Contains(txtSearch))
+                    {
+                        result.Add(product);
+                    }
+                }
                 if (product.Name.ToLower().Contains(txtSearch.ToLower()))
                 {
-                    result.Add(product);
+                    if (!result.Contains(product))
+                    {
+                        result.Add(product);
+                    }
                 }
             }
             return result;
