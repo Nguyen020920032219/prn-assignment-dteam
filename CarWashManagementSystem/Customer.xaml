@@ -15,13 +15,11 @@
                 <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding CustomerId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="500"/>
-                <DataGridTemplateColumn x:Name="Delete" Header="Delete">
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="490"/>
+                <DataGridTemplateColumn x:Name="ManageVehicle" Header="Vehicle">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="Delete" Click="Delete_Click">
-                                <Image Source="/images/delete_document_20px.png" Width="16" Height="16" />
-                            </Button>
+                            <Button x:Name="ManageVehicle" Click="ManageVehicle_Click">View</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
