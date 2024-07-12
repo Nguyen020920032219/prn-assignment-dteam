@@ -21,7 +21,7 @@
                 <DataGridTemplateColumn Header="Stock in">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="StockIn" Click="StockIn_Click">
+                            <Button x:Name="btnStockIn" Click="StockIn_Click">
                                 <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\stock_in_32px.png" Width="16" Height="16"/>
                             </Button>
                         </DataTemplate>
@@ -30,7 +30,7 @@
                 <DataGridTemplateColumn Header="Discontinued">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="Discontinued" Click="Discontinued_Click">
+                            <Button x:Name="btnDiscontinued" Click="Discontinued_Click">
                                 <Image Source="/images/delete_document_20px.png" Width="70" Height="16"/>
                             </Button>
                         </DataTemplate>
@@ -41,8 +41,10 @@
 
         <DockPanel HorizontalAlignment="Center" Height="100" LastChildFill="True" Margin="0,385,0,0" VerticalAlignment="Top" Width="967" Background="#FF11CDEF">
             <Label x:Name="lblSearch" Content="Search" Width="50" Height="24" Margin="10,0,0,0"/>
-            <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0"/>
-            <Button Name="Add" Click="Add_Click" Width="50" Height="40" Background="#00000000" BorderThickness="0" >
+            <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,350,0"/>
+            <Button x:Name="btnChangeView" Click="ChangeView_Click" Content="Discontinued product" Width="150" Height="30" 
+                    Background="White" FontWeight="ExtraBold" BorderThickness="0" Margin="0,0,30,0"></Button>
+            <Button x:Name="Add" Click="Add_Click" Width="50" Height="40" Background="#00000000" BorderThickness="0" Margin="0,0,30,0">
                 <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\add_product_32px.png"/>
             </Button>
         </DockPanel>

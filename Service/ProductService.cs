@@ -61,5 +61,19 @@ namespace Service
         {
             _productRepo.Add(product);
         }
+
+        public List<Product> GetProductsByStatus(bool isDiscontinued)
+        {
+            List<Product> products = _productRepo.GetAll();
+            List<Product> result = new List<Product>();
+            foreach (Product product in products)
+            {
+                if (product.IsDiscontinued==isDiscontinued)
+                {
+                    result.Add(product);
+                }
+            }
+            return result;
+        }
     }
 }

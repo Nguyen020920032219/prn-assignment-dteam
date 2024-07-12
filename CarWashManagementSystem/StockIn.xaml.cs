@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Repository.Entities;
+using Service;
 
 namespace CarWashManagementSystem
 {
@@ -21,11 +22,16 @@ namespace CarWashManagementSystem
     public partial class StockIn : Window
     {
         Product product;
+        CostOfGoodService _costOfGoodService;
+        ProductService _productService;
         public StockIn(Product product)
         {
             InitializeComponent();
             this.product = product;
+            this._costOfGoodService = new CostOfGoodService();
+            this._productService = new ProductService();
             txtName.Text = product.Name;
+            txtPrice.Text=product.Price.ToString();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -35,9 +41,18 @@ namespace CarWashManagementSystem
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            product.StockQuantity += int.Parse(txtQuantity.Text);
+            _productService.UpdateProduct(product);
+
             CostOfGood costOfGood = new CostOfGood();
             costOfGood.ProductId=product.ProductId;
-            costOfGood.
+            costOfGood.Date = DateOnly.FromDateTime(DateTime.Now);
+            costOfGood.Price = decimal.Parse(txtPrice.Text);
+            costOfGood.Quantity=int.Parse(txtQuantity.Text);
+
+            _costOfGoodService.AddCostOfGood(costOfGood);
+
+            btnCancel_Click(sender, e);
         }
     }
 }
