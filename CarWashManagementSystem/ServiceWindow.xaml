@@ -17,7 +17,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="330" />
-                <DataGridTextColumn Header="Is Deleted" Binding="{Binding IsDeleted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
+                <DataGridTextColumn Header="Discontinued" Binding="{Binding IsDiscontinued, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
                 <DataGridTemplateColumn x:Name="Delete" Header="Delete" Width="67">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -33,7 +33,7 @@
             <Label x:Name="lblSearch" Content="Search" Width="50" Height="24" Margin="10,0,0,0"/>
             <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0"/>
             <Button Name="btnAdd" Click="btnAdd_Click" Width="50" Height="40" Background="#00000000" BorderThickness="0" >
-                <Image Source="/CarWashManagementSystem;component/images/add_user_male_30px.png"/>
+                <Image Source="\images\add_service_32px.png"/>
             </Button>
         </DockPanel>
     </Grid>
