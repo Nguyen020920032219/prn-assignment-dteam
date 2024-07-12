@@ -66,21 +66,12 @@ namespace CarWashManagementSystem
                 return;
             }
 
-            //i
-            //{
-            //    MessageBox.Show("Product price must be a number.");
-            //    e.Cancel = true;
-            //    return;
-            //}
-
-            //if (!_validation.IsNumber(product.Price.ToString()))
-            //{
-            //    MessageBox.Show("Product price must be a number.");
-            //    e.Cancel = true;
-            //    return;
-            //}
-
-
+            if (!_validation.IsWithinRange((decimal)product.Price, 0, decimal.MaxValue))
+            {
+                MessageBox.Show("Product price must be greater than 0 and smaller than " + decimal.MaxValue + ".");
+                e.Cancel = true;
+                return;
+            }
 
             if (!_validation.IsStringValid(product.StockQuantity.ToString()))
             {
@@ -89,21 +80,22 @@ namespace CarWashManagementSystem
                 return;
             }
 
-            if (!_validation.IsNumber(product.StockQuantity + ""))
+            if (!_validation.IsNumber(product.StockQuantity.ToString()))
             {
                 MessageBox.Show("Product quantity must be a number.");
                 e.Cancel = true;
                 return;
             }
 
-            if (!_validation.IsPositiveInteger(Int32.Parse(product.StockQuantity + "")))
+            if (!_validation.IsWithinRange((int)product.StockQuantity, 0, int.MaxValue))
             {
-                MessageBox.Show("Product quantity must be positve number.");
+                MessageBox.Show("Product price must be greater than 0 and smaller than " + int.MaxValue + ".");
                 e.Cancel = true;
                 return;
             }
 
             _productService.UpdateProduct(product);
+            MessageBox.Show("Product update successfully.");
             ShowData(_isDiscontinued);
         }
 
@@ -197,11 +189,13 @@ namespace CarWashManagementSystem
             {
                 _isDiscontinued = true;
                 btnChangeView.Content = "Actively Product";
+                Add.IsEnabled = false;
             }
             else
             {
                 _isDiscontinued = false;
                 btnChangeView.Content = "Discontinued product";
+                Add.IsEnabled = true;
             }
 
             ShowData(_isDiscontinued);

@@ -48,7 +48,7 @@ namespace Service
             return date != default(DateTime);
         }
 
-        public bool IsWithinRange(int input, int minValue, int maxValue)
+        public bool IsWithinRange(decimal input, decimal minValue, decimal maxValue)
         {
             return input >= minValue && input <= maxValue;
         }
@@ -84,6 +84,12 @@ namespace Service
         public bool IsNumber(string input)
         {
             return decimal.TryParse(input, out _);
+        }
+
+        public bool ValidateLicensePlate(string licensePlate)
+        {
+            string pattern = @"^[A-Za-z]{3}\d{3}$";
+            return Regex.IsMatch(licensePlate, pattern);
         }
     }
 }
