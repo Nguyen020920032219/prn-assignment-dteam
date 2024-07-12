@@ -64,13 +64,7 @@
                             <DataGridTextColumn Header="Date" Binding="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
                             <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="235" />
                             <DataGridTextColumn Header="Price" Binding="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="235" />
-                            <DataGridTemplateColumn Header="Total" Width="230">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock x:Name="txtTotal"></TextBlock>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

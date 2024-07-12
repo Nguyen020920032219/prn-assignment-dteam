@@ -44,7 +44,7 @@ public partial class CarWashContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A6A2B3DD4A");
+            entity.HasKey(e => e.AccountId).HasName("PK__Account__349DA5A6D759BCBE");
 
             entity.ToTable("Account");
 
@@ -66,11 +66,12 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<CostOfGood>(entity =>
         {
-            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628628F6F07");
+            entity.HasKey(e => e.CostOfGoodId).HasName("PK__CostOfGo__82B32628D485C68E");
 
             entity.ToTable("CostOfGood");
 
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Product).WithMany(p => p.CostOfGoods)
                 .HasForeignKey(d => d.ProductId)
@@ -79,7 +80,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D85CFF562D");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64D834758E98");
 
             entity.ToTable("Customer");
 
@@ -96,7 +97,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11724E47E3");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F11D8E84F5C");
 
             entity.ToTable("Employee");
 
@@ -117,9 +118,9 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCF95C0C218");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCFC289F990");
 
-            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D920F17FF5").IsUnique();
+            entity.HasIndex(e => e.TransactionNo, "UQ__Orders__554342D9FA91EFBA").IsUnique();
 
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.TransactionNo)
@@ -141,7 +142,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B339871C19B6");
+            entity.HasKey(e => e.OrderProductsId).HasName("PK__OrderPro__E3B9B3397639116D");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -156,7 +157,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<OrderService>(entity =>
         {
-            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB87CC3516");
+            entity.HasKey(e => e.OrderServiceId).HasName("PK__OrderSer__F065F7EB4024A029");
 
             entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
 
@@ -171,7 +172,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CDFD4A3859");
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__B40CC6CD8BE42696");
 
             entity.ToTable("Product");
 
@@ -184,7 +185,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Service>(entity =>
         {
-            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00A3F0BF653");
+            entity.HasKey(e => e.ServiceId).HasName("PK__Service__C51BB00AA6DF12BA");
 
             entity.ToTable("Service");
 
@@ -197,7 +198,7 @@ public partial class CarWashContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B5492834FE5F8");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicle__476B549214487AFD");
 
             entity.ToTable("Vehicle");
 
