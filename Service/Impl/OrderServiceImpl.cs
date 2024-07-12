@@ -30,11 +30,17 @@ namespace Service.Impl
             _repository.Add(order);
         }
 
+        public void UpdateOrder(Order order)
+        {
+            _repository = new OrderRepository();
+            _repository.Update(order);
+        }
+
         public void CompleteOrder(Order order)
         {
             _repository = new OrderRepository();
             order.Date = DateOnly.FromDateTime(DateTime.Now);
-            order.Status = "Completed";
+            order.Status = true;
 
             _repository.Update(order);
         }

@@ -9,6 +9,10 @@ namespace Service
 {
     public interface IOrderServiceService
     {
-        void addOrderServiceList(List<OrderService> list);
+        void AddOrderServiceList(List<OrderService> list);
+
+        void DeleteOrderServicesByOrderId(int orderId);
+
+        List<OrderService> GetOrderServicesByOrderId(int orderId);
     }
 }

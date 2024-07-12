@@ -13,6 +13,8 @@ namespace Service
 
         void AddOrder(Order order);
 
+        void UpdateOrder(Order order);
+
         void CompleteOrder(Order order);
 
         Order? GetOrderByTransactionNo(string transactionNo);

@@ -25,7 +25,7 @@ namespace Service.Impl
 
                 foreach (Repository.Entities.Service service in serviceList)
                 {
-                    if (!service.IsDeleted)
+                    if (!service.IsDiscontinued)
                     {
                         list.Add(service);
                     }
@@ -55,7 +55,7 @@ namespace Service.Impl
         {
             try
             {
-                service.IsDeleted = true;
+                service.IsDiscontinued = true;
                 _repository.Update(service);
             }
             catch (Exception ex)

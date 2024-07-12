@@ -27,7 +27,11 @@ namespace CarWashManagementSystem
         private IOrderService _orderService;
 
         public Order order { get; set; }
-         
+
+        public bool PaymentSuccessful { get; private set; } = false;
+
+        public event EventHandler PaymentCompleted;
+
         public SettlePayment()
         {
             InitializeComponent();
@@ -112,8 +116,11 @@ namespace CarWashManagementSystem
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         { 
             if (double.Parse(txtCash.Text) - double.Parse(txtSale.Text) >= 0) {
-                _orderService.CompleteOrder(order);
+                PaymentSuccessful = true;
+                PaymentCompleted?.Invoke(this, EventArgs.Empty);
                 MessageBox.Show("Pay successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+             
 
                 this.DialogResult = true;
                 this.Close();

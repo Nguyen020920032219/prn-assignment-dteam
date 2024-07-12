@@ -3,7 +3,6 @@ using Repository.Entities;
 using Service;
 using Service.Impl;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,17 +12,15 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Cash.xaml
     /// </summary>
-    public partial class Cash : UserControl, INotifyPropertyChanged
+    public partial class Cash : UserControl
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private IOrderService _orderService;
 
         private IOrderServiceService _orderServiceService;
 
         private UserControl? _activeWindown = null;
 
-        private bool _isCashButtonEnable;
+        //private bool _isCashButtonEnable;
 
         //Track which is Vehicle of customer selected
         private CustomerVehicleDTO _customerVehicleSelected;
@@ -32,7 +29,9 @@ namespace CarWashManagementSystem
         private ObservableCollection<dynamic> _cashRecords;
 
         //Track what are services of which is vehicle selected 
-        private Dictionary<int, List<Repository.Entities.Service>> _vehicleServices = new Dictionary<int, List<Repository.Entities.Service>>();
+        private Dictionary<int, List<Repository.Entities.Service>> _vehicleServices;
+
+        private Order _currentOrder;
 
         public Cash()
         {
@@ -43,8 +42,10 @@ namespace CarWashManagementSystem
             _orderServiceService = new OrderServiceServiceImpl();
 
             _cashRecords = new ObservableCollection<dynamic>();
-            _cashRecords.CollectionChanged += CashRecords_CollectionChanged;
             dgvCash.ItemsSource = _cashRecords;
+
+            _vehicleServices = new Dictionary<int, List<Repository.Entities.Service>>();
+
 
             GetTransactionNo();
             btnAddService.IsEnabled = false;
@@ -88,29 +89,6 @@ namespace CarWashManagementSystem
                 lblTransactionNo.Content = date + "0001";
             }
 
-        }
-
-        public bool IsCashButtonEnabled
-        {
-            get { return _isCashButtonEnable; }
-
-            set { 
-                if (_isCashButtonEnable != value)
-                {
-                    _isCashButtonEnable = value;
-                    OnPropertyChanged(nameof(IsCashButtonEnabled));
-                }
-             }
-        }
-
-        private void CashRecords_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            IsCashButtonEnabled = _cashRecords.Count > 0;
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
@@ -233,54 +211,130 @@ namespace CarWashManagementSystem
 
         private void btnCash_Click(object sender, RoutedEventArgs e)
         {
+            // If there are no cash records, do nothing
+            if (_cashRecords.Count == 0)
+            {
+                MessageBox.Show("No services selected.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string transactionNo = _cashRecords[0].TransactionNo;
+            var existingOrder = _orderService.GetOrderByTransactionNo(transactionNo);
+
             string totalPrice = lblTotalPrice.Content.ToString().Replace(",", "");
             decimal.TryParse(totalPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal totalPriceIsConverted);
 
-            // Create and save a new Order
-            Order order = new Order()
+            if (existingOrder == null)
             {
-                TransactionNo = _cashRecords[0].TransactionNo,
-                Date = DateOnly.FromDateTime(DateTime.Now),
-                Status = "Pending",
-                TotalPrice = totalPriceIsConverted,
-                VehicleId = _cashRecords[0].VehicleId,
-                CustomerId = _cashRecords[0].CustomerId,
-                EmployeeId = 1
-            };
-            _orderService.AddOrder(order);
-            Order orderIsSaved = _orderService.GetOrderByTransactionNo(order.TransactionNo);
-
-            // Create and save new OrderServiceList
-            List<OrderService> orderServices = new List<OrderService>();
-            foreach (var serviceRecord in _cashRecords)
-            {
-                OrderService orderService = new OrderService()
+                // Create and save a new Order
+                _currentOrder = new Order()
                 {
-                    OrderId = orderIsSaved.OrderId,
-                    ServiceId = serviceRecord.ServiceId,
-                    UnitPrice = serviceRecord.ServicePrice
+                    TransactionNo = _cashRecords[0].TransactionNo,
+                    Date = DateOnly.FromDateTime(DateTime.Now),
+                    Status = false,
+                    TotalPrice = totalPriceIsConverted,
+                    VehicleId = _cashRecords[0].VehicleId,
+                    CustomerId = _cashRecords[0].CustomerId,
+                    EmployeeId = 1
                 };
-                orderServices.Add(orderService);
+                _orderService.AddOrder(_currentOrder);
+                Order orderIsSaved = _orderService.GetOrderByTransactionNo(_currentOrder.TransactionNo);
+                _currentOrder.OrderId = orderIsSaved.OrderId;
+
+                // Create and save new OrderServiceList
+                List<OrderService> orderServices = new List<OrderService>();
+                foreach (var serviceRecord in _cashRecords)
+                {
+                    OrderService orderService = new OrderService()
+                    {
+                        OrderId = orderIsSaved.OrderId,
+                        ServiceId = serviceRecord.ServiceId,
+                        UnitPrice = serviceRecord.ServicePrice
+                    };
+                    orderServices.Add(orderService);
+                }
+                _orderServiceService.AddOrderServiceList(orderServices);
+            } else
+            {
+                _currentOrder = existingOrder;
+
+                // Check if services have changed
+                bool servicesChanged = false;
+                var currentOrderServices = _orderServiceService.GetOrderServicesByOrderId(_currentOrder.OrderId);
+
+                // Create a list of service IDs from current cash records
+                var currentServiceIds = new HashSet<int>(_cashRecords.Select(cr => (int)cr.ServiceId));
+
+                // Check if there's any service that is not in the current cash records
+                foreach (var orderService in currentOrderServices)
+                {
+                    if (!currentServiceIds.Contains((int)orderService.ServiceId))
+                    {
+                        servicesChanged = true;
+                        break;
+                    }
+                }
+
+                // Check if there's any new service added in the current cash records
+                foreach (var serviceId in currentServiceIds)
+                {
+                    if (!currentOrderServices.Any(os => os.ServiceId == serviceId))
+                    {
+                        servicesChanged = true;
+                        break;
+                    }
+                }
+
+                // Update order and order services if services have changed
+                if (servicesChanged || existingOrder.TotalPrice != totalPriceIsConverted)
+                {
+                    _currentOrder.TotalPrice = totalPriceIsConverted;
+                    _orderService.UpdateOrder(_currentOrder);
+
+                    _orderServiceService.DeleteOrderServicesByOrderId(_currentOrder.OrderId);
+
+                    List<OrderService> updatedOrderServices = new List<OrderService>();
+                    foreach (var serviceRecord in _cashRecords)
+                    {
+                        OrderService orderService = new OrderService()
+                        {
+                            OrderId = _currentOrder.OrderId,
+                            ServiceId = serviceRecord.ServiceId,
+                            UnitPrice = serviceRecord.ServicePrice
+                        };
+                        updatedOrderServices.Add(orderService);
+                    }
+                    _orderServiceService.AddOrderServiceList(updatedOrderServices);
+                }
             }
-            _orderServiceService.addOrderServiceList(orderServices);
+
 
             SettlePayment settlePayment = new SettlePayment();
-            settlePayment.order = orderIsSaved;
+            settlePayment.order = _currentOrder;
             settlePayment.InitializePayment();
-            settlePayment.Closed += (s, args) =>
-            {
-                if (settlePayment.DialogResult == true)
-                {
-                    ResetCash();
-                }
-            };
+            settlePayment.PaymentCompleted += OnPaymentCompleted;
             settlePayment.ShowDialog();
+
+            if (settlePayment.PaymentSuccessful)
+            {
+                ResetCash();
+            }
+
+        }
+
+        private void OnPaymentCompleted(object sender, EventArgs e)
+        {
+            _currentOrder.Status = true;
+            _orderService.CompleteOrder(_currentOrder);
+            ResetCash();
         }
 
         private void ResetCash()
         {
             _cashRecords.Clear(); // Auto disable the cash button when reset
+            _vehicleServices.Clear();
             GetTransactionNo();
+            lblTotalPrice.Content = "0.00";
             btnAddService.IsEnabled = false; // Disable the service button when reset
         }
     }
