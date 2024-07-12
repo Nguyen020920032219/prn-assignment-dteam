@@ -17,7 +17,7 @@
                 <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding ServiceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" />
-                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="350" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="330" />
                 <DataGridTextColumn Header="Is Deleted" Binding="{Binding IsDeleted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" />
                 <DataGridTemplateColumn x:Name="Delete" Header="Delete" Width="67">
                     <DataGridTemplateColumn.CellTemplate>

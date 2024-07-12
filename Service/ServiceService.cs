@@ -27,7 +27,7 @@ namespace Service
 
                 foreach (Repository.Entities.Service service in _serviceList)
                 {
-                    if (!service.IsDeleted)
+                    if (!service.IsDiscontinued)
                     {
                         list.Add(service);
                     }

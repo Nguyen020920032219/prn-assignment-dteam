@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarWashManagementSystem"
         mc:Ignorable="d"
-        Title="EmployerModule" Height="360" Width="708"
-        FontFamily="Century Gothic" FontSize="12"
-        WindowStartupLocation="CenterScreen" WindowStyle="None">
+          Title="WarehouseModule" Height="360" Width="708"
+ FontFamily="Century Gothic" FontSize="12"
+ WindowStyle="None" ResizeMode="NoResize">
     <Grid>
         <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" VerticalAlignment="Top" Width="706" Background="#FFC10037"/>
         <Label Content="Employer Registration" HorizontalAlignment="Left" Height="27" Margin="10,25,0,0" VerticalAlignment="Top" Width="136" Foreground="#FFC10037" FontWeight="Bold"/>
-        <Button x:Name="btnClose" HorizontalAlignment="Left" Height="20" Margin="670,25,0,0" VerticalAlignment="Top" Width="20" BorderThickness="0" Background="White" Click="btClose_Click">
+        <Button x:Name="btnClose" HorizontalAlignment="Left" Height="20" Margin="670,25,0,0" VerticalAlignment="Top" Width="20" BorderThickness="0" Background="White" Click="btnClose_Click">
             <Image Source="/CarWashManagementSystem;component/images/cancel_20px.png" RenderTransformOrigin="1.604,0.667" />
         </Button>
 
@@ -27,26 +27,12 @@
         <Label Content="Address:" HorizontalAlignment="Left" Height="24" Margin="10,110,0,0" VerticalAlignment="Top" Width="60"/>
         <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="72" Margin="100,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
 
-        <Label Content="Role:" HorizontalAlignment="Left" Height="24" Margin="10,188,0,0" VerticalAlignment="Top" Width="40"/>
-        <ComboBox x:Name="cbRole" HorizontalAlignment="Left" Height="24" Margin="100,188,0,0" VerticalAlignment="Top" Width="200">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="2"/>
-            <ComboBoxItem Content="3"/>
-        </ComboBox>
+        <Label Content="Gender:" HorizontalAlignment="Left" Height="24" Margin="200,235,0,0" VerticalAlignment="Top" Width="60"/>
+        <RadioButton x:Name="rdMale" Content="Male" HorizontalAlignment="Left" Height="24" Margin="280,240,0,0" VerticalAlignment="Top" Width="50"/>
+        <RadioButton x:Name="rdFemale" Content="Female" HorizontalAlignment="Left" Height="24" Margin="350,240,0,0" VerticalAlignment="Top" Width="65"/>
 
-        <Label Content="Salary:" HorizontalAlignment="Left" Height="24" Margin="10,218,0,0" VerticalAlignment="Top" Width="50"/>
-        <TextBox x:Name="txtSalary" HorizontalAlignment="Left" Height="24" Margin="100,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Height="60" Margin="110,280,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnCreate_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="60" Margin="490,280,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnCancel_Click"/>
 
-        <Label Content="Gender:" HorizontalAlignment="Left" Height="24" Margin="320,218,0,0" VerticalAlignment="Top" Width="60"/>
-        <RadioButton x:Name="rdMale" Content="Male" HorizontalAlignment="Left" Height="24" Margin="380,224,0,0" VerticalAlignment="Top" Width="50"/>
-        <RadioButton x:Name="rdFemale" Content="Female" HorizontalAlignment="Left" Height="24" Margin="450,224,0,0" VerticalAlignment="Top" Width="65"/>
-
-        <Label Content="Password:" HorizontalAlignment="Left" Height="24" Margin="10,248,0,0" VerticalAlignment="Top" Width="70"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="24" Margin="100,248,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="585"/>
-        
-        <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Height="40" Margin="110,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnCreate_Click"/>
-        <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Height="40" Margin="300,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnUpdate_Click"/>
-        <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Height="40" Margin="490,300,0,0" VerticalAlignment="Top" Width="100" BorderThickness="0" Background="#FF4965F0" Foreground="White" Click="btnCancel_Click"/>
-        
     </Grid>
 </Window>

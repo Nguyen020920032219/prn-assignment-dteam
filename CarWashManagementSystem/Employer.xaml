@@ -11,12 +11,12 @@
                   CanUserAddRows="False" CanUserDeleteRows="False" 
                   CanUserResizeColumns="False" CanUserResizeRows="False"
                   ColumnHeaderHeight="28"
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False" CellEditEnding="dgvEmployer_CellEditEnding">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="180"/>
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="124" />
-                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="350"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="320"/>
                 <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
                 <DataGridTextColumn Header="Gender" Binding="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
                 <DataGridTemplateColumn x:Name="Delete" Header="Delete" >
@@ -34,7 +34,7 @@
         <DockPanel HorizontalAlignment="Center" Height="100" LastChildFill="True" Margin="0,369,0,0" VerticalAlignment="Top" Width="967" Background="#FF11CDEF">
             <Label x:Name="lblSearch" Content="Search" Width="50" Height="24"/>
             <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0" TextChanged="txtSearch_TextChanged"/>
-            <Button Name="btnAdd" Width="50" Height="40" Background="#00000000" BorderThickness="0" >
+            <Button Name="btnAdd" Width="50" Height="40" Background="#00000000" BorderThickness="0" Click="btnAdd_Click">
                 <Image Source="/CarWashManagementSystem;component/images/add_user_male_30px.png"/>
             </Button>
         </DockPanel>
