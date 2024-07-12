@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-   public class AccountService
+    public class AccountService
     {
         private AccountRepository _repository;
 

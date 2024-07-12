@@ -95,8 +95,8 @@
             <DockPanel LastChildFill="False" Background="White" Width="260" Height="95" Margin="90,0,0,50">
                 <Image Height="40" Source="/CarWashManagementSystem;component/images/cash_in_hand_35px.png" Width="40" Stretch="Fill" Margin="200,0,0,35"/>
                 <TextBlock VerticalAlignment="Top" Text="GROSS PROFIT" FontSize="16" Margin="-290, 8, 0, 0" Width="158" Height="31"/>
-                    <TextBlock x:Name="txtGrossProfit" VerticalAlignment="Center" Text="0.00" FontSize="20" Margin="-180, 15, 0, 0" FontWeight="Black"/>
-                    <TextBlock VerticalAlignment="Bottom" Text="Since last 7 days" FontSize="16" Margin="-105, 8, 0, 0" Width="120" Height="31"/>
+                <TextBlock x:Name="txtGrossProfit" VerticalAlignment="Center" Text="0.00" FontSize="20" Margin="-180, 15, 0, 0" FontWeight="Black"/>
+                <TextBlock VerticalAlignment="Bottom" Text="Since last 7 days" FontSize="16" Margin="-105, 8, 0, 0" Width="120" Height="31"/>
             </DockPanel>
         </DockPanel>
         <DockPanel x:Name="panelChild" HorizontalAlignment="Left" Height="485" LastChildFill="False" Margin="248,249,0,0" VerticalAlignment="Top" Width="968" Background="White"/>
