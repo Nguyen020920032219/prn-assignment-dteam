@@ -15,5 +15,7 @@ public partial class CostOfGood
 
     public DateOnly? Date { get; set; }
 
+    public decimal? Total { get; set; }
+
     public virtual Product? Product { get; set; }
 }
