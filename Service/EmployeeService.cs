@@ -37,7 +37,7 @@ namespace Service
                 return result;
         }
 
-        public List<Employee> GetEmployeeByName(String txtName)
+        public List<Employee> GetEmployeeByName(String txtName, String phone)
         {
             List<Employee> employees = _employeeRepository.GetAll();
             List<Employee> result = new List<Employee>();

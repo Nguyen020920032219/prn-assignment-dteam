@@ -22,7 +22,7 @@ namespace Service
             List<Order> result = new List<Order>();
             foreach (Order order in orders)
             {
-                if(order.Date >= fromDate && order.Date <= toDate && order.Status.Equals("Completed"))
+                if(order.Date >= fromDate && order.Date <= toDate && order.Status==true)
                 {
                     result.Add(order);
                 }

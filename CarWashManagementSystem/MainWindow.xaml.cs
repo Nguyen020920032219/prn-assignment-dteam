@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Service;
+using System.Data.SqlClient;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +18,18 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        ReportService _reportService;
+        CostOfGoodService _costOfGoodService;
+        private DateOnly fromDate;
+        private DateOnly toDate;
         public MainWindow()
         {
             InitializeComponent();
+            _reportService = new ReportService();
+            _costOfGoodService = new CostOfGoodService();
+            toDate = DateOnly.FromDateTime(DateTime.Now);
+            fromDate = toDate.AddDays(-7);
+            ShowData();
         }
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
@@ -86,7 +96,15 @@ namespace CarWashManagementSystem
             margin.Top = btnLogout.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
         }
-
+        private void ShowData()
+        {
+            var (orders, total) = _reportService.GetOrders(fromDate, toDate);
+            txtRevenus.Text = total.ToString("0.00");
+            var (cost, totals) = _costOfGoodService.GetOrdersCostOfGood(fromDate, toDate);
+            txtCostOfGoodSold.Text = totals.ToString("0.00");
+            decimal grossprofit = decimal.Parse(txtRevenus.Text) - decimal.Parse(txtCostOfGoodSold.Text);
+            txtGrossProfit.Text = grossprofit.ToString("0.00");           
+        }
         
     }
 }
