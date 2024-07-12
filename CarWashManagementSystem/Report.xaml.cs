@@ -7,7 +7,7 @@ using System.Windows.Controls;
 namespace CarWashManagementSystem
 {
     
-    public partial class Report : Window
+    public partial class Report : UserControl
     {
         ReportService _reportService;
         CostOfGoodService _costOfGoodService;

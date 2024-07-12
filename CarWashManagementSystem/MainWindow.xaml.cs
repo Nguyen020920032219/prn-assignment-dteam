@@ -22,7 +22,6 @@ namespace CarWashManagementSystem
         CostOfGoodService _costOfGoodService;
         private DateOnly fromDate;
         private DateOnly toDate;
-        public MainWindow()
         private UserControl? _activeWindow = null;
 
         public MainWindow(string role)
@@ -107,6 +106,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnReport.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new Report());
         }
 
         private void btnWareHouse_Click(object sender, RoutedEventArgs e)

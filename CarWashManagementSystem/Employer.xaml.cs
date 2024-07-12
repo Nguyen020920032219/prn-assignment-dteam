@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace CarWashManagementSystem
 {
-    public partial class Employer : Window
+    public partial class Employer : UserControl
     {
         private readonly EmployeeService _employeeService;
         private readonly ValidationService _validationService;
