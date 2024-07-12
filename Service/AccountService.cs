@@ -1,14 +1,14 @@
-﻿using Repository;
-using Repository.Entities;
+﻿using Repository.Entities;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Impl
+namespace Service
 {
-    public class AccountService : IAccountService
+   public class AccountService
     {
         private AccountRepository _repository;
 

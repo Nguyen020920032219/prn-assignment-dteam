@@ -1,18 +1,17 @@
 ﻿using Repository;
-using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Impl
+namespace Service
 {
-    public class OrderServiceServiceImpl : IOrderServiceService
+    public class OrderServiceService
     {
         private OrderServiceRepository _repository;
 
-        public void AddOrderServiceList(List<OrderService> list)
+        public void AddOrderServiceList(List<Repository.Entities.OrderService> list)
         {
             _repository = new OrderServiceRepository();
 
@@ -26,17 +25,17 @@ namespace Service.Impl
         {
             _repository = new OrderServiceRepository();
 
-            List<OrderService> list = _repository.GetAll()
+            List<Repository.Entities.OrderService> list = _repository.GetAll()
                                                  .Where(orderService => orderService.OrderId == orderId)
                                                  .ToList();
 
-            foreach (var orderService in list) 
+            foreach (var orderService in list)
             {
                 _repository.Delete(orderService);
             }
         }
 
-        public List<OrderService> GetOrderServicesByOrderId(int orderId)
+        public List<Repository.Entities.OrderService> GetOrderServicesByOrderId(int orderId)
         {
             _repository = new OrderServiceRepository();
             return _repository.GetAll()

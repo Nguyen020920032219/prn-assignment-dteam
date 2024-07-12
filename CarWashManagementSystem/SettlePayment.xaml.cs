@@ -1,21 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Repository.Entities;
-using Service;
-using Service.Impl;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Repository.Entities;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarWashManagementSystem
 {
@@ -24,7 +9,7 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class SettlePayment : Window
     {
-        private IOrderService _orderService;
+        private Service.OrderService _orderService;
 
         public Order order { get; set; }
 
@@ -35,7 +20,7 @@ namespace CarWashManagementSystem
         public SettlePayment()
         {
             InitializeComponent();
-            _orderService = new OrderServiceImpl();
+            _orderService = new Service.OrderService();
         }
 
         public void InitializePayment()

@@ -1,7 +1,4 @@
-﻿using Repository.Entities;
-using Service;
-using Service.Impl;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace CarWashManagementSystem

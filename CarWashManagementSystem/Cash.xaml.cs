@@ -1,7 +1,6 @@
 ﻿using Repository.DTO;
 using Repository.Entities;
 using Service;
-using Service.Impl;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -14,9 +13,9 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class Cash : UserControl
     {
-        private IOrderService _orderService;
+        private Service.OrderService _orderService;
 
-        private IOrderServiceService _orderServiceService;
+        private OrderServiceService _orderServiceService;
 
         private UserControl? _activeWindown = null;
 
@@ -38,8 +37,8 @@ namespace CarWashManagementSystem
             InitializeComponent();
             DataContext = this;
 
-            _orderService = new OrderServiceImpl();
-            _orderServiceService = new OrderServiceServiceImpl();
+            _orderService = new Service.OrderService();
+            _orderServiceService = new OrderServiceService();
 
             _cashRecords = new ObservableCollection<dynamic>();
             dgvCash.ItemsSource = _cashRecords;
@@ -242,10 +241,10 @@ namespace CarWashManagementSystem
                 _currentOrder.OrderId = orderIsSaved.OrderId;
 
                 // Create and save new OrderServiceList
-                List<OrderService> orderServices = new List<OrderService>();
+                List<Repository.Entities.OrderService> orderServices = new List<Repository.Entities.OrderService>();
                 foreach (var serviceRecord in _cashRecords)
                 {
-                    OrderService orderService = new OrderService()
+                    Repository.Entities.OrderService orderService = new Repository.Entities.OrderService()
                     {
                         OrderId = orderIsSaved.OrderId,
                         ServiceId = serviceRecord.ServiceId,
@@ -293,10 +292,10 @@ namespace CarWashManagementSystem
 
                     _orderServiceService.DeleteOrderServicesByOrderId(_currentOrder.OrderId);
 
-                    List<OrderService> updatedOrderServices = new List<OrderService>();
+                    List<Repository.Entities.OrderService> updatedOrderServices = new List<Repository.Entities.OrderService>();
                     foreach (var serviceRecord in _cashRecords)
                     {
-                        OrderService orderService = new OrderService()
+                        Repository.Entities.OrderService orderService = new Repository.Entities.OrderService()
                         {
                             OrderId = _currentOrder.OrderId,
                             ServiceId = serviceRecord.ServiceId,
