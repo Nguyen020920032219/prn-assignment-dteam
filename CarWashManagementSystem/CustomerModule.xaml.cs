@@ -71,7 +71,7 @@ namespace CarWashManagementSystem
             customer.Address = Address;
 
             _customerService.CreateCustomer(customer);
-
+            MessageBox.Show("Customer add successfully.");
             btnClose_Click(sender,e);
         }
     }

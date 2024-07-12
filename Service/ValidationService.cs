@@ -10,7 +10,7 @@ namespace Service
     {
         public bool IsStringValid(string input)
         {
-            return !string.IsNullOrEmpty(input);
+            return !string.IsNullOrWhiteSpace(input);
         }
 
         public bool IsStringLengthValid(string input, int minLength, int maxLength)
@@ -28,6 +28,11 @@ namespace Service
         public bool IsPositiveDecimal(decimal input)
         {
             return input > 0;
+        }
+
+        public bool IsYear(int input)
+        {
+            return input >= 1 && input <= 9999;
         }
 
         public bool IsEmailValid(string email)
@@ -48,7 +53,7 @@ namespace Service
             return date != default(DateTime);
         }
 
-        public bool IsWithinRange(int input, int minValue, int maxValue)
+        public bool IsWithinRange(decimal input, decimal minValue, decimal maxValue)
         {
             return input >= minValue && input <= maxValue;
         }
@@ -84,6 +89,12 @@ namespace Service
         public bool IsNumber(string input)
         {
             return decimal.TryParse(input, out _);
+        }
+
+        public bool ValidateLicensePlate(string licensePlate)
+        {
+            string pattern = @"^[A-Za-z]{3}\d{3}$";
+            return Regex.IsMatch(licensePlate, pattern);
         }
     }
 }

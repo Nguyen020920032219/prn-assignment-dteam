@@ -21,7 +21,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnStockIn" Click="StockIn_Click">
-                                <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\stock_in_32px.png" Width="16" Height="16"/>
+                                <Image Source="\images\stock_in_32px.png" Width="16" Height="16"/>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

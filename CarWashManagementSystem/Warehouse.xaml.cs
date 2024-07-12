@@ -20,22 +20,29 @@ namespace CarWashManagementSystem
             InitializeComponent();
             _productService = new ProductService();
             _validation = new ValidationService();
-            ShowData(_isDiscontinued);
+            ShowData();
         }
 
-        private void ShowData(bool isDiscontinued)
+        private void ShowData()
         {
             dgvProduct.ItemsSource = null;
-            dgvProduct.ItemsSource = _productService.GetProductsByStatus(isDiscontinued);
+            dgvProduct.ItemsSource = _productService.GetProductsByStatus(_isDiscontinued);
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            dgvProduct.ItemsSource = _productService.GetProductsContainString(txtSearch.Text);
+            dgvProduct.ItemsSource = _productService.GetProductsContainString(txtSearch.Text, _isDiscontinued);
         }
 
         private void dgvProduct_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+            if (_isDiscontinued)
+            {
+                MessageBox.Show("Reactive this product to do this.");
+                e.Cancel = true;    
+                return;
+            }
+
             Product product = e.Row.Item as Product;
 
             if (!_validation.IsStringValid(product.Name))
@@ -52,43 +59,51 @@ namespace CarWashManagementSystem
                 return;
             }
 
-            //if (!_validation.IsStringValid(product.Price))
-            //{
-            //    MessageBox.Show("Giá sản phẩm không được để trống.");
-            //    e.Cancel = true;
-            //    return;
-            //}
+            if (!_validation.IsStringValid(product.Price.ToString()))
+            {
+                MessageBox.Show("Product price can not be empty.");
+                e.Cancel = true;
+                return;
+            }
 
-            if (!_validation.IsNumber(product.Price + ""))
+            if (!_validation.IsNumber(product.Price.ToString()))
             {
                 MessageBox.Show("Product price must be a number.");
                 e.Cancel = true;
                 return;
             }
 
-            //if (!_validation.IsStringValid(product.StockQuantity))
-            //{
-            //    MessageBox.Show("Số lượng sản phẩm không được để trống.");
-            //    e.Cancel = true;
-            //    return;
-            //}
+            if (!_validation.IsWithinRange((decimal)product.Price, 0, decimal.MaxValue))
+            {
+                MessageBox.Show("Product price must be greater than 0 and smaller than " + decimal.MaxValue + ".");
+                e.Cancel = true;
+                return;
+            }
 
-            if (!_validation.IsNumber(product.StockQuantity + ""))
+            if (!_validation.IsStringValid(product.StockQuantity.ToString()))
+            {
+                MessageBox.Show("Product quantity can not be empty.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!_validation.IsNumber(product.StockQuantity.ToString()))
             {
                 MessageBox.Show("Product quantity must be a number.");
                 e.Cancel = true;
                 return;
             }
 
-            if (!_validation.IsPositiveInteger(Int32.Parse(product.StockQuantity + "")))
+            if (!_validation.IsWithinRange((int)product.StockQuantity, 0, int.MaxValue))
             {
-                MessageBox.Show("Product quantity must be positve number.");
+                MessageBox.Show("Product price must be greater than 0 and smaller than " + int.MaxValue + ".");
                 e.Cancel = true;
                 return;
             }
 
             _productService.UpdateProduct(product);
-            ShowData(_isDiscontinued);
+            MessageBox.Show("Product update successfully.");
+            ShowData();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -100,7 +115,7 @@ namespace CarWashManagementSystem
         }
         private void Module_Closed(object sender, EventArgs e)
         {
-            ShowData(_isDiscontinued);
+            ShowData();
         }
 
         private void Discontinued_Click(object sender, RoutedEventArgs e)
@@ -130,7 +145,7 @@ namespace CarWashManagementSystem
                         MessageBox.Show($"Error while processing: {ex.Message}");
                     }
                 }
-                ShowData(_isDiscontinued);
+                ShowData();
             }
             else
             {
@@ -153,7 +168,7 @@ namespace CarWashManagementSystem
                         MessageBox.Show($"Error while processing: {ex.Message}");
                     }
                 }
-                ShowData(_isDiscontinued);
+                ShowData();
             }
         }
 
@@ -181,14 +196,16 @@ namespace CarWashManagementSystem
             {
                 _isDiscontinued = true;
                 btnChangeView.Content = "Actively Product";
+                Add.IsEnabled = false;
             }
             else
             {
                 _isDiscontinued = false;
                 btnChangeView.Content = "Discontinued product";
+                Add.IsEnabled = true;
             }
 
-            ShowData(_isDiscontinued);
+            ShowData();
         }
     }
 }

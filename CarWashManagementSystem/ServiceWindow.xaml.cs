@@ -23,6 +23,8 @@ namespace CarWashManagementSystem
     {
         ServiceService _services;
         ValidationService _validationService;
+        bool _isDiscontinued = false;
+
         public ServiceWindow()
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace CarWashManagementSystem
         {
             try
             {
-                dgvService.ItemsSource = _services.GetList();
+                dgvService.ItemsSource = _services.GetServicesByStatus(_isDiscontinued);
             }
             catch
             {
@@ -46,7 +48,7 @@ namespace CarWashManagementSystem
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            dgvService.ItemsSource=_services.GetServicesContainString(txtSearch.Text, _isDiscontinued);
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -65,34 +67,68 @@ namespace CarWashManagementSystem
 
         private void Hide_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            Button btn = (Button)sender;
 
+            Repository.Entities.Service service = (Repository.Entities.Service)btn.DataContext;
 
-            Repository.Entities.Service service = button.DataContext as Repository.Entities.Service;
-            service.IsDiscontinued = true;
-            MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirm delete",
+            if (service.IsDiscontinued)
+            {
+                MessageBoxResult result = MessageBox.Show(
+                $"Are you sure to move '{service.Name}' to actively product?",
+                "Confirm",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
+            );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        service.IsDiscontinued = false;
+                        _services.UpdateService(service);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error while processing: {ex.Message}");
+                    }
+                }
+                ViewData();
+            }
+            else
+            {
+
+                MessageBoxResult result = MessageBox.Show(
+                    $"Are you sure to move '{service.Name}' to discontinued product?",
+                    "Confirm",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
                 );
 
-            if (result == MessageBoxResult.Yes)
-            {
-                try
+                if (result == MessageBoxResult.Yes)
                 {
-                    _services.DeleteService(service);
-                    ViewData();
-                    MessageBox.Show("Delete successfull");
+                    try
+                    {
+                        service.IsDiscontinued = true;
+                        _services.UpdateService(service);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error while processing: {ex.Message}");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Hide service failed because: " + ex.Message);
-                }
+                ViewData();
             }
-
         }
 
         private void dgvService_Update(object sender, DataGridCellEditEndingEventArgs e)
         {
+            if (_isDiscontinued)
+            {
+                MessageBox.Show("Reactive service to do this process.");
+                e.Cancel = true;
+                return;
+            }
+
             var Service = e.Row.Item as Repository.Entities.Service;
             if (!_validationService.IsStringValid(Service.Name))
             {
@@ -134,6 +170,24 @@ namespace CarWashManagementSystem
             {
                 MessageBox.Show("Update was failed beacause: " + ex.Message);
             }
+        }
+
+        private void ChangeView_Click(object sender, RoutedEventArgs e)
+        {
+            if (_isDiscontinued == false)
+            {
+                _isDiscontinued = true;
+                btnChangeView.Content = "Actively Product";
+                btnAdd.IsEnabled = false;
+            }
+            else
+            {
+                _isDiscontinued = false;
+                btnChangeView.Content = "Discontinued product";
+                btnAdd.IsEnabled = true;
+            }
+
+            ViewData();
         }
     }
 }

@@ -11,10 +11,12 @@ namespace Service
     public class ServiceService
     {
         private readonly ServiceRepository _serviceRepository;
+        ValidationService _validationService;
        
         public ServiceService()
         {
             _serviceRepository = new ServiceRepository();
+            _validationService = new ValidationService();
         }
 
         private List<Repository.Entities.Service> _serviceList;
@@ -38,7 +40,20 @@ namespace Service
                 throw ex;
             }
             return list;
+        }
 
+        public List<Repository.Entities.Service> GetServicesByStatus(bool isDiscontinued)
+        {
+            List<Repository.Entities.Service> services = _serviceRepository.GetAll();
+            List<Repository.Entities.Service> result = new List<Repository.Entities.Service>();
+            foreach (Repository.Entities.Service service in services)
+            {
+                if (service.IsDiscontinued == isDiscontinued)
+                {
+                    result.Add(service);
+                }
+            }
+            return result;
         }
 
         public List<Repository.Entities.Service> GetAllServices()
@@ -84,7 +99,28 @@ namespace Service
             }
         }
 
-        
-
+        public List<Repository.Entities.Service> GetServicesContainString(string txtSearch, bool status)
+        {
+            List<Repository.Entities.Service> services = GetServicesByStatus(status);
+            List<Repository.Entities.Service> result = new List<Repository.Entities.Service>();
+            foreach (Repository.Entities.Service service in services)
+            {
+                if (_validationService.IsNumber(txtSearch))
+                {
+                    if (service.ServiceId.ToString().Contains(txtSearch))
+                    {
+                        result.Add(service);
+                    }
+                }
+                if (service.Name.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(service))
+                    {
+                        result.Add(service);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

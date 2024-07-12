@@ -19,7 +19,9 @@
                 <DataGridTemplateColumn x:Name="ManageVehicle" Header="Vehicle">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="ManageVehicle" Click="ManageVehicle_Click">View</Button>
+                            <Button x:Name="ManageVehicle" Click="ManageVehicle_Click">
+                                <Image Source="/images/car.png" Height="16" Width="32"/>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

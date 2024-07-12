@@ -56,6 +56,12 @@ namespace CarWashManagementSystem
                 return;
             }
 
+            if (!_validation.IsWithinRange(decimal.Parse(priceText),0,decimal.MaxValue))
+            {
+                MessageBox.Show("Product price must be greater than 0 and smaller than " + decimal.MaxValue + ".");
+                return;
+            }
+
             if (!_validation.IsStringValid(quantityText))
             {
                 MessageBox.Show("Product quantity can not be empty.");
@@ -68,9 +74,9 @@ namespace CarWashManagementSystem
                 return;
             }
 
-            if (!_validation.IsPositiveInteger(Int32.Parse(quantityText)))
+            if (!_validation.IsWithinRange(int.Parse(quantityText), 0, int.MaxValue))
             {
-                MessageBox.Show("Product quantity must be positive number.");
+                MessageBox.Show("Product price must be greater than 0 and smaller than " + int.MaxValue + ".");
                 return;
             }
 
@@ -89,7 +95,7 @@ namespace CarWashManagementSystem
             try
             {
                 _productService.CreateProduct(product);
-                MessageBox.Show("Product added.");
+                MessageBox.Show("Product add successfully.");
                 Close_Click(sender, e);
             }
             catch (Exception ex)
