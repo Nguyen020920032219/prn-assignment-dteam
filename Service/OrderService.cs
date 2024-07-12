@@ -1,14 +1,14 @@
-﻿using Repository;
-using Repository.Entities;
+﻿using Repository.Entities;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Impl
+namespace Service
 {
-    public class OrderServiceImpl : IOrderService
+    public class OrderService
     {
         private OrderRepository _repository;
 
@@ -17,7 +17,7 @@ namespace Service.Impl
             _repository = new OrderRepository();
             List<Order> orders = _repository.GetAll();
 
-            return  orders
+            return orders
                    .Where(cash => cash.TransactionNo != null && cash.TransactionNo.StartsWith(prefix))
                    .OrderByDescending(cash => cash.TransactionNo.Substring(cash.TransactionNo.Length - 4))
                    .Select(cash => cash.TransactionNo)
@@ -30,11 +30,17 @@ namespace Service.Impl
             _repository.Add(order);
         }
 
+        public void UpdateOrder(Order order)
+        {
+            _repository = new OrderRepository();
+            _repository.Update(order);
+        }
+
         public void CompleteOrder(Order order)
         {
             _repository = new OrderRepository();
             order.Date = DateOnly.FromDateTime(DateTime.Now);
-            order.Status = "Completed";
+            order.Status = true;
 
             _repository.Update(order);
         }
@@ -46,7 +52,7 @@ namespace Service.Impl
 
             return orders
                    .FirstOrDefault(order => order.TransactionNo.Equals(transactionNo));
-      
+
         }
     }
 }

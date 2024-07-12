@@ -1,8 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using Repository.DTO;
 using Service;
-using Service.Impl;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace CarWashManagementSystem
@@ -12,7 +10,7 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class CashService : UserControl
     {
-        private IServiceService _serviceService;
+        private ServiceService _serviceService;
 
         public CustomerVehicleDTO? CustomerVehicleSelected { get; set; }
 
@@ -23,7 +21,7 @@ namespace CarWashManagementSystem
         public CashService(CustomerVehicleDTO? customerVehicleSelected, List<Repository.Entities.Service> alreadySelectedServices)
         {
             InitializeComponent();
-            _serviceService = new ServiceServiceImpl();
+            _serviceService = new ServiceService();
 
             CustomerVehicleSelected = customerVehicleSelected;
             ServicesSelected = new List<Repository.Entities.Service>();
@@ -32,7 +30,7 @@ namespace CarWashManagementSystem
 
         public void CashService_Load(List<Repository.Entities.Service> alreadySelectedServices)
         {
-            var allServices = _serviceService.GetServicesIsNotDeleteList();
+            var allServices = _serviceService.GetList();
             
             if(alreadySelectedServices != null)
             {

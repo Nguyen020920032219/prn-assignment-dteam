@@ -1,19 +1,6 @@
 ﻿using Repository.Entities;
 using Service;
-using Service.Impl;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CarWashManagementSystem
 {
@@ -22,7 +9,7 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class Login : Window
     {
-        private IAccountService _accountService;
+        private AccountService _accountService;
 
         public Login()
         {
@@ -39,7 +26,7 @@ namespace CarWashManagementSystem
 
             if (account != null)
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(account.Role);
                 mainWindow.Show();
                 this.Close();
             } else

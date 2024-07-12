@@ -19,9 +19,15 @@ namespace CarWashManagementSystem
     {
         private UserControl? _activeWindow = null;
 
-        public MainWindow()
+        public MainWindow(string role)
         {
             InitializeComponent();
+           
+            if (role.Equals("Staff", StringComparison.OrdinalIgnoreCase)) 
+            {
+                btnEmployer.IsEnabled = false;
+                btnServices.IsEnabled = false;
+            }
         }
 
         public void OpenChildWindow (UserControl childWindow)

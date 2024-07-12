@@ -16,7 +16,9 @@ namespace Service
         {
             _serviceRepository = new ServiceRepository();
         }
+
         private List<Repository.Entities.Service> _serviceList;
+
         public List<Repository.Entities.Service> GetList()
         {
             List<Repository.Entities.Service> list = new List<Repository.Entities.Service>();
@@ -37,6 +39,11 @@ namespace Service
             }
             return list;
 
+        }
+
+        public List<Repository.Entities.Service> GetAllServices()
+        {
+            return _serviceRepository.GetAll();
         }
 
         public void addService(Repository.Entities.Service service)
