@@ -34,7 +34,6 @@ namespace CarWashManagementSystem
             this._productService = new ProductService();
             this._validation = new ValidationService();
             txtName.Text = product.Name;
-            txtPrice.Text=product.Price.ToString();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -87,10 +86,11 @@ namespace CarWashManagementSystem
             _productService.UpdateProduct(product);
 
             CostOfGood costOfGood = new CostOfGood();
-            costOfGood.ProductId=product.ProductId;
+            costOfGood.ProductId = product.ProductId;
             costOfGood.Date = DateOnly.FromDateTime(DateTime.Now);
             costOfGood.Price = decimal.Parse(priceText);
-            costOfGood.Quantity=int.Parse(priceText);
+            costOfGood.Quantity = int.Parse(quantityText);
+            costOfGood.Total = decimal.Parse(priceText) * int.Parse(quantityText);
 
             _costOfGoodService.AddCostOfGood(costOfGood);
             MessageBox.Show("Add successfully.");

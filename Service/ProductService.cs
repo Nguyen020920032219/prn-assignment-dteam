@@ -23,9 +23,9 @@ namespace Service
             return _productRepo.GetAll();
         }
 
-        public List<Product> GetProductsContainString(string txtSearch)
+        public List<Product> GetProductsContainString(string txtSearch, bool status)
         {
-            List<Product> products = _productRepo.GetAll();
+            List<Product> products = GetProductsByStatus(status);
             List<Product> result = new List<Product>();
             foreach (Product product in products)
             {

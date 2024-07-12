@@ -20,22 +20,29 @@ namespace CarWashManagementSystem
             InitializeComponent();
             _productService = new ProductService();
             _validation = new ValidationService();
-            ShowData(_isDiscontinued);
+            ShowData();
         }
 
-        private void ShowData(bool isDiscontinued)
+        private void ShowData()
         {
             dgvProduct.ItemsSource = null;
-            dgvProduct.ItemsSource = _productService.GetProductsByStatus(isDiscontinued);
+            dgvProduct.ItemsSource = _productService.GetProductsByStatus(_isDiscontinued);
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            dgvProduct.ItemsSource = _productService.GetProductsContainString(txtSearch.Text);
+            dgvProduct.ItemsSource = _productService.GetProductsContainString(txtSearch.Text, _isDiscontinued);
         }
 
         private void dgvProduct_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
+            if (_isDiscontinued)
+            {
+                MessageBox.Show("Reactive this product to do this.");
+                e.Cancel = true;    
+                return;
+            }
+
             Product product = e.Row.Item as Product;
 
             if (!_validation.IsStringValid(product.Name))
@@ -96,7 +103,7 @@ namespace CarWashManagementSystem
 
             _productService.UpdateProduct(product);
             MessageBox.Show("Product update successfully.");
-            ShowData(_isDiscontinued);
+            ShowData();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -108,7 +115,7 @@ namespace CarWashManagementSystem
         }
         private void Module_Closed(object sender, EventArgs e)
         {
-            ShowData(_isDiscontinued);
+            ShowData();
         }
 
         private void Discontinued_Click(object sender, RoutedEventArgs e)
@@ -138,7 +145,7 @@ namespace CarWashManagementSystem
                         MessageBox.Show($"Error while processing: {ex.Message}");
                     }
                 }
-                ShowData(_isDiscontinued);
+                ShowData();
             }
             else
             {
@@ -161,7 +168,7 @@ namespace CarWashManagementSystem
                         MessageBox.Show($"Error while processing: {ex.Message}");
                     }
                 }
-                ShowData(_isDiscontinued);
+                ShowData();
             }
         }
 
@@ -198,7 +205,7 @@ namespace CarWashManagementSystem
                 Add.IsEnabled = true;
             }
 
-            ShowData(_isDiscontinued);
+            ShowData();
         }
     }
 }

@@ -17,6 +17,7 @@
     <None Remove="images\add_user_male_32px.png" />
     <None Remove="images\bank_30px.png" />
     <None Remove="images\cancel_20px.png" />
+    <None Remove="images\car.png" />
     <None Remove="images\car_cleaning_30cpx.png" />
     <None Remove="images\cash_in_hand_35px.png" />
     <None Remove="images\clean_120px.png" />
@@ -62,6 +63,7 @@
     <Resource Include="images\add_user_male_32px.png" />
     <Resource Include="images\bank_30px.png" />
     <Resource Include="images\cancel_20px.png" />
+    <Resource Include="images\car.png" />
     <Resource Include="images\car_cleaning_30cpx.png" />
     <Resource Include="images\cash_in_hand_35px.png" />
     <Resource Include="images\clean_120px.png" />

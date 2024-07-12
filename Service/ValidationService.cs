@@ -10,7 +10,7 @@ namespace Service
     {
         public bool IsStringValid(string input)
         {
-            return !string.IsNullOrEmpty(input);
+            return !string.IsNullOrWhiteSpace(input);
         }
 
         public bool IsStringLengthValid(string input, int minLength, int maxLength)
@@ -28,6 +28,11 @@ namespace Service
         public bool IsPositiveDecimal(decimal input)
         {
             return input > 0;
+        }
+
+        public bool IsYear(int input)
+        {
+            return input >= 1 && input <= 9999;
         }
 
         public bool IsEmailValid(string email)

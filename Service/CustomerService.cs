@@ -31,9 +31,30 @@ namespace Service
             List<Customer> result = new List<Customer>();
             foreach (Customer customer in customers)
             {
-                if (customer.Name.ToLower().Contains(txtSearch.ToLower()))
+                if (customer.CustomerId.ToString().Contains(txtSearch.ToLower()))
                 {
                     result.Add(customer);
+                }
+                if (customer.Name.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(customer))
+                    {
+                        result.Add(customer);
+                    }
+                }
+                if (customer.Phone.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(customer))
+                    {
+                        result.Add(customer);
+                    }
+                }
+                if (customer.Address.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    if (!result.Contains(customer))
+                    {
+                        result.Add(customer);
+                    }
                 }
             }
             return result;
