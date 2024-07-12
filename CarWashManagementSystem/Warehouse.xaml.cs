@@ -52,26 +52,42 @@ namespace CarWashManagementSystem
                 return;
             }
 
-            //if (!_validation.IsStringValid(product.Price))
-            //{
-            //    MessageBox.Show("Giá sản phẩm không được để trống.");
-            //    e.Cancel = true;
-            //    return;
-            //}
+            if (!_validation.IsStringValid(product.Price.ToString()))
+            {
+                MessageBox.Show("Product price can not be empty.");
+                e.Cancel = true;
+                return;
+            }
 
-            if (!_validation.IsNumber(product.Price + ""))
+            if (!_validation.IsNumber(product.Price.ToString()))
             {
                 MessageBox.Show("Product price must be a number.");
                 e.Cancel = true;
                 return;
             }
 
-            //if (!_validation.IsStringValid(product.StockQuantity))
+            //i
             //{
-            //    MessageBox.Show("Số lượng sản phẩm không được để trống.");
+            //    MessageBox.Show("Product price must be a number.");
             //    e.Cancel = true;
             //    return;
             //}
+
+            //if (!_validation.IsNumber(product.Price.ToString()))
+            //{
+            //    MessageBox.Show("Product price must be a number.");
+            //    e.Cancel = true;
+            //    return;
+            //}
+
+
+
+            if (!_validation.IsStringValid(product.StockQuantity.ToString()))
+            {
+                MessageBox.Show("Product quantity can not be empty.");
+                e.Cancel = true;
+                return;
+            }
 
             if (!_validation.IsNumber(product.StockQuantity + ""))
             {
