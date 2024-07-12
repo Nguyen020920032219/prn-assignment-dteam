@@ -15,5 +15,7 @@ public partial class Account
 
     public string? Role { get; set; }
 
+    public bool IsActive { get; set; }
+
     public virtual Employee? Employee { get; set; }
 }

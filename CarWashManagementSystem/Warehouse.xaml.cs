@@ -2,6 +2,8 @@
 using Service;
 using System.Windows;
 using System.Windows.Controls;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
+using System.Xml.Linq;
 
 namespace CarWashManagementSystem
 {
@@ -11,17 +13,19 @@ namespace CarWashManagementSystem
     public partial class Warehouse : UserControl
     {
         ProductService _productService;
+        ValidationService _validation;
         public Warehouse()
         {
             InitializeComponent();
             _productService = new ProductService();
+            _validation = new ValidationService();
             ShowData();
         }
 
         private void ShowData()
         {
             dgvProduct.ItemsSource = null;
-            dgvProduct.ItemsSource=_productService.GetProducts();
+            dgvProduct.ItemsSource = _productService.GetProducts();
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -36,8 +40,8 @@ namespace CarWashManagementSystem
             Product product = (Product)btn.DataContext;
 
             MessageBoxResult result = MessageBox.Show(
-                $"Bạn có chắc chắn muốn xóa sản phẩm '{product.Name}' không?",
-                "Xác nhận xóa",
+                $"Are you sure to delete '{product.Name}'?",
+                "Confirm",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
             );
@@ -50,7 +54,7 @@ namespace CarWashManagementSystem
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Lỗi khi xóa sản phẩm: {ex.Message}");
+                    MessageBox.Show($"Error while deleting product: {ex.Message}");
                 }
             }
             ShowData();
@@ -58,7 +62,57 @@ namespace CarWashManagementSystem
 
         private void dgvProduct_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            Product product= e.Row.Item as Product;
+            Product product = e.Row.Item as Product;
+
+            if (!_validation.IsStringValid(product.Name))
+            {
+                MessageBox.Show("Product name can not be empty.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!_validation.IsStringValid(product.Description))
+            {
+                MessageBox.Show("Product description can not be empty.");
+                e.Cancel = true;
+                return;
+            }
+
+            //if (!_validation.IsStringValid(product.Price))
+            //{
+            //    MessageBox.Show("Giá sản phẩm không được để trống.");
+            //    e.Cancel = true;
+            //    return;
+            //}
+
+            if (!_validation.IsNumber(product.Price+""))
+            {
+                MessageBox.Show("Product price must be a number.");
+                e.Cancel = true;
+                return;
+            }
+
+            //if (!_validation.IsStringValid(product.StockQuantity))
+            //{
+            //    MessageBox.Show("Số lượng sản phẩm không được để trống.");
+            //    e.Cancel = true;
+            //    return;
+            //}
+
+            if (!_validation.IsNumber(product.StockQuantity + ""))
+            {
+                MessageBox.Show("Product quantity must be a number.");
+                e.Cancel = true;
+                return;
+            }
+
+            if (!_validation.IsPositiveInteger(Int32.Parse(product.StockQuantity + "")))
+            {
+                MessageBox.Show("Product quantity must be positve number.");
+                e.Cancel = true;
+                return;
+            }
+
             _productService.UpdateProduct(product);
             ShowData();
         }
@@ -68,7 +122,7 @@ namespace CarWashManagementSystem
             WarehouseModule wm = new WarehouseModule();
             wm.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             wm.Closed += WarehouseModule_Closed;
-            wm.Show();
+            wm.ShowDialog();
         }
         private void WarehouseModule_Closed(object sender, EventArgs e)
         {

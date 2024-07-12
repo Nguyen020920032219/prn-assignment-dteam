@@ -15,7 +15,7 @@ public partial class Product
 
     public string? Description { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDiscontinued { get; set; }
 
     public virtual ICollection<CostOfGood> CostOfGoods { get; set; } = new List<CostOfGood>();
 
