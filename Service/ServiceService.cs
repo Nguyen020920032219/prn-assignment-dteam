@@ -61,6 +61,11 @@ namespace Service
             return _serviceRepository.GetAll();
         }
 
+        public Repository.Entities.Service GetServicesById(int id)
+        {
+            return _serviceRepository.GetAll().FirstOrDefault(s => s.ServiceId == id);
+        }
+
         public void addService(Repository.Entities.Service service)
         { 
             Boolean result = false;

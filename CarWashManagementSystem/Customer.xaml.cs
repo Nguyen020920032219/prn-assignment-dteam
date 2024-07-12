@@ -9,7 +9,7 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Customer.xaml
     /// </summary>
-    public partial class Customer : Window
+    public partial class Customer : UserControl
     {
         CustomerService _customerService;
         ValidationService _validation;

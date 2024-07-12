@@ -1,64 +1,44 @@
-﻿<Window x:Class="CarWashManagementSystem.Employer"
+﻿<UserControl x:Class="CarWashManagementSystem.Employer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarWashManagementSystem"
         mc:Ignorable="d"
-        Title="Employer" Height="485" Width="980"
-        ResizeMode="NoResize"
-        >
+        Height="485" Width="980">
     <Grid>
         <DataGrid x:Name="dgvEmployer" Margin="0,0,0,100" BorderBrush="White"
                   CanUserAddRows="False" CanUserDeleteRows="False" 
                   CanUserResizeColumns="False" CanUserResizeRows="False"
-                  IsReadOnly="True" AutoGenerateColumns="False"
-                  ColumnHeaderHeight="28">
+                  ColumnHeaderHeight="28"
+                  AutoGenerateColumns="False" CellEditEnding="dgvEmployer_CellEditEnding">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="Id" Binding="{Binding IdEmployee}" Header="Id" Width="40"/>
-                <DataGridTextColumn x:Name="Name" Binding="{Binding Name}" Header="Name" Width="110"/>
-                <DataGridTextColumn x:Name="Phone" Binding="{Binding Phone}" Header="Phone" Width="90"/>
-                <DataGridTextColumn x:Name="Address" Binding="{Binding Address}" Header="Address" Width="200"/>
-                <DataGridTextColumn x:Name="Dob" Binding="{Binding Dob}" Header="Date of Birth" Width="100"/>
-                <DataGridTextColumn x:Name="Gender" Binding="{Binding Gender}" Header="Gender"  Width="60"/>
-                <DataGridTextColumn x:Name="Role" Binding="{Binding Role}" Header="Role" Width="110"/>
-                <DataGridTextColumn x:Name="Salary" Binding="{Binding Salary}" Header="Salary" Width="80"/>
-                <DataGridTextColumn x:Name="Password" Binding="{Binding Password}" Header="Password" Width="100"/>
-
-                <!-- DataGridTemplateColumn for Edit -->
-                <!--<DataGridTemplateColumn x:Name="Edit" Header="Edit">
+                <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="180"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="124" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="320"/>
+                <DataGridTextColumn Header="Date Of Birth" Binding="{Binding DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                <DataGridTemplateColumn x:Name="Delete" Header="Delete" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="EditButton_Click">
-                                <Image Source="/images/edit_20px.png" Width="16" Height="16" />
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                -->
-                <!-- DataGridTemplateColumn for Delete -->
-                <!--
-                <DataGridTemplateColumn x:Name="Delete" Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Click="DeleteButton_Click">
+                            <Button x:Name="Delete" Click="Delete_Click">
                                 <Image Source="/images/delete_document_20px.png" Width="16" Height="16" />
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         
         <DockPanel HorizontalAlignment="Center" Height="100" LastChildFill="True" Margin="0,369,0,0" VerticalAlignment="Top" Width="967" Background="#FF11CDEF">
             <Label x:Name="lblSearch" Content="Search" Width="50" Height="24"/>
-            <TextBox x:Name="txtSearch" TextChanged="SearchTbEmployer" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0"/>
-            <Button Name="btnAdd" Width="50" Height="40" Background="#00000000" BorderThickness="0" >
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="" Width="250" Height="25" Margin="0,0,500,0" TextChanged="txtSearch_TextChanged"/>
+            <Button Name="btnAdd" Width="50" Height="40" Background="#00000000" BorderThickness="0" Click="btnAdd_Click">
                 <Image Source="/CarWashManagementSystem;component/images/add_user_male_30px.png"/>
             </Button>
         </DockPanel>
 
 
     </Grid>
-</Window>
+</UserControl>

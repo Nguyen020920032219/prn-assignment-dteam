@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Service;
+using System.Data.SqlClient;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,11 +18,20 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        ReportService _reportService;
+        CostOfGoodService _costOfGoodService;
+        private DateOnly fromDate;
+        private DateOnly toDate;
         private UserControl? _activeWindow = null;
 
         public MainWindow(string role)
         {
             InitializeComponent();
+            _reportService = new ReportService();
+            _costOfGoodService = new CostOfGoodService();
+            toDate = DateOnly.FromDateTime(DateTime.Now);
+            fromDate = toDate.AddDays(-7);
+            ShowData();
            
             if (role.Equals("Staff", StringComparison.OrdinalIgnoreCase)) 
             {
@@ -56,6 +66,8 @@ namespace CarWashManagementSystem
             margin.Top = btnEmployer.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
 
+            OpenChildWindow(new Employer());
+
         }
 
         private void btnCustomer_Click(object sender, RoutedEventArgs e)
@@ -64,6 +76,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnCustomer.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new Customer());
         }
 
         private void btnServices_Click(object sender, RoutedEventArgs e)
@@ -92,6 +106,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnReport.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new Report());
         }
 
         private void btnWareHouse_Click(object sender, RoutedEventArgs e)
@@ -115,7 +131,25 @@ namespace CarWashManagementSystem
             login.Show();
             this.Close();
         }
-
+        private void ShowData()
+        {
+            var (orders, total) = _reportService.GetOrders(fromDate, toDate);
+            txtRevenus.Text = total.ToString("0.00");
+            var (cost, totals) = _costOfGoodService.GetOrdersCostOfGood(fromDate, toDate);
+            txtCostOfGoodSold.Text = totals.ToString("0.00");
+            decimal grossprofit = decimal.Parse(txtRevenus.Text) - decimal.Parse(txtCostOfGoodSold.Text);
+            txtGrossProfit.Text = grossprofit.ToString("0.00");           
+        }
         
+
+        private void btnHistoryOrder_Click(object sender, RoutedEventArgs e)
+        {
+            panelSlide.Height = btnHistoryOrder.ActualHeight;
+            Thickness margin = panelSlide.Margin;
+            margin.Top = btnHistoryOrder.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
+            panelSlide.Margin = margin;
+
+            OpenChildWindow(new OrderHistory());
+        }
     }
 }

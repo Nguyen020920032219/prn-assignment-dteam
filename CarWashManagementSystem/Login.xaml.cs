@@ -22,7 +22,7 @@ namespace CarWashManagementSystem
             string userName = txtUsername.Text;
             string password = cbShowPassword.IsChecked == true ? txtPasswordVisible.Text : txtPassword.Password;
 
-            Account? account = _accountService.GetEmployeeByUserNameAndPassword(userName, password);
+            Repository.Entities.Account? account = _accountService.GetAccountByUserNameAndPassword(userName, password);
 
             if (account != null)
             {

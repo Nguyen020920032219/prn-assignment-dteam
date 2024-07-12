@@ -17,12 +17,17 @@ namespace Service
 
         public CustomerService()
         {
-            _customerRepo =new CustomerRepository();
+            _customerRepo = new CustomerRepository();
         }
 
         public List<Customer> GetCustomers()
         {
             return _customerRepo.GetAll();
+        }
+
+        public Customer GetCustomerById(int id)
+        {
+            return _customerRepo.GetAll().FirstOrDefault(c => c.CustomerId == id);
         }
 
         public List<Customer> GetCustomersContainString(string txtSearch)
