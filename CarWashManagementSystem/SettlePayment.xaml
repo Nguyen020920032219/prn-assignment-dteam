@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SettlePayment" Height="380" Width="344"
         FontFamily="Century Gothic" FontSize="12"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+        WindowStartupLocation="Manual" WindowStyle="None" ResizeMode="NoResize">
     <Grid>
         <DockPanel HorizontalAlignment="Left" Height="24" LastChildFill="False" VerticalAlignment="Top" Width="344" Background="#FF11CDEF">
             <Label Content="Settle Payment" Height="24" Width="100"/>

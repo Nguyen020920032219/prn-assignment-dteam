@@ -189,7 +189,7 @@ namespace CarWashManagementSystem
             var serviceRecord = button.DataContext;
 
             var serviceId = serviceRecord.GetType().GetProperty("ServiceId").GetValue(serviceRecord, null);
-            var servicePrice = serviceRecord.GetType().GetProperty("ServicePrice").GetValue(serviceRecord, null);
+            //var servicePrice = serviceRecord.GetType().GetProperty("ServicePrice").GetValue(serviceRecord, null);
 
             var customerId = serviceRecord.GetType().GetProperty("CustomerId").GetValue(serviceRecord, null);
 
