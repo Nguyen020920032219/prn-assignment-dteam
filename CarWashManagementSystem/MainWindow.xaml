@@ -18,7 +18,7 @@
             <Button x:Name="btnDashboard" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnDashboard_Click">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image Height="35" Source="/CarWashManagementSystem;component/images/dashboard_layout_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
-                    <TextBlock VerticalAlignment="Center" Text="Dashboard" FontSize="16"/>
+                    <TextBlock VerticalAlignment="Center" Text="Welcome" FontSize="16"/>
                 </StackPanel>
             </Button>
             <Button x:Name="btnEmployer" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnEmployer_Click">
