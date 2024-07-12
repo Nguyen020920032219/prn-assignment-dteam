@@ -1,6 +1,6 @@
 ﻿
 using Repository.Entities;
-using service;
+using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,18 +30,15 @@ namespace CarWashManagementSystem
             _service = new ServiceService();
         }
 
-
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
-
             try
             {
                 var Name = txtName.Text;
                 var Description = txtDescription.Text;
                 var Price = decimal.Parse(txtPrice.Text);
 
-                Service service = new Service();
+                Repository.Entities.Service service = new Repository.Entities.Service();
                 service.Name = Name;
                 service.Description = Description;
                 service.Price = Price;

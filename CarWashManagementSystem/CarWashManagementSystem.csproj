@@ -45,11 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <ProjectReference Include="..\Service\Service.csproj" />
-=======
-    <ProjectReference Include="..\Service\service.csproj" />
->>>>>>> develop
   </ItemGroup>
 
   <ItemGroup>
