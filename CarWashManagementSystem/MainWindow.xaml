@@ -66,6 +66,12 @@
                     <TextBlock x:Name="No_name" VerticalAlignment="Center" Text="Warehouse" FontSize="16"/>
                 </StackPanel>
             </Button>
+            <Button x:Name="btnHistoryOrder" DockPanel.Dock="Top" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnHistoryOrder_Click">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Height="35" Source="/CarWashManagementSystem;component/images/us_dollar_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="History Cash" FontSize="16"/>
+                </StackPanel>
+            </Button>
             <Button x:Name="btnLogout" DockPanel.Dock="Bottom" Height="45" Background="White" HorizontalContentAlignment="Stretch" BorderBrush="White" Click="btnLogout_Click">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Image Height="35" Source="/CarWashManagementSystem;component/images/Logout_35px.png" Width="35" Stretch="Fill" Margin="5,0,5,0"/>

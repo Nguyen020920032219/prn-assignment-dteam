@@ -22,6 +22,7 @@ namespace CarWashManagementSystem
         public Report()
         {
             InitializeComponent();
+            dgvCostOfGoodSold.ItemsSource = null;
         }
     }
 }

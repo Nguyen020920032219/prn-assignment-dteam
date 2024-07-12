@@ -6,7 +6,7 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Employer.xaml
     /// </summary>
-    public partial class Employer : Window
+    public partial class Employer : UserControl
     {
         //private IEmployeeService employeeService = new EmployeeServiceImpl();
 

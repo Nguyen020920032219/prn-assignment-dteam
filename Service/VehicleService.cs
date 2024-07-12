@@ -18,6 +18,11 @@ namespace Service
             _validationService = new ValidationService();
         }
 
+        public Vehicle GetVehicleById(int id)
+        {
+            return _vehicleRepo.GetAll().FirstOrDefault(v => v.VehicleId == id);
+        }
+
         public List<Vehicle> GetVehiclesByCustomerId(int customerId)
         {
             List<Vehicle> vehicles = _vehicleRepo.GetAll();
