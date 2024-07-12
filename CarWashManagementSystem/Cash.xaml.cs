@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.Identity.Client;
-using Repository.DTO;
+﻿using Repository.DTO;
 using Repository.Entities;
 using Service;
 using Service.Impl;
 using System.Collections.ObjectModel;
-using System.Reflection;
+using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,21 +13,23 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Cash.xaml
     /// </summary>
-    public partial class Cash : UserControl
+    public partial class Cash : UserControl, INotifyPropertyChanged
     {
-        //private decimal? totalPrice = 0;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private IOrderService _orderService;
 
+        private IOrderServiceService _orderServiceService;
+
         private UserControl? _activeWindown = null;
+
+        private bool _isCashButtonEnable;
 
         //Track which is Vehicle of customer selected
         private CustomerVehicleDTO _customerVehicleSelected;
 
-        //private List<Repository.Entities.Service> servicesSelected;
-
         //Track what are services of vehicle selected to display 
-        private ObservableCollection<dynamic> _cashRecords = new ObservableCollection<dynamic>();
+        private ObservableCollection<dynamic> _cashRecords;
 
         //Track what are services of which is vehicle selected 
         private Dictionary<int, List<Repository.Entities.Service>> _vehicleServices = new Dictionary<int, List<Repository.Entities.Service>>();
@@ -36,10 +37,16 @@ namespace CarWashManagementSystem
         public Cash()
         {
             InitializeComponent();
+            DataContext = this;
+
             _orderService = new OrderServiceImpl();
+            _orderServiceService = new OrderServiceServiceImpl();
+
+            _cashRecords = new ObservableCollection<dynamic>();
+            _cashRecords.CollectionChanged += CashRecords_CollectionChanged;
+            dgvCash.ItemsSource = _cashRecords;
 
             GetTransactionNo();
-            dgvCash.ItemsSource = _cashRecords;
             btnAddService.IsEnabled = false;
         }
 
@@ -83,6 +90,29 @@ namespace CarWashManagementSystem
 
         }
 
+        public bool IsCashButtonEnabled
+        {
+            get { return _isCashButtonEnable; }
+
+            set { 
+                if (_isCashButtonEnable != value)
+                {
+                    _isCashButtonEnable = value;
+                    OnPropertyChanged(nameof(IsCashButtonEnabled));
+                }
+             }
+        }
+
+        private void CashRecords_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            IsCashButtonEnabled = _cashRecords.Count > 0;
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
             CashCustomer cashCustomer = new CashCustomer();
@@ -108,7 +138,7 @@ namespace CarWashManagementSystem
         }
 
         //Hidden serives are selected by a customer
-        //Show services again if choice anther cust
+        //Show services again if choice anther customer
         private void OnServiceSelectionCompleted(List<Repository.Entities.Service> servicesSelected)
         {
             if (_customerVehicleSelected != null)
@@ -199,6 +229,59 @@ namespace CarWashManagementSystem
                     services.Remove(serviceToRemove);
                 }
             }
+        }
+
+        private void btnCash_Click(object sender, RoutedEventArgs e)
+        {
+            string totalPrice = lblTotalPrice.Content.ToString().Replace(",", "");
+            decimal.TryParse(totalPrice, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal totalPriceIsConverted);
+
+            // Create and save a new Order
+            Order order = new Order()
+            {
+                TransactionNo = _cashRecords[0].TransactionNo,
+                Date = DateOnly.FromDateTime(DateTime.Now),
+                Status = "Pending",
+                TotalPrice = totalPriceIsConverted,
+                VehicleId = _cashRecords[0].VehicleId,
+                CustomerId = _cashRecords[0].CustomerId,
+                EmployeeId = 1
+            };
+            _orderService.AddOrder(order);
+            Order orderIsSaved = _orderService.GetOrderByTransactionNo(order.TransactionNo);
+
+            // Create and save new OrderServiceList
+            List<OrderService> orderServices = new List<OrderService>();
+            foreach (var serviceRecord in _cashRecords)
+            {
+                OrderService orderService = new OrderService()
+                {
+                    OrderId = orderIsSaved.OrderId,
+                    ServiceId = serviceRecord.ServiceId,
+                    UnitPrice = serviceRecord.ServicePrice
+                };
+                orderServices.Add(orderService);
+            }
+            _orderServiceService.addOrderServiceList(orderServices);
+
+            SettlePayment settlePayment = new SettlePayment();
+            settlePayment.order = orderIsSaved;
+            settlePayment.InitializePayment();
+            settlePayment.Closed += (s, args) =>
+            {
+                if (settlePayment.DialogResult == true)
+                {
+                    ResetCash();
+                }
+            };
+            settlePayment.ShowDialog();
+        }
+
+        private void ResetCash()
+        {
+            _cashRecords.Clear(); // Auto disable the cash button when reset
+            GetTransactionNo();
+            btnAddService.IsEnabled = false; // Disable the service button when reset
         }
     }
 }

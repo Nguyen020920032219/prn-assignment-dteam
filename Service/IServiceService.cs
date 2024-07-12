@@ -2,6 +2,8 @@
 {
     public interface IServiceService
     {
-        List<Repository.Entities.Service> GetAllServices(); 
+        List<Repository.Entities.Service> GetAllServices();
+
+        public List<Repository.Entities.Service> GetServicesIsNotDeleteList();
     }
 }

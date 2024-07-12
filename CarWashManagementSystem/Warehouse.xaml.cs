@@ -8,7 +8,7 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Warehouse.xaml
     /// </summary>
-    public partial class Warehouse : Window
+    public partial class Warehouse : UserControl
     {
         ProductService _productService;
         public Warehouse()

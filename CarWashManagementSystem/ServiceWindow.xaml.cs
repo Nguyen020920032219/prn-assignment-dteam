@@ -19,7 +19,7 @@ namespace CarWashManagementSystem
     /// <summary>
     /// Interaction logic for Service.xaml
     /// </summary>
-    public partial class ServiceWindow : Window
+    public partial class ServiceWindow : UserControl
     {
         ServiceService _services;
         public ServiceWindow()

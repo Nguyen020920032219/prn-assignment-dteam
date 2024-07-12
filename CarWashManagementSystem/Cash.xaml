@@ -71,7 +71,7 @@
             <Label Content="Total price:" Width="75" Height="30" Margin="300,0,0,0"/>
             <Label Name="lblTotalPrice" Content="0.00" Width="100" Height="30" Margin="0,0,0,0"/>
 
-            <Button x:Name="btnCash" Width="75" Height="30" Margin="150,0,0,8" Background="White" BorderThickness="0">
+            <Button x:Name="btnCash" IsEnabled="{Binding IsCashButtonEnabled}" Width="75" Height="30" Margin="150,0,0,8" Background="White" BorderThickness="0" Click="btnCash_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/CarWashManagementSystem;component/images/bank_30px.png" Width="30" Height="30" Margin="0,0,5,0"/>
                     <TextBlock Text="Cash" VerticalAlignment="Center"/>

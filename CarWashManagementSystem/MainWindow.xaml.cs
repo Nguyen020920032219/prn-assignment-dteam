@@ -66,14 +66,17 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnServices.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new ServiceWindow());
         }
 
         private void btnCash_Click(object sender, RoutedEventArgs e)
         {
-            //panelSlide.Height = btnCash.ActualHeight;
-            //Thickness margin = panelSlide.Margin;
-            //margin.Top = btnCash.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
-            //panelSlide.Margin = margin;
+            panelSlide.Height = btnCash.ActualHeight;
+            Thickness margin = panelSlide.Margin;
+            margin.Top = btnCash.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
+            panelSlide.Margin = margin;
+
             OpenChildWindow(new Cash());
         }
 
@@ -91,6 +94,8 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnWareHouse.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            OpenChildWindow(new Warehouse());
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -99,6 +104,10 @@ namespace CarWashManagementSystem
             Thickness margin = panelSlide.Margin;
             margin.Top = btnLogout.TranslatePoint(new Point(0, 0), panelSlide.Parent as UIElement).Y;
             panelSlide.Margin = margin;
+
+            Login login = new Login();
+            login.Show();
+            this.Close();
         }
 
         

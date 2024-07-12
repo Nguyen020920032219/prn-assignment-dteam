@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using Repository.Entities;
+using Service;
+using Service.Impl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +24,24 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class SettlePayment : Window
     {
+        private IOrderService _orderService;
+
+        public Order order { get; set; }
+         
         public SettlePayment()
         {
             InitializeComponent();
+            _orderService = new OrderServiceImpl();
+        }
+
+        public void InitializePayment()
+        {
+            if (order != null)
+            {
+                txtSale.Text = order.TotalPrice.ToString();
+                txtCash.Text = "0";
+                txtChange.Text = "0";
+            }
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -91,8 +110,17 @@ namespace CarWashManagementSystem
         }
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
-        {
+        { 
+            if (double.Parse(txtCash.Text) - double.Parse(txtSale.Text) >= 0) {
+                _orderService.CompleteOrder(order);
+                MessageBox.Show("Pay successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                this.DialogResult = true;
+                this.Close();
+            } else
+            {
+                MessageBox.Show("Cash money can not less than sale money", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnClean_Click(object sender, RoutedEventArgs e)
@@ -105,8 +133,15 @@ namespace CarWashManagementSystem
         {
             try
             {
-                double charge = double.Parse(txtSale.Text) - double.Parse(txtCash.Text);
-                txtChange.Text = $"{charge:N2}";
+                double charge = double.Parse(txtCash.Text) - double.Parse(txtSale.Text);
+
+                if (charge <= 0)
+                {
+                    txtChange.Text = "0.00";
+                } else
+                {
+                    txtChange.Text = $"{charge:N2}";
+                }
             } catch (Exception ex)
             {
                 txtChange.Text = "0.00";

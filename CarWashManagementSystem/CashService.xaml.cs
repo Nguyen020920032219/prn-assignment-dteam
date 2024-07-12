@@ -32,7 +32,7 @@ namespace CarWashManagementSystem
 
         public void CashService_Load(List<Repository.Entities.Service> alreadySelectedServices)
         {
-            var allServices = _serviceService.GetAllServices();
+            var allServices = _serviceService.GetServicesIsNotDeleteList();
             
             if(alreadySelectedServices != null)
             {
