@@ -216,19 +216,21 @@ INSERT INTO OrderServices (OrderId, ServiceId, UnitPrice) VALUES
 CREATE TABLE CostOfGood (
     CostOfGoodId INT PRIMARY KEY NOT NULL IDENTITY(1,1),
     ProductId INT,
-    Cost DECIMAL(10, 2),
+    Price DECIMAL(10, 2),
+    Quantity INT,
     Date DATE,
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
 
-INSERT INTO CostOfGood (ProductId, Cost, Date) VALUES
-(1, 10.00, '2024-07-01'),
-(2, 150.00, '2024-07-01'),
-(3, 3.00, '2024-07-01'),
-(4, 20.00, '2024-07-01'),
-(5, 80.00, '2024-07-01'),
-(6, 50.00, '2024-07-01'),
-(7, 5.00, '2024-07-01'),
-(8, 25.00, '2024-07-01'),
-(9, 350.00, '2024-07-01'),
-(10, 10.00, '2024-07-01');
+INSERT INTO CostOfGood (ProductId, Price, Quantity, Date) VALUES
+(1, 10.00, 100, '2024-07-01'),
+(2, 150.00, 50, '2024-07-01'),
+(3, 3.00, 200, '2024-07-01'),
+(4, 20.00, 70, '2024-07-01'),
+(5, 80.00, 30, '2024-07-01'),
+(6, 50.00, 150, '2024-07-01'),
+(7, 5.00, 100, '2024-07-01'),
+(8, 25.00, 80, '2024-07-01'),
+(9, 350.00, 20, '2024-07-01'),
+(10, 10.00, 90, '2024-07-01');
+
