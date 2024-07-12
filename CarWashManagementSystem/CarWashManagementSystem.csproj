@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="images\Add car_30px.png" />
+    <None Remove="images\add_product_32px.png" />
+    <None Remove="images\add_service_32px.png" />
     <None Remove="images\add_user_male_30Cpx.png" />
     <None Remove="images\add_user_male_30px.png" />
     <None Remove="images\add_user_male_32px.png" />
@@ -52,6 +54,8 @@
 
   <ItemGroup>
     <Resource Include="images\Add car_30px.png" />
+    <Resource Include="images\add_product_32px.png" />
+    <Resource Include="images\add_service_32px.png" />
     <Resource Include="images\add_user_male_30Cpx.png" />
     <Resource Include="images\add_user_male_30px.png" />
     <Resource Include="images\add_user_male_32px.png" />
