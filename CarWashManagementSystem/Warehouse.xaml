@@ -45,7 +45,7 @@
             <Button x:Name="btnChangeView" Click="ChangeView_Click" Content="Discontinued product" Width="150" Height="30" 
                     Background="White" FontWeight="ExtraBold" BorderThickness="0" Margin="0,0,30,0"></Button>
             <Button x:Name="Add" Click="Add_Click" Width="50" Height="40" Background="#00000000" BorderThickness="0" Margin="0,0,30,0">
-                <Image Source="D:\My space\Visual Studio\prn-assignment\prn-assignment-dteam\CarWashManagementSystem\images\add_product_32px.png"/>
+                <Image Source="\images\add_product_32px.png"/>
             </Button>
         </DockPanel>
     </Grid>
