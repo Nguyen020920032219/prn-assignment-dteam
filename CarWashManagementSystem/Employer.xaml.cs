@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Repository.Entities;
+using Service;
+using Service.Impl;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace CarWashManagementSystem
 {
@@ -19,9 +11,24 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class Employer : Window
     {
+        //private IEmployeeService employeeService = new EmployeeServiceImpl();
+
         public Employer()
         {
             InitializeComponent();
+            //Employer_Load();
+        }
+
+        //public void Employer_Load()
+        //{
+        //    dgvEmployer.ItemsSource = null;
+        //    dgvEmployer.ItemsSource = employeeService.GetTbEmployeesList();
+        //}
+
+        public void SearchTbEmployer(object sender, TextChangedEventArgs e)
+        {
+        //    dgvEmployer.ItemsSource = null;
+        //    dgvEmployer.ItemsSource = employeeService.GetTbEmployeeContainNameList(txtSearch.Text);
         }
     }
 }
