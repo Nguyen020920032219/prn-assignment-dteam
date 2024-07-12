@@ -20,15 +20,10 @@ namespace Repository
         }
         public void Add(T entity)
         {
-<<<<<<< HEAD
-            _dbSet.Add(entity);
-            _context.SaveChanges();
-=======
-           
+
             _dbSet.Add(entity);
             _context.SaveChanges();
 
->>>>>>> develop
         }
         public void Delete(T entity)
         {
@@ -41,18 +36,10 @@ namespace Repository
         }
 
         public void Update(T entity)
-<<<<<<< HEAD
         {
-=======
-        {   
->>>>>>> develop
             var tracker = _context.Attach(entity);
             tracker.State = EntityState.Modified;
             _context.SaveChanges();
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> develop

@@ -10,7 +10,8 @@
         <DataGrid x:Name="dgvEmployer" Margin="0,0,0,100" BorderBrush="White"
                   CanUserAddRows="False" CanUserDeleteRows="False" 
                   CanUserResizeColumns="False" CanUserResizeRows="False"
-                  ColumnHeaderHeight="28">
+                  ColumnHeaderHeight="28"
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding EmployeeId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="180"/>
