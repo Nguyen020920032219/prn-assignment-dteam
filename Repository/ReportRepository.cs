@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class AccountRepository : RepositoryBase<Repository.Entities.Account>
+    public class ReportRepository : RepositoryBase<Order>
     {
     }
 }

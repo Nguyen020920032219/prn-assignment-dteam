@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Service;
+using System.Data.SqlClient;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,17 +18,18 @@ namespace CarWashManagementSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UserControl? _activeWindow = null;
-
-        public MainWindow(string role)
+        ReportService _reportService;
+        CostOfGoodService _costOfGoodService;
+        private DateOnly fromDate;
+        private DateOnly toDate;
+        public MainWindow()
         {
             InitializeComponent();
-           
-            if (role.Equals("Staff", StringComparison.OrdinalIgnoreCase)) 
-            {
-                btnEmployer.IsEnabled = false;
-                btnServices.IsEnabled = false;
-            }
+            _reportService = new ReportService();
+            _costOfGoodService = new CostOfGoodService();
+            toDate = DateOnly.FromDateTime(DateTime.Now);
+            fromDate = toDate.AddDays(-7);
+            ShowData();
         }
 
         public void OpenChildWindow (UserControl childWindow)
@@ -115,7 +117,15 @@ namespace CarWashManagementSystem
             login.Show();
             this.Close();
         }
-
+        private void ShowData()
+        {
+            var (orders, total) = _reportService.GetOrders(fromDate, toDate);
+            txtRevenus.Text = total.ToString("0.00");
+            var (cost, totals) = _costOfGoodService.GetOrdersCostOfGood(fromDate, toDate);
+            txtCostOfGoodSold.Text = totals.ToString("0.00");
+            decimal grossprofit = decimal.Parse(txtRevenus.Text) - decimal.Parse(txtCostOfGoodSold.Text);
+            txtGrossProfit.Text = grossprofit.ToString("0.00");           
+        }
         
     }
 }

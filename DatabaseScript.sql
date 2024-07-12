@@ -76,7 +76,6 @@ CREATE TABLE Account (
     IsActive BIT NOT NULL DEFAULT 1,
     FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId)
 );
-
 INSERT INTO Account (EmployeeId, UserName, Password, Role, IsActive) VALUES
 (1, 'johnsmith', 'password1', 'Admin', 1),
 (2, 'janejohnson', 'password2', 'Staff', 1),

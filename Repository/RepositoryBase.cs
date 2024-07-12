@@ -20,7 +20,7 @@ namespace Repository
         }
         public void Add(T entity)
         {
-           
+
             _dbSet.Add(entity);
             _context.SaveChanges();
 
@@ -36,7 +36,7 @@ namespace Repository
         }
 
         public void Update(T entity)
-        {   
+        {
             var tracker = _context.Attach(entity);
             tracker.State = EntityState.Modified;
             _context.SaveChanges();

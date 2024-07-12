@@ -1,120 +1,92 @@
-﻿using System;
+﻿using Repository.Entities;
+using Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Data.SqlClient;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace CarWashManagementSystem
 {
     public partial class EmployerModule : Window
-
     {
-        SqlCommand cm = new SqlCommand();
-        String title = "Car Wash Managent System";
-        private void btClose_Click(object sender, System.Windows.RoutedEventArgs e)
+        EmployeeService _employeeService;
+        ValidationService _validationService;
+        public EmployerModule()
         {
-           this.Close();
+            InitializeComponent();
+            _employeeService = new EmployeeService();
+            _validationService = new ValidationService();
         }
 
-        
-
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
+        }
+
+        private void btnCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var fullname = txtFullName.Text;
+            DateOnly? selectedDate = dpDob.SelectedDate.HasValue ? DateOnly.FromDateTime(dpDob.SelectedDate.Value.Date) : (DateOnly?)null;
+            var phone = txtPhone.Text;
+            var address = txtAddress.Text;
+            var gender = "";
+            if (rdFemale.IsChecked == true)
+            {
+                gender = "Female";
+            }
+            if (rdMale.IsChecked == true)
+            {
+                gender = "Male";
+            }
+            if (!_validationService.IsStringValid(fullname))
+            {
+                MessageBox.Show("Fullname can not be empty!");
+                return;
+            }
+            if (!_validationService.IsStringValid(phone))
+            {
+                MessageBox.Show("Phone can not be empty!");
+                return;
+            }
+            if (!_validationService.IsStringValid(address))
+            {
+                MessageBox.Show("Address can not be empty!");
+                return;
+            }
+            Employee employer = new Employee
+            {
+                Name = fullname,
+                Phone = phone,
+                Address = address,
+                DateOfBirth = selectedDate,
+                Gender = gender,
+                IsActive = true
+            };
+            try
+            {
+                _employeeService.CreateEmployee(employer);
+                MessageBox.Show("Product added.");
+                btnClose_Click(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while adding product: {ex.Message}");
+            }
 
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        
-
-        private void btnCreate_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(txtFullName.Text))
-                {
-                    MessageBox.Show("Please enter the full name.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtPhone.Text))
-                {
-                    MessageBox.Show("Please enter the phone number.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtAddress.Text))
-                {
-                    MessageBox.Show("Please enter the address.");
-                    return;
-                }
-
-                if (!dpDob.SelectedDate.HasValue)
-                {
-                    MessageBox.Show("Please select a date of birth.");
-                    return;
-                }
-
-                if (rdMale.IsChecked == false && rdFemale.IsChecked == false)
-                {
-                    MessageBox.Show("Please select a gender.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(cbRole.Text))
-                {
-                    MessageBox.Show("Please select a role.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtSalary.Text))
-                {
-                    MessageBox.Show("Please enter the salary.");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtPassword.Text))
-                {
-                    MessageBox.Show("Please enter the password.");
-                    return;
-                }
-                if (MessageBox.Show("Are you sure you want register this employer ?", "Employer Registration", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
-                    cm = new SqlCommand("INSERT INTO tbEmployee(name,phone,address,dob,gender,role,salary,password)VALUES(@name,@phone,@address,@dob,@gender,@role,@salary,@password)");
-                    cm.Parameters.AddWithValue("@name", txtFullName.Text);
-                    cm.Parameters.AddWithValue("@phone", txtPhone.Text);
-                    cm.Parameters.AddWithValue("@address", txtAddress.Text);
-                    cm.Parameters.AddWithValue("@dob", dpDob.SelectedDate.Value);
-                    cm.Parameters.AddWithValue("@gender", rdFemale.IsChecked == true ? "Male" : "Female");
-                    cm.Parameters.AddWithValue("@role", cbRole.Text);
-                    cm.Parameters.AddWithValue("@salary", txtSalary.Text);
-                    cm.Parameters.AddWithValue("@password", txtPassword.Text);
-
-
-                    cm.ExecuteNonQuery();
-
-                    MessageBox.Show("Employer has been successfully registered!", title);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, title);
-            }
-        }
-        public void clear()
-        {
-            txtFullName.Clear();
-            txtPhone.Clear();
-            txtAddress.Clear();
-            txtPassword.Clear();
-            txtSalary.Clear();
-
-            dpDob.SelectedDate = DateTime.Now;
+            this.Close();
         }
     }
 }
