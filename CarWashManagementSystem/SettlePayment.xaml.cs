@@ -105,8 +105,6 @@ namespace CarWashManagementSystem
                 PaymentCompleted?.Invoke(this, EventArgs.Empty);
                 MessageBox.Show("Pay successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-             
-
                 this.DialogResult = true;
                 this.Close();
             } else

@@ -26,7 +26,7 @@ namespace CarWashManagementSystem
 
             if (account != null)
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(account.Role);
                 mainWindow.Show();
                 this.Close();
             } else
