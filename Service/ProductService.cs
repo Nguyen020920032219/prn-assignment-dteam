@@ -37,7 +37,7 @@ namespace Service
 
         public void DeleteProduct(Product product)
         {
-            product.IsDeleted = true;
+            product.IsDiscontinued = true;
             _productRepo.Update(product);
         }
         public void UpdateProduct(Product product)

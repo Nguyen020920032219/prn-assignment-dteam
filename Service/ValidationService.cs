@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Service
 {
-    public class Validation
+    public class ValidationService
     {
         public bool IsStringValid(string input)
         {
