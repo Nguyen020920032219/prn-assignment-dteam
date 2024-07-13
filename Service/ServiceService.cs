@@ -11,10 +11,11 @@ namespace Service
     public class ServiceService
     {
         private readonly ServiceRepository _serviceRepository;
-       
+        private ValidationService _validationService;
         public ServiceService()
         {
             _serviceRepository = new ServiceRepository();
+            _validationService = new ValidationService();
         }
         private List<Repository.Entities.Service> _serviceList;
         public List<Repository.Entities.Service> GetList()
@@ -32,8 +33,8 @@ namespace Service
                         list.Add(service);
                     }
                 }
-            } catch (Exception ex) {
-                throw ex;
+            } catch {
+                throw;
             }
             return list;
 
@@ -45,8 +46,8 @@ namespace Service
             try
             {
                 _serviceRepository.Add(service);
-            } catch (Exception ex) {
-                throw ex;
+            } catch{
+                throw;
             }
         }
 
@@ -55,8 +56,8 @@ namespace Service
             try
             {
                _serviceRepository.Update(service);
-            } catch(Exception ex) { 
-                throw ex;
+            } catch{ 
+                throw;
             }
         }
 
@@ -66,13 +67,36 @@ namespace Service
             {
                 _serviceRepository.Update(service);
             }
-            catch(Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 
-        
+        public List<Repository.Entities.Service> GetServiceContainString(string txtSearch)
+        {
+            List<Repository.Entities.Service> services = new List<Repository.Entities.Service>();
+            List<Repository.Entities.Service> result = new List<Repository.Entities.Service>();
+
+            foreach (Repository.Entities.Service service in _serviceList)
+            {
+                if (_validationService.IsNumber(txtSearch))
+                {
+                    if (service.ServiceId.ToString().Contains(txtSearch))
+                    {
+                        result.Add(service);
+                    }
+                    
+                }
+                if (service.Name.ToLower().Contains(txtSearch.ToLower()))
+                {
+                    result.Add(service);
+                }
+               
+            }
+            return result;
+        }
+
 
     }
 }

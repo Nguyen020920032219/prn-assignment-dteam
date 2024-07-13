@@ -46,7 +46,8 @@ namespace CarWashManagementSystem
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+                dgvService.ItemsSource = _services.GetServiceContainString(txtSearch.Text);
+            
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)

@@ -85,5 +85,11 @@ namespace Service
         {
             return decimal.TryParse(input, out _);
         }
+
+        public bool isFormat(string pattern, string input)
+        {
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(input);
+        }
     }
 }

@@ -36,26 +36,22 @@ namespace CarWashManagementSystem
         {
             var Name = txtName.Text;
             var Description = txtDescription.Text;
-
-
-            if (!_validationService.IsStringValid(Name))
-            {
-                MessageBox.Show("Name cannot be null or empty");
-                return;
-            }
+                if (!_validationService.IsStringValid(Name))
+                {
+                    throw new ArgumentNullException("Name cannot be empty or null");
+                }
+            
 
 
             if (!_validationService.IsStringValid(txtPrice.Text))
             {
-                MessageBox.Show("Price cannot be null or empty");
-                return;
+                throw new ArgumentNullException("Price cannot be null or empty");
             }
 
          
             if (!_validationService.IsStringValid(Description))
             {
-                MessageBox.Show("Description cannot be null or empty");
-                return;
+                throw new ArgumentNullException("Description cannot be null or empty");
             }
            
 
@@ -64,8 +60,7 @@ namespace CarWashManagementSystem
                 var Price = decimal.Parse(txtPrice.Text);
                 if (!_validationService.IsPositiveDecimal(Price))
                 {
-                    MessageBox.Show("Price cannot be negative number");
-                    return;
+                    throw new ArgumentException("Price cannot be negative number");
                 }
                 
                 Repository.Entities.Service service = new Repository.Entities.Service();
