@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="CarWashManagementSystem.Report"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWashManagementSystem"
+        mc:Ignorable="d"
+        Height="485" Width="967"
+        FontFamily="Century Gothic" FontSize="12">
+    <Grid>
+        <DockPanel HorizontalAlignment="Center" Height="20" LastChildFill="False" VerticalAlignment="Top" Width="967" Background="#FFC10037"/>
+
+        <TabControl HorizontalAlignment="Left" Height="460" Margin="0,20,0,0" VerticalAlignment="Top" Width="967">
+            <TabItem Header="Revenus">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="227*"/>
+                        <ColumnDefinition Width="734*"/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel HorizontalAlignment="Left" Height="40" LastChildFill="False" VerticalAlignment="Top" Width="967" Grid.ColumnSpan="2" Margin="-3,0,0,0">
+                        <Label Content="Filter by: From" Width="89" Height="24" Margin="10,0,0,0"/>
+                        <DatePicker x:Name="dpFromRevenus" Width="150" Height="24" SelectedDateChanged="dpFromRevenus_SelectedDateChanged"/>
+
+                        <Label Content="To" Width="25" Height="24" Margin="0,0,0,0"/>
+                        <DatePicker x:Name="dpToRevenus" Width="150" Height="24" SelectedDateChanged="dpToRevenus_SelectedDateChanged"/>
+
+                        <Label Content="Total price:" Width="75" Height="30" Margin="300,0,0,0"/>
+                        <Label Name="lblTotalPriceRevenus" Content="0.00" Width="100" Height="30" Margin="30,0,0,0" FontWeight="Bold"/>
+                    </DockPanel>
+
+                    <DataGrid x:Name="dgvRevenus" Margin="0,40,0,0" BorderBrush="White"
+                              CanUserAddRows="False" CanUserDeleteRows="False" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False"
+                              ColumnHeaderHeight="28" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding OrderId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="160"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
+                            <DataGridTextColumn Header="TotalPrice" Binding="{Binding TotalPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="500" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cost of Good Sold">
+                <Grid Background="#FFE5E5E5">
+                    <DockPanel HorizontalAlignment="Center" Height="40" LastChildFill="False" VerticalAlignment="Top" Width="967">
+                        <Label Content="Filter by: From" Width="89" Height="24" Margin="10,0,0,0"/>
+                        <DatePicker x:Name="dpFromCostOfGoodSold" Width="150" Height="24" SelectedDateChanged="dpFromCostOfGoodSold_SelectedDateChanged"/>
+
+                        <Label Content="To" Width="25" Height="24" Margin="0,0,0,0"/>
+                        <DatePicker x:Name="dpToCostOfGoodSold" Width="150" Height="24" SelectedDateChanged="dpToCostOfGoodSold_SelectedDateChanged"/>
+
+                        <Label Content="Total price:" Width="75" Height="30" Margin="300,0,0,0"/>
+                        <Label Name="lblTotalPriceCostOfGoodSold" Content="0.00" Width="100" Height="30" Margin="0,0,0,0" FontWeight="Bold"/>
+                    </DockPanel>
+
+                    <DataGrid x:Name="dgvCostOfGoodSold" Margin="0,40,0,0" BorderBrush="White"
+                              CanUserAddRows="False" CanUserDeleteRows="False" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False"
+                              ColumnHeaderHeight="28" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding CostOfGoodId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                            <DataGridTextColumn Header="ProductId" Binding="{Binding ProductId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="235" />
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="235" />
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="230" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Gross Profit">
+                <Grid Background="#FFE5E5E5">
+                    <DockPanel HorizontalAlignment="Center" Height="40" LastChildFill="False" VerticalAlignment="Top" Width="967">
+                        <Label Content="Filter by: From" Width="89" Height="24" Margin="10,0,0,0"/>
+                        <DatePicker x:Name="dpFromGrossProfit" Width="150" Height="24" SelectedDateChanged="dpFromGrossProfit_SelectedDateChanged"/>
+
+                        <Label Content="To" Width="25" Height="24" Margin="0,0,0,0"/>
+                        <DatePicker x:Name="dpToGrossProfit" Width="150" Height="24" SelectedDateChanged="dpToGrossProfit_SelectedDateChanged"/>
+                    </DockPanel>
+
+                    <Label Content="Revenus" HorizontalAlignment="Left" Height="24" Margin="274,160,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Image Source="/CarWashManagementSystem;component/images/sales_performance_35px.png" HorizontalAlignment="Left" Height="24" Margin="245,160,0,0" VerticalAlignment="Top" Width="30"/>
+                    <TextBox x:Name="txtRevenus" HorizontalAlignment="Left" Height="24" Margin="412,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" IsReadOnly="True"/>
+
+                    <Label Content="Cost of Good Sold" HorizontalAlignment="Left" Height="24" Margin="274,190,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Image Source="/CarWashManagementSystem;component/images/withdrawal_35px.png" HorizontalAlignment="Left" Height="24" Margin="245,190,0,0" VerticalAlignment="Top" Width="30"/>
+                    <TextBox x:Name="txtCostOfGoodSold" HorizontalAlignment="Left" Height="24" Margin="412,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" IsReadOnly="True"/>
+
+                    <Label Content="Gross Profit" HorizontalAlignment="Left" Height="24" Margin="274,220,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Image Source="/CarWashManagementSystem;component/images/cash_in_hand_35px.png" HorizontalAlignment="Left" Height="24" Margin="245,220,0,0" VerticalAlignment="Top" Width="30"/>
+                    <TextBox x:Name="txtGrossProfit" HorizontalAlignment="Left" Height="24" Margin="412,220,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" IsReadOnly="True"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</UserControl>
